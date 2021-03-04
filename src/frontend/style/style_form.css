@@ -1,0 +1,147 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #E6E8EB;
+    background: url(images/ZOOM_HSE_04.jpg) 0 0/100% 100% fixed;
+    box-shadow: 0 0 0 400px rgba(0, 0, 0, 0.4) inset;
+    background-repeat: no-repeat;
+}
+.authoriz_f {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.authorization_form {
+    float:right;
+    background: #ffffff; 
+    padding: 10px; 
+    width: 430px;
+    height: 405px;
+    border-radius: 0 10px 10px 0;
+    opacity: 0.8;
+    position:relative
+} 
+/*.position_form {
+    position:relative
+    float:right;
+    background: #ffffff; 
+    padding: 10px; 
+    width: 440px;
+    height: 320px;
+    border-radius: 0 10px 0 0;
+    opacity: 0.8;
+}
+.create_account {
+    background: #ABAEA9;
+    width: 440px;
+    height: 130px;
+    color: antiquewhite;
+    text-align: center;
+    font-size: 18px;
+    font-size: 20px;
+    border-radius: 0 0 10px 0;
+    opacity: 0.9;
+}*/
+
+a {
+    text-decoration: none;
+    transition: 0.5s;
+    color: #298cad;
+    display: block;
+    text-align: center;
+    line-height: 13px;
+    margin-top: 20px;
+    font-size: 18px;
+}
+.authorization_form a:hover {
+ color: #36d2ff;
+}
+.authorization_form a.button:hover {
+    color: #fff;
+ background-color: #0363F9;
+}
+.create_account a.button[id="b3"]:hover {
+    color: #fff;
+    background-color: #38A420;
+}
+.authorization_form ul {
+ list-style: none;
+ padding: 0;
+ margin: 0;
+}
+.authorization_form input {
+ display: block;
+ width: 100%;
+}
+.info-form {
+    float:left;
+    background: #0332DC; 
+    padding: 10px; 
+    font-size: 20px;
+    color: #ffffff;
+    width: 430px;
+    height: 405px;
+    border-radius: 10px 0 0 10px;
+    opacity: 0.7;
+}
+.tab-form {
+    border-radius: 0 10px 0 0;
+    background: #fff;
+    padding: 30px 20px 20px;
+    margin: -10px -10px -10px -10px;
+}
+.tab-form-down {
+    background: #ABAEA9;
+    color: antiquewhite;
+    text-align: center;
+    font-size: 18px;
+    margin: -10px -10px -10px -10px;
+    border-radius: 0 0 10px 0;
+    padding: 1px 20px 10px;
+    padding: 1px 20px 20px;
+}
+
+.input:focus{
+    background-color: #fff;
+    border-color: #0392F9;
+    color: #0332DC; 
+}
+.input {
+    vertical-align: 0;
+    font-size: 16px;
+    border: 2px solid #e9eaea;
+   /* padding: 12px 14px; */
+    padding: 12px 14px;
+    box-sizing: border-box;
+    margin-bottom: 1px;
+    color: #0392F9;
+    outline: none;
+    border-radius: 3px 3px 3px 3px;
+}
+
+a.button {
+ background: #0392F9;
+ color: #ffffff;
+ font-size: 18px;
+ text-transform: uppercase;
+ display: block;
+ text-align: center;
+ line-height: 46px;
+ margin-top: 25px;
+ margin-bottom: 10px;
+ border-radius: 3px 3px 3px 3px;
+}
+
+a.button[id="b3"]{
+    text-transform: none;
+    background: #42D12A;
+}
+
+.info-form p, h3, hr{
+    margin-top: 55px;
+    text-align: center;
+    vertical-align: middle;
+}

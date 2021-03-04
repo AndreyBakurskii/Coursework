@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Форма авторизации</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style/style_form.css" type="text/css">
+    
+</head>
+<body>
+    
+<div class="authoriz_f">
+    <div class="info-form">
+            <h3 align="center" line-height="350px">Чат для студентов и сотрудников Высшей школы экономики</h3>
+            <hr width="300px" align="center" color=#ffffff NoShade>
+            <p><q><cite> Лучший способ заинтересовать других
+                собой - интересоваться другими </cite></q></p>    
+    </div>
+    
+        <div class="authorization_form">
+        <form class="tab-form">
+            <input class="input" typy="email" name="tabs" placeholder="Электронный адрес" required>
+            <input class="input" type="password" name="tabs" placeholder="Пароль" required>
+            <a href="#" class="button" onclick="GetDateOfUser()">Войти</a>
+            <a href="#" class="button" id="b2">Забыли пароль?</a>
+        </form> 
+        <form class="tab-form-down">
+            <p>Ещё нет аккаунта?</p>
+            <a href="#" class="button" id="b3">Зарегистрироваться</a>
+        </form>    
+    </div>
+    
+        
+    
+</div>
+    <script>
+        function GetDateOfUser() {
+            var email = document.getElementsByTagName("input")[0].value;
+            var password = document.getElementsByTagName("input")[1].value;
+            alert(email + password);
+            return email, password;
+        }
+    </script>
+</body>
+</html>
