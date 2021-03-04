@@ -10,7 +10,7 @@
     
 </head>
 <body>
-    
+<div id="grey"></div> 
 <div class="authoriz_f">
     <div class="info-form">
             <h3 align="center" line-height="350px">Чат для студентов и сотрудников Высшей школы экономики</h3>
@@ -23,25 +23,15 @@
         <form class="tab-form">
             <input class="input" typy="email" name="tabs" placeholder="Электронный адрес" required>
             <input class="input" type="password" name="tabs" placeholder="Пароль" required>
-            <a href="#" class="button" onclick="GetDateOfUser()">Войти</a>
-            <a href="#" class="button" id="b2">Забыли пароль?</a>
+            <button type="submit">Войти</button>
+            <button type="submit" id="b2">Забыли пароль?</button>
         </form> 
         <form class="tab-form-down">
             <p>Ещё нет аккаунта?</p>
-            <a href="#" class="button" id="b3">Зарегистрироваться</a>
+            <button type="submit" id="b3" >Зарегистрироваться</button>
         </form>    
-    </div>
-    
-        
-    
+    </div>    
 </div>
-    <script>
-        function GetDateOfUser() {
-            var email = document.getElementsByTagName("input")[0].value;
-            var password = document.getElementsByTagName("input")[1].value;
-            alert(email + password);
-            return email, password;
-        }
-    </script>
+    
 </body>
 </html>
