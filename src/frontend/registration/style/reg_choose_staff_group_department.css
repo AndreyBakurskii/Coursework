@@ -216,3 +216,47 @@ h2 {
     margin-top: 30px;
     margin-bottom: 20px
 }
+
+
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .form-input-select select::-ms-expand {
+    display: none;
+  }
+  .form-input-select select:focus::-ms-value {
+    background: transparent;
+    color: #000;
+  }
+}
+@-moz-document url-prefix() {
+  .form-input-select {
+    overflow: hidden;
+  }
+  .form-input-select select {
+    width: 120%;
+    width: calc(100% + 3em);
+  }
+  @supports (-moz-appearance: none) {
+    .form-input-select select {
+      width: 100%;
+    }
+  }
+  .form-input-select select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+  }
+}
+@supports (-moz-appearance: none) {
+  .form-input-select {
+    width: 100%;
+  }
+}
+
+@-moz-document url-prefix() {
+ .form-input-select {
+    border-right: 3px solid #E6E6E6;
+  }
+  .form-input-select:hover {
+    border-right: 3px solid #0332DC;
+  }
+}
