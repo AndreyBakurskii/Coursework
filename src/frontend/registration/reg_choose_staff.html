@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link rel="stylesheet" href="style/reg_choose_staff_group_department.css" type="text/css">
+<body>
+   
+<div id="grey"></div> 
+<div class="registration">
+    <div class="reg">    
+        <form id="regForm" method="POST"> {% csrf_token %}
+            <div class="title" id="title">Регистрация</div>
+            <div class="tab">
+                <h2>Укажите Вашу должность:</h2>
+                 <div class="form-select">
+                     <div class="form-input-select">
+                         <select required>
+                            <option value="" hidden>Должность</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                            <option value="4">Option 4</option>
+                            <option value="5">Option 5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" id="prevBtn" name="action" value="prev">Назад</button>
+            <button type="submit" id="nextBtn" name="action" value="next">Далее</button>
+            <div style="text-align:center;margin-top:40px;">
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+            </div>
+        </form>
+    </div>
+</div>
+</body>

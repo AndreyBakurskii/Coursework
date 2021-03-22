@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link rel="stylesheet" href="style/reg_fio_email_end.css" type="text/css">
+<body>
+   
+<div id="grey"></div> 
+<div class="registration">
+    <div class="reg">    
+        <form id="regForm" method="POST"> {% csrf_token %}
+            <div class="title" id="title">Регистрация</div>
+            <div class="tab">
+                <div class="middle">
+                    <div id="line-inputs">
+                        <label class="input">
+                            <input type="text" oninput="this.className = ''" name="uname" >
+                            <span><span>Username</span></span>
+                        </label>
+                        <label class="input">
+                            <input type="password" oninput="this.className = ''" name="pword">
+                            <span><span>Пароль</span></span>
+                        </label>
+                        <label class="input">
+                            <input type="password" oninput="this.className = ''" name="rpword">
+                            <span><span>Повторите пароль</span></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" id="prevBtn" name="action" value="prev">Назад</button>
+            <button type="submit" id="nextBtn" name="action" value="end">Завершить</button>
+            <div style="text-align:center;margin-top:40px;">
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+     document.getElementById("nextBtn").style.background = "#2EE152";
+</script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
