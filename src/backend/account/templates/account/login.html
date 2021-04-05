@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style/style_form.css" type="text/css">
+    <link rel="stylesheet" href="{% static 'account/login.css'%}" type="text/css">
     
 </head>
 <body>
@@ -20,13 +22,28 @@
     </div>
     
         <div class="authorization_form">
-        <form class="tab-form">
-            <input class="input" type="email" name="tabs" placeholder="Электронный адрес" required>
-            <input class="input" type="password" name="tabs" placeholder="Пароль" required>
+        <form class="tab-form" method="post"> {% csrf_token %}
+            <input class="input" type="email" name="email" placeholder="Почта" required>
+            <input class="input" type="password" name="password" placeholder="Пароль" required>
+
             <button type="submit">Войти</button>
-            <button type="submit" id="b2">Забыли пароль?</button>
+
+            {% for field in login_form %}
+				<p>
+				{% for error in field.errors %}
+				<p style="color: red">{{ error }}</p>
+				{% endfor %}
+				</p>
+            {% endfor %}
+            {% if login_form.non_field_errors %}
+				<div style="color: red">
+				    <p>{{login_form.non_field_errors}}</p>
+				</div>
+
+            {% endif %}
+
         </form> 
-        <form class="tab-form-down">
+        <form class="tab-form-down" action="{% url 'reg_fio' %}" method="GET">
             <p>Ещё нет аккаунта?</p>
             <button type="submit" id="b3" >Зарегистрироваться</button>
         </form>    

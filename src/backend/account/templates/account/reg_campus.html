@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'account/reg_campus_staff_ed_staff.css' %}" type="text/css">
+<body>
+   
+<div id="grey"></div> 
+<div class="registration">
+    <div class="reg">    
+        <form id="regForm" method="POST"> {% csrf_token %}
+            <div class="title" id="title">Регистрация</div>
+            <div class="tab">
+                <div class="middle">
+                    <h2>Выберите город, в котором расподожен ваш кампус:</h2>
+                    <div id="radio-input">
+                        <label class="control control--radio">Москва
+                            <input type="radio" name="group1" value="Москва">
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--radio">Нижний Новгород
+                            <input type="radio" name="group1" value="Нижний Новгород" checked/>
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--radio">Пермь
+                            <input type="radio" name="group1" value="Пермь"/>
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--radio">Санкт-Петербург
+                            <input type="radio" name="group1" value="Санкт-Петербург"/>
+                            <div class="control__indicator"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+<!--            <div class="tab">-->
+<!--                <div class="middle">-->
+<!--                    <ul>-->
+<!--                        {% for error in errors %}-->
+<!--                            <li> {{ error }} </li>-->
+<!--                        {% endfor %}-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <button type="submit" id="prevBtn" name="action" value="prev">Назад</button>
+            <button type="submit" id="nextBtn" name="action" value="next">Далее</button>
+            <div style="text-align:center;margin-top:40px;">
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

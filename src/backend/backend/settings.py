@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = "account.Account"
 
+# AUTHENTICATION_BACKENDS = ['account.backends.EmailBackend']
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'hse',
     'account',
+    'apptest',
 ]
 
 MIDDLEWARE = [

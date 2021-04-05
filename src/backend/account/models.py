@@ -14,22 +14,19 @@ from hse.models import (
 
 
 class AccountManager(BaseUserManager):
-    def create_user(self, email, first_name, middle_name, last_name, password=None, **extra_fields):
-        # todo: сделать обработку почты, чтобы оканчивалась на hse.ru
-        if not email:
+    def create_user(self, email, username, password=None, **extra_fields):
+        if email:
+            if not email.endswith("hse.ru"):
+                raise ValueError('User`s email must end with "hse.ru"')
+        else:
             raise ValueError('Users must have an email address')
-        if not first_name:
-            raise ValueError('Users must have a firstname')
-        if not middle_name:
-            raise ValueError('Users must have a middlename')
-        if not last_name:
-            raise ValueError('Users must have a lastname')
+
+        if not username:
+            raise ValueError('Users must have an username')
 
         user = self.model(
             email=self.normalize_email(email),
-            first_name=first_name,
-            middle_name=middle_name,
-            last_name=last_name,
+            username=username,
             **extra_fields
         )
 
@@ -37,13 +34,11 @@ class AccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, first_name, middle_name, last_name, password, **extra_fields):
+    def create_superuser(self, email, username, password, **extra_fields):
         user = self.create_user(
             email=self.normalize_email(email),
+            username=username,
             password=password,
-            first_name=first_name,
-            middle_name=middle_name,
-            last_name=last_name,
             **extra_fields
         )
         user.is_admin = True
@@ -54,7 +49,9 @@ class AccountManager(BaseUserManager):
 
 
 class Account(AbstractBaseUser):
+    username = models.CharField(verbose_name="username", max_length=50, unique=True)
     email = models.EmailField(verbose_name="email", max_length=50, unique=True)
+
     first_name = models.CharField(verbose_name="first_name", max_length=40)
     middle_name = models.CharField(verbose_name="middle_name", max_length=40)
     last_name = models.CharField(verbose_name="last_name", max_length=40)
@@ -80,7 +77,7 @@ class Account(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'middle_name', 'last_name']
+    REQUIRED_FIELDS = ['username']
 
     objects = AccountManager()
 
@@ -91,7 +88,3 @@ class Account(AbstractBaseUser):
     # Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY)
     def has_module_perms(self, app_label):
         return True
-
-
-
-
