@@ -248,6 +248,23 @@ def logout_view(request):
     return redirect("login")
 
 
+def account_view(request, *args, **kwargs):
+    context = {}
+
+    user_id = kwargs.get('user_id')
+
+    try:
+        user = Account.objects.get(pk=user_id)
+    except:
+        return HttpResponse('Something went wrong')
+
+    context['fio'] = " ".join([user.first_name, user.middle_name, user.last_name])
+    context['username'] = user.username
+    context['email'] = user.email
+
+    return render(request, "account/account_view.html", context)
+
+
 def thanks_page(request):
     print("hello")
     return render(request, 'account/thanks.html')

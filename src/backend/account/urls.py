@@ -25,6 +25,7 @@ from .views import (registration_fio,
                     registration_group,
                     registration_end,
                     login_view, thanks_page, logout_view,
+                    account_view,
                     # test_add_campus
                     )
 
@@ -41,6 +42,7 @@ urlpatterns = [
     path('logout', logout_view, name='logout'),
     path('login', login_view, name='login'),
     path('thanks', thanks_page, name='thanks_page'),
+    path('<user_id>',account_view, name='account_view')
     # path('testing', test_add_campus, name='testing_page'),
 
 ]
