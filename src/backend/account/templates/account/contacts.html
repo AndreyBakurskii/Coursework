@@ -7,56 +7,6 @@
 {% endblock %}
 {% block title_main %}Контакты{% endblock %}
 {% block person_contact_list %}
-                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
-
-                    <div class="user-info-avatar" id="avatar" ></div>
-                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
-
-                    <div class="user-status">
-                        <p><strong>Должность: </strong>студент</p>
-
-                    </div>
-                </button>
-                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
-
-                    <div class="user-info-avatar" id="avatar" ></div>
-                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
-
-                    <div class="user-status">
-                        <p><strong>Должность: </strong>студент</p>
-
-                    </div>
-                </button>
-                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
-
-                    <div class="user-info-avatar" id="avatar" ></div>
-                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
-
-                    <div class="user-status">
-                        <p><strong>Должность: </strong>студент</p>
-
-                    </div>
-                </button>
-                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
-
-                    <div class="user-info-avatar" id="avatar" ></div>
-                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
-
-                    <div class="user-status">
-                        <p><strong>Должность: </strong>студент</p>
-
-                    </div>
-                </button>
-                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
-
-                    <div class="user-info-avatar" id="avatar" ></div>
-                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
-
-                    <div class="user-status">
-                        <p><strong>Должность: </strong>студент</p>
-
-                    </div>
-                </button>
 {% for friend in friends %}
 
                 <button class="block_person" id="person_{{ friend.id }}" onclick="ProfileInfo(this)">
@@ -168,22 +118,22 @@
             // изменяем информацию о профиле
             var person_id = button.id.slice(7);
             
-                // изменяем информацию в первом блоке
-            document.getElementById("this-user-name").getElementsByTagName("span")[0].getElementsByTagName("strong")[0].textContent = "Иванов Иван Иванович";
-                    
-            var avatar = document.getElementById("this-user-avatar");                
-            avatar.style.background = button.getElementsByClassName("user-info-avatar")[0].style.background;
-
-            var letterName = "И".substr(0, 1) + "И".substr(0, 1); 
-            avatar.innerHTML = letterName;
-
-                    // изменяем информацию во втором блоке
-            document.getElementById("personal-data-email").textContent = "friend.email";
-            document.getElementById("personal-data-campus").textContent = "friend.campus";
-
-            document.getElementById("personal-data-staff").textContent = "friend.staff";
-            document.getElementById("personal-data-department").textContent = "friend.department";
-            document.getElementById("personal-data-group").textContent = "friend.group";
+//                // изменяем информацию в первом блоке
+//            document.getElementById("this-user-name").getElementsByTagName("span")[0].getElementsByTagName("strong")[0].textContent = "Иванов Иван Иванович";
+//                    
+//            var avatar = document.getElementById("this-user-avatar");                
+//            avatar.style.background = button.getElementsByClassName("user-info-avatar")[0].style.background;
+//
+//            var letterName = "И".substr(0, 1) + "И".substr(0, 1); 
+//            avatar.innerHTML = letterName;
+//
+//                    // изменяем информацию во втором блоке
+//            document.getElementById("personal-data-email").textContent = "friend.email";
+//            document.getElementById("personal-data-campus").textContent = "friend.campus";
+//
+//            document.getElementById("personal-data-staff").textContent = "friend.staff";
+//            document.getElementById("personal-data-department").textContent = "friend.department";
+//            document.getElementById("personal-data-group").textContent = "friend.group";
             
             {% for friend in friends %}
                 if ( {{friend.id}} == person_id ) {
