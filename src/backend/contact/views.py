@@ -51,7 +51,7 @@ def my_contacts(request: HttpRequest):
     # context['friends'] = Contact.get_friends(user)
 
     context['friends'] = Account.objects.all()
-    return render(request, 'contact/new_friends_2.html', context)
+    return render(request, 'account/base2.html', context)
 
 
 def important_people(request: HttpRequest):

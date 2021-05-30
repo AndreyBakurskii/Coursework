@@ -7,16 +7,17 @@
 {% endblock %}
 {% block title_main %}Контакты{% endblock %}
 {% block person_contact_list %}
-{% for friend in friends %}
+        {% for friend in friends %}
 
-                <button class="block_person" id="person_{{ friend.id }}" onclick="ProfileInfo(this)">
+            <button class="block_person" id="person_{{ friend.id }}" onclick="ProfileInfo(this)">
 
-                    <div class="user-info-avatar" id="avatar" ></div>
-                    <div class="user-info-name" id="name"><span>{{friend.last_name}} {{friend.first_name}} {{friend.middle_name}}</span></div>
+                <div class="user-info-avatar" id="avatar" ></div>
+                <div class="user-info-name" id="name"><span>{{friend.last_name}} {{friend.first_name}} {{friend.middle_name}}</span></div>
 
-                    <div class="user-status">
-                        <p><strong>Должность: </strong>{{friend.staff}}</p>
+                <div class="user-status">
+                    <p><strong>Должность: </strong>{{friend.staff}}</p>
 
+<<<<<<< Updated upstream:src/backend/account/templates/account/contacts.html
                     </div>
                 </button>
             {% endfor %}
@@ -34,6 +35,13 @@
                 </svg>
             </button>
 {% endblock %}
+=======
+                </div>
+        </button>
+        {% endfor %}
+{% endblock %}
+
+>>>>>>> Stashed changes:src/backend/contact/templates/contact/contacts.html
 {% block button_contact_list %}
     <!-- кнопка "Удалить из контактов" -->
     <button  class="button" type="submit" id="b-delete" title="Удалить из контактов">

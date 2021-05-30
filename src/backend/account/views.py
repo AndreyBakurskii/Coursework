@@ -267,4 +267,4 @@ def account_view(request, *args, **kwargs):
 
 def thanks_page(request):
     print("hello")
-    return render(request, 'account/thanks.html')
+    return render(request, 'account/base3.html')
