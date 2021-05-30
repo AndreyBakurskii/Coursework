@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous">
+    </script>
+</head>
+<body>
+    <p id="msg">
+        lalala
+    </p>
+    <input type="text" class="send_msg">
+    <button onclick="Changetext()">Change</button>
+
+    <script>
+        function Changetext() {
+
+<!--            var msg_dom = $('.send_msg');-->
+<!--            console.log(msg_dom.val());-->
+
+
+<!--            oldhtml = $('p').html();-->
+<!--            $('p').html(oldhtml + '<p>' + msg_dom.val() + '</p>');-->
+
+
+<!--            msg_dom.val('');-->
+
+                var element = document.getElementById("msg");
+                element.textContent = "Text is changed!";
+
+        }
+    </script>
+</body>
+</html>

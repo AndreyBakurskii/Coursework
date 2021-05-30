@@ -42,7 +42,7 @@ urlpatterns = [
     path('logout', logout_view, name='logout'),
     path('login', login_view, name='login'),
     path('thanks', thanks_page, name='thanks_page'),
-    path('<user_id>',account_view, name='account_view')
+    path('<user_id>', account_view, name='account_view')
     # path('testing', test_add_campus, name='testing_page'),
 
 ]

@@ -39,7 +39,7 @@ class RegistrationUserFromAdminSite(UserCreationForm):
 class AccountAdmin(UserAdmin):
     add_form = RegistrationUserFromAdminSite
 
-    list_display = ('email', 'username', 'first_name', 'last_name', 'campus', 'staff', 'department', 'group', 'last_login', 'is_admin')
+    list_display = ('id', 'email', 'username', 'first_name', 'last_name', 'campus', 'staff', 'department', 'group', 'last_login', 'is_admin')
     search_fields = ('email', 'username', 'first_name', 'middle_name', 'last_name', 'department')
     readonly_fields = ('id', 'date_joined', 'last_login')
 
