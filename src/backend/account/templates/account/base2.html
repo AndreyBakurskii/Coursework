@@ -1,9 +1,9 @@
+{% extends "account/base.html" %}
 
-{% extends "base.html" %}
 {% load static %}
-{% block title %}The current time{% endblock %}
+{% block title %}Base 2{% endblock %}
 {% block additional_media2 %}
-        <link rel="stylesheet" type="text/css" href="{% static 'account/base2.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'base2.css' %}" />
     {% endblock %}
 
 {% block content %}
@@ -44,7 +44,7 @@
      
     <div class="block_messages">
         <div class="block_info_choose">
-            <h3>Выберите контакт, чтобы увидеть персональные данные</h3>        
+            <h3>{% block block_info_choose %}{% endblock %}</h3>        
         </div>
         {% block right %}{% endblock %}
         
