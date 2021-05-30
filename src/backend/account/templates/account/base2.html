@@ -3,26 +3,16 @@
 {% load static %}
 {% block title %}Base 2{% endblock %}
 {% block additional_media2 %}
-        <link rel="stylesheet" type="text/css" href="{% static 'base2.css' %}" />
-    {% endblock %}
+        <link rel="stylesheet" type="text/css" href="{% static 'account/base2.css' %}" />
+{% endblock %}
 
 {% block content %}
 <div class="block_dialogs" id="header">
     <div class="block_info">
         <h2>{% block title_main %}{% endblock %}</h2>
         <div class="create-new-chat">
-<!--           <a href="#popup">-->
-               <button class="button" onclick="location.href ='#popup'">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
-                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
-                </svg>
-            </button>
-<!--            </a> -->
-            <button class="button" type="submit" id="newChat">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                </svg>
-            </button>
+            {% block button_create_new_chat %}{% endblock %}
+               
         </div>
         <div class="search">
             <form>
@@ -62,103 +52,34 @@
                 
                 <div class="popup_title">Новые контакты</div>
                 <div class="popup_persons">
-                    <button class="block_person" id="person_1">
+                    <div class="popup_person" id="person_1">
                         <div class="user-info-avatar" id="avatar"></div>
                         <div class="user-info-name" id="name"><span>Зверев Кирилл Юрьевич</span></div>
-                    </button>
-                    <button class="button_contact_add">Добавить в контакты</button>
-                    <button class="button_contact_add" id="reject">Отклонить заявку</button>
-                    <button class="block_person" id="person_2">
-                        <div class="user-info-avatar" id="avatar" ></div>
-                        <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
-                    </button>
-                    <button class="button_contact_add">Добавить в контакты</button>
-                    <button class="button_contact_add" id="reject">Отклонить заявку</button>
-                    <button class="block_person" id="person_3">
-                        <div class="user-info-avatar" id="avatar" ></div>
-                        <div class="user-info-name" id="name"><span>Зверев Кирилл Юрьевич</span></div>
-                    </button>
-                    <button class="button_contact_add">Добавить в контакты</button>
+                        <button class="button_contact_add">Добавить в контакты</button>
                         <button class="button_contact_add" id="reject">Отклонить заявку</button>
-                    <button class="block_person" id="person_4">
-                        <div class="user-info-avatar" id="avatar" ></div>
+                    </div>
+                    <div class="popup_person" id="person_1">
+                        <div class="user-info-avatar" id="avatar"></div>
                         <div class="user-info-name" id="name"><span>Зверев Кирилл Юрьевич</span></div>
-                    </button>
-                    <button class="button_contact_add">Добавить в контакты</button>
-                    <button class="button_contact_add" id="reject">Отклонить заявку</button>
-                
+                        <button class="button_contact_add">Добавить в контакты</button>
+                        <button class="button_contact_add" id="reject">Отклонить заявку</button>
+                    </div>
+                    <div class="popup_person" id="person_1">
+                        <div class="user-info-avatar" id="avatar"></div>
+                        <div class="user-info-name" id="name"><span>Зверев Кирилл Юрьевич</span></div>
+                        <button class="button_contact_add">Добавить в контакты</button>
+                        <button class="button_contact_add" id="reject">Отклонить заявку</button>
+                    </div>
+                    <div class="popup_person" id="person_1">
+                        <div class="user-info-avatar" id="avatar"></div>
+                        <div class="user-info-name" id="name"><span>Зверев Кирилл Юрьевич</span></div>
+                        <button class="button_contact_add">Добавить в контакты</button>
+                        <button class="button_contact_add" id="reject">Отклонить заявку</button>
+                    </div>        
                 </div>
             </div>
         </div>
-
-    
     </div>
-<script>
-        // делает рандомные цвета в аватарках людям
-        function ChooseColor() {
-            var color = [
-                '#F29B34',
-                '#A19C69',
-                '#FF00AE',
-                '#3C3741',
-                '#D0FF00',
-                '#25373D',
-                '#EB9532',
-                '#3AE2CE',
-                '#60646D',
-                '#00FFA9',
-                '#FFDD00',
-                '#B34EE9'];
-            var rand = Math.floor(Math.random() * color.length);
-            return color[rand];
-        };
 
-        var avatars = document.getElementsByClassName("user-info-avatar");
-        var names = document.getElementsByClassName("user-info-name");
-        for (var i = 0; i < avatars.length; i++) {
-            
-            avatars[i].style.background = ChooseColor();
-            var name = names[i].textContent;
-            var arrName = name.split(' ', 2)
-            var letterName = arrName[0].substr(0, 1) + arrName[1].substr(0, 1);
-            avatars[i].innerHTML = letterName;
-        }
-        
-        
-        function ProfileInfo(button) {
-
-            // возвращаем все кнопки в дефоолтный цвет
-            var prof_b = document.getElementsByClassName("block_person");
-            for(var i = 0; i < prof_b.length; i++) {
-                prof_b[i].style.background = "#BDDFEF";
-
-                document.getElementsByClassName("user-info-name")[i].style.color = "#032E42";
-                document.getElementsByClassName("user-status")[i].style.color = "#2B6684";
-            }
-
-            // изменяем цвет кнопки на которую нажали
-            button.style.backgroundColor = "#012E67";
-            button.getElementsByClassName("user-info-name")[0].style.color = "#F3F7FB";
-            button.getElementsByClassName("user-status")[0].style.color = "#F3F7FB";
-
-
-            // изменяем информацию о профиле
-            var person_id = button.id.slice(7);
-            
-            {% block this_user_info %}{% endblock %}
-            
-
-            // скрываем подпись о выборе контакта
-            var info = document.getElementsByClassName("block_info_choose");
-            info[0].style.display = "none";
-
-            // показываем два блока
-            var profile = document.getElementsByClassName("this-user-info");
-            profile[0].style.display = "block";
-            profile[1].style.display = "block";
-              
-        }
-
-    </script>
 {% endblock %}
 

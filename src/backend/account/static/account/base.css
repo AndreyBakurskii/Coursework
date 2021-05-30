@@ -83,19 +83,18 @@ li {
 #b-start:hover {
     background: #408FB4;
 }
-/*
-#b-contact {
+#b-delete {
     margin-top: 10px;
+    margin-left: 10px;
     background: #C32439;
-    cursor: inherit;
 }
-#b-contact:hover {
+#b-delete:hover {
     background: #E35760;
 }
-*/
+
 .button-contact-list {
     margin-top: 10px;
-    margin-left: 165px;
+    margin-left: 160px;
     width: 200px;
     height: 50px;
 
@@ -113,7 +112,6 @@ li {
 }
 
 .personal-data h3 {
-    
     margin-left: 10px;
     color: #012E67;
 }
