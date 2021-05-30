@@ -207,7 +207,7 @@ form {
     top: 26px;
 }
 .popup_persons {
-    padding-top: 30px;
+/*    padding-top: 30px;*/
     width: 466px;
     height: 400px;
     overflow-y: scroll;
@@ -219,16 +219,27 @@ form {
 }
 .popup_persons .user-info-name {
     color: #012E67;
-    margin-top: -10px;
+/*    margin-top: -10px;*/
 }
 .popup_persons .user-info-avatar {
-    margin-top: 0;
-}
-.popup_persons .block_person {
-    margin-top: -20px;
-    background-color: #F3F7FB;
+    margin-top: 25px;
 }
 
+.popup_person {
+    margin: 0 auto;
+    margin-top: 20px;
+     background-color: #F3F7FB;
+    height: 100px;
+    width: 420px;
+    border: 2px solid #2B6684;
+    border-radius: 3px;
+    display:block;
+    cursor: pointer;
+}
+
+.popup_person:hover{
+    border-color:  #012E67;
+}
 .popup_title {
     top: -10px;
     width: 100%;
@@ -254,7 +265,6 @@ form {
 
 
 .button_contact_add {
-    position: relative;
     appearance: none;
     border: 0;
     border-radius: 5px;
@@ -264,8 +274,8 @@ form {
     font-size: 12px;
     width: 150px;
     font-family: inherit;
-    left: 120px;
-    top: -50px;
+    margin-left:  10px;
+    margin-top: 10px;
     cursor: pointer;
 }
 

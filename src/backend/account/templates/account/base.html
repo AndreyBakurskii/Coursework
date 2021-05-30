@@ -4,14 +4,14 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>{% block title %}{% endblock %}</title>
+    <title>Контакты{% block title %}{% endblock %}</title>
 
      <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'account/base.css' %}" />
     {% block additional_media2 %}{% endblock %}
     {% block additional_media3 %}{% endblock %}
-    {% block additional_media4 %}{% endblock %}
+<!--    {% block additional_media4 %}{% endblock %}-->
 
 
 </head>
@@ -35,7 +35,7 @@
                 </a>
             </li>
             <li class="item-choice">
-                <a id="friends" title="Контакты" href="/Contancts">
+                <a id="contacts" title="Контакты" href="/Contancts">
                     <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
                         <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                         <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
@@ -65,6 +65,7 @@
           
         </ul>
     </div>
-   {% block content %}{% endblock %}
+    {% block content %}{% endblock %}
+    {% block script %}{% endblock %}
 </body>
 </html>
