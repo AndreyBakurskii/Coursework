@@ -1,0 +1,21 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block title %}Base 3{% endblock %}
+{% block additional_media3 %}
+        <link rel="stylesheet" type="text/css" href="{% static 'account/base3.css' %}" />
+{% endblock %}
+
+{% block right %}
+<div class="this-user-info">
+            <div class="personal-data" id="contact-avatar">
+                <div class="this-user-info-avatar" id="this-user-avatar" ></div>
+                <div class="this-user-info-name" id="this-user-name"><span><strong></strong></span></div>
+                <div class="button-contact-list">
+                     {% block button_contact_list %}{% endblock %}
+                </div>
+            </div>
+                <div class="personal-data">
+                    {% block personal_data %}{% endblock %}
+                </div>
+        </div>
+{% endblock %}
