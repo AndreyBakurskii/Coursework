@@ -41,8 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hse',
+    'website',
     'account',
-    'apptest',
+    # 'apptest',
+    'contact',
+    'channels',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -74,6 +78,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
+
+ASGI_APPLICATION = 'backend.asgi.application'
 
 CHANNEL_LAYERS = {
     'default': {

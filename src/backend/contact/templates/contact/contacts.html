@@ -1,26 +1,27 @@
-{% extends "account/base3.html" %}
+{% extends "website/base3.html" %}
 {% load static %}
 {% block title %}Contacts{% endblock %}
 
 {% block additional_media3 %}
-        <link rel="stylesheet" type="text/css" href="{% static 'account/contacts.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'contact/contacts.css' %}" />
 {% endblock %}
+
 {% block title_main %}Контакты{% endblock %}
 {% block person_contact_list %}
-{% for friend in friends %}
+        {% for friend in friends %}
 
-                <button class="block_person" id="person_{{ friend.id }}" onclick="ProfileInfo(this)">
+            <button class="block_person" id="person_{{ friend.id }}" onclick="ProfileInfo(this)">
 
-                    <div class="user-info-avatar" id="avatar" ></div>
-                    <div class="user-info-name" id="name"><span>{{friend.last_name}} {{friend.first_name}} {{friend.middle_name}}</span></div>
+                <div class="user-info-avatar" id="avatar" ></div>
+                <div class="user-info-name" id="name"><span>{{friend.last_name}} {{friend.first_name}} {{friend.middle_name}}</span></div>
 
-                    <div class="user-status">
-                        <p><strong>Должность: </strong>{{friend.staff}}</p>
-
-                    </div>
-                </button>
-            {% endfor %}
+                <div class="user-status">
+                    <p><strong>Должность: </strong>{{friend.staff}}</p>
+                </div>
+            </button>
+        {% endfor %}
 {% endblock %}
+
 {% block button_create_new_chat %}
             <button class="button" onclick="location.href ='#popup'">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
@@ -34,6 +35,7 @@
                 </svg>
             </button>
 {% endblock %}
+
 {% block button_contact_list %}
     <!-- кнопка "Удалить из контактов" -->
     <button  class="button" type="submit" id="b-delete" title="Удалить из контактов">
