@@ -1,10 +1,11 @@
-{% extends "account/base3.html" %}
+{% extends "website/base3.html" %}
 {% load static %}
 {% block title %}Contacts{% endblock %}
 
 {% block additional_media3 %}
-        <link rel="stylesheet" type="text/css" href="{% static 'account/contacts.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'contact/contacts.css' %}" />
 {% endblock %}
+
 {% block title_main %}Контакты{% endblock %}
 {% block person_contact_list %}
         {% for friend in friends %}
@@ -16,12 +17,11 @@
 
                 <div class="user-status">
                     <p><strong>Должность: </strong>{{friend.staff}}</p>
-
-<<<<<<< Updated upstream:src/backend/account/templates/account/contacts.html
-                    </div>
-                </button>
-            {% endfor %}
+                </div>
+            </button>
+        {% endfor %}
 {% endblock %}
+
 {% block button_create_new_chat %}
             <button class="button" onclick="location.href ='#popup'">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
@@ -35,13 +35,7 @@
                 </svg>
             </button>
 {% endblock %}
-=======
-                </div>
-        </button>
-        {% endfor %}
-{% endblock %}
 
->>>>>>> Stashed changes:src/backend/contact/templates/contact/contacts.html
 {% block button_contact_list %}
     <!-- кнопка "Удалить из контактов" -->
     <button  class="button" type="submit" id="b-delete" title="Удалить из контактов">

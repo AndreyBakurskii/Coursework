@@ -3,7 +3,6 @@ body {
     margin: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
-    
 }
 
 .block_select {
@@ -15,7 +14,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
 a {
@@ -33,14 +31,14 @@ li {
     margin-left: -35px;
     margin-bottom: 20px;
 }
+
 .item-choice a{
     color: #A9A4FE;
 }
+
 .item-choice a:hover {
     color: #EBE6FF;
 }
-
-
 
 .this-user-info-avatar {
     margin: 0 auto;
@@ -52,42 +50,40 @@ li {
     color: white;
     text-align: center;
 }
+
 .this-user {
     width: 100vw;
     display: none;
 }
+
 .this-user h2{
     margin: 0 auto;
     margin-top: 20px;
-     color: #032E42;
+    color: #032E42;
     text-align: center;
 }
-
-
 
 .this-user-info-name {
     margin-top: 20px;
     text-align: center;
     color: #032E42;
-    
-    
 }
-
-
-
 
 #b-start {
     margin-top: 10px;
     background: #012E67;
 }
+
 #b-start:hover {
     background: #408FB4;
 }
+
 #b-delete {
     margin-top: 10px;
     margin-left: 10px;
     background: #C32439;
 }
+
 #b-delete:hover {
     background: #E35760;
 }
@@ -97,7 +93,6 @@ li {
     margin-left: 160px;
     width: 200px;
     height: 50px;
-
 }
 
 .personal-data {
@@ -108,13 +103,13 @@ li {
     border: 2px solid #9CACBF;
     background: url(main3.png)  0 0/100% auto fixed;
     background-position: top 0 left 300px;
-
 }
 
 .personal-data h3 {
     margin-left: 10px;
     color: #012E67;
 }
+
 .personal-data p {
     color: #012E67;
     margin-left: 80px;
@@ -131,4 +126,3 @@ li {
     display: none;
     height: 620px;
 }
-
