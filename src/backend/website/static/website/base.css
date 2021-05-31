@@ -99,7 +99,6 @@ li {
     margin-top: 20px;
     padding: 40px;
     width: 600px;
-    height: 400px;
     border: 2px solid #9CACBF;
     background: url(main3.png)  0 0/100% auto fixed;
     background-position: top 0 left 300px;
@@ -124,5 +123,4 @@ li {
     margin: 0 auto;
     width: 600px;
     display: none;
-    height: 620px;
 }
