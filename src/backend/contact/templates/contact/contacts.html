@@ -69,9 +69,6 @@
 {% block block_info_choose %}Выберите контакт, чтобы увидеть персональные данные{% endblock %}
 {% block script %}
 <script>
-
-		document.getElementById("title-data-department").style.display = "none";
-        document.getElementById("personal-data-department").style.dispaly = "none";
         // делает рандомные цвета в аватарках людям
         function ChooseColor() {
             var color = [
@@ -139,8 +136,20 @@
                     document.getElementById("personal-data-email").textContent = "{{friend.email}}";
                     document.getElementById("personal-data-campus").textContent = "{{friend.campus}}";
                     document.getElementById("personal-data-staff").textContent = "{{friend.staff}}";
-                    document.getElementById("personal-data-department").textContent = "{{friend.department}}";
-                    document.getElementById("personal-data-group").textContent = "{{friend.group}}";
+
+                    {% if friend.department%}
+                        document.getElementById("personal-data-department").textContent = "{{friend.department}}";
+                    {% else %}
+                        document.getElementById("title-data-department").style.display = "none";
+                        document.getElementById("personal-data-department").style.display = "none";
+                    {% endif %}
+
+                    {% if friend.group %}
+                        document.getElementById("personal-data-group").textContent = "{{friend.group}}";
+                    {% else %}
+                        document.getElementById("title-data-group").style.display = "none";
+                        document.getElementById("personal-data-group").style.display = "none";
+                    {% endif %}
                 }
             {% endfor %}
 

@@ -7,6 +7,23 @@ class Contact(models.Model):
     user2 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user2')
 
     @staticmethod
+    def get_contact(user1: settings.AUTH_USER_MODEL, user2: settings.AUTH_USER_MODEL):
+        contact = None
+
+        try:
+            contact = Contact.objects.get(user1=user1, user2=user2)
+        except Contact.DoesNotExist:
+            pass
+
+        if not contact:
+            try:
+                contact = Contact.objects.get(user1=user2, user2=user1)
+            except Contact.DoesNotExist:
+                pass
+
+        return contact
+
+    @staticmethod
     def get_friends(user: settings.AUTH_USER_MODEL):
         friend = []
         for contact in Contact.objects.all():
@@ -18,12 +35,12 @@ class Contact(models.Model):
         return friend
 
     @staticmethod
-    def create_contact(user1, user2):
+    def create_contact(user1: settings.AUTH_USER_MODEL, user2: settings.AUTH_USER_MODEL):
         contact1 = Contact(user1=user1, user2=user2)
         contact1.save()
 
     @staticmethod
-    def delete_contact(owner, del_friend):
+    def delete_contact(owner: settings.AUTH_USER_MODEL, del_friend: settings.AUTH_USER_MODEL):
         Contact.objects.filter(user1=owner, user2=del_friend).delete()
         Contact.objects.filter(user1=del_friend, user2=owner).delete()
 

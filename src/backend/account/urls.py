@@ -25,7 +25,7 @@ from .views import (registration_fio,
                     registration_group,
                     registration_end,
                     login_view, logout_view,
-                    account_view,
+                    other_account_view, account_view
                     )
 
 
@@ -40,5 +40,7 @@ urlpatterns = [
     path('registration/end', registration_end, name='reg_end'),
     path('logout', logout_view, name='logout'),
     path('login', login_view, name='login'),
-    path('<user_id>', account_view, name='account_view')
+
+    path('my_acc', account_view, name='account_view'),
+    path('<user_id>', other_account_view, name='other_account_view')
 ]

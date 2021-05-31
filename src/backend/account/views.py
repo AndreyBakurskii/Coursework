@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate, logout
 from .forms import RegistrationForm, RegistrationFIOEmailForm, RegistrationEndForm, LoginForm
 from hse.models import Campus, Department, Group, Staff
 from account.models import Account
+from contact.models import Contact
 
 
 def registration_fio(request):
@@ -248,6 +249,10 @@ def logout_view(request):
     return redirect("login")
 
 
+def account_view(request):
+    return render(request, 'account/account_view.html')
+
+
 def other_account_view(request, *args, **kwargs):
     context = {}
 
@@ -255,12 +260,14 @@ def other_account_view(request, *args, **kwargs):
 
     try:
         user = Account.objects.get(pk=user_id)
-    except:
+    except Account.DoesNotExist:
         return HttpResponse('Something went wrong')
 
-    context['fio'] = " ".join([user.first_name, user.middle_name, user.last_name])
-    context['username'] = user.username
-    context['email'] = user.email
+    context['is_friend'] = False
+    if Contact.get_contact(request.user, user):
+        context['is_friend'] = True
+
+    context['other_user'] = user
 
     return render(request, "account/other_account_view.html", context)
 
