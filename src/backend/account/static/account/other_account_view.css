@@ -1,0 +1,169 @@
+.button {
+    margin-top: 20px;
+    float: right;
+    margin-right: 3px;
+    border: 0;
+    border-radius: 5px;
+    background: #032E42;
+    color: #fff;
+    padding: 8px 10px;
+    font-size: 18px;
+    min-width: 10px;
+    width: 50px;
+    cursor: pointer;
+    outline: none;
+}
+
+.block_messages {
+    float: right;
+    position: absolute;
+    left: 80px;
+    background: #F3F7FB;
+    height: 100vh;
+    width: calc(100vw - 80px);
+    display: fixed;
+    justify-content: center;
+    align-items: center;
+}
+.this-user-info-avatar {
+    margin: 0 auto;
+    margin-top: -20px;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    border-radius: 35px;
+    color: white;
+    text-align: center;
+}
+.this-user {
+/*    margin: 0 auto;*/
+    width: 100vw;
+    display: none;
+}
+.this-user h2{
+    margin: 0 auto;
+    margin-top: 20px;
+     color: #032E42;
+    text-align: center;
+}
+
+
+
+.this-user-info-name {
+    margin-top: 20px;
+    text-align: center;
+    color: #032E42;
+
+
+}
+
+#b-start {
+/*    position: fixed;*/
+    margin-top: 10px;
+    background: #012E67;
+}
+#b-start:hover {
+    background: #408FB4;
+}
+#b-contact {
+    margin-top: 10px;
+    background: #C32439;
+    cursor: inherit;
+}
+#b-contact:hover {
+    background: #E35760;
+}
+.button-contact-list {
+    margin-top: 10px;
+    margin-left: 155px;
+    width: 200px;
+    height: 50px;
+/*    margin-top:  10px;*/
+/*    width: 30px; */
+}
+
+
+.personal-data {
+/*    margin-left: calc((100vw - 540px)/2 - 250px);*/
+/*    margin-left: calc(50vw - 30px);*/
+/*    margin-left: -120px;*/
+/*    position: ;*/
+/*    float: right;*/
+/*    margin: 0 auto;*/
+    margin-top: 20px;
+    padding: 40px;
+/*
+    left: calc(100wh - 540px);
+    bottom: 50px;
+*/
+
+    width: 600px;
+    height: 400px;
+/*    height: 50vh;*/
+/*    margin-top: 220px;*/
+/*    margin-bottom: 20px;*/
+    border: 2px solid #9CACBF;
+    background: url(main3.png)  0 0/100% auto fixed;
+    background-position: top 0 left 300px;
+
+}
+
+.personal-data h3 {
+
+    margin-left: 10px;
+    color: #012E67;
+}
+.personal-data p {
+    color: #012E67;
+    margin-left: 80px;
+}
+
+#contact-avatar {
+/*    position: fixed;*/
+
+/*    margin-left: calc(30vw - 270px);*/
+/*
+    margin-left: 0;
+    margin-top: 0;
+*/
+/*    margin-right: 0;*/
+/*    margin-right:  calc(27vw - 270px);*/
+/*    margin-left: calc(30vw + 270px);*/
+/*    margin-left: calc((100vw - 540px)/2 - 50px);*/
+/*    margin-right: calc((100vw - 540px)/2 - 640px);*/
+/*    margin-left: calc((100vw2 - 540px)/2 + 500px);*/
+/*    margin-right: 20px;*/
+/*    background: url(main3.png)  0 0/100% auto fixed;*/
+/*    width: 600px;*/
+    height: 120px;
+}
+
+.this-user-info {
+/*    display: fixed;*/
+/*    position: fixed;*/
+    position: relative;
+    margin: 0 auto;
+/*
+    left: calc(30vw + 270px);
+    left: calc(50vw - 30px);
+*/
+/*    left: calc(540px + 50vw - 270px - 300px)*/
+    width: 600px;
+/*    min-height: 100vh;*/
+    display: block;
+/*    top: calc(50vh - 350px);*/
+    height: 620px;
+}
+.block_info_choose {
+    margin: 0 auto;
+    margin-top: 49vh;
+    width: 400px;
+}
+
+
+.block_info_choose h3 {
+    margin: 0 auto;
+    margin-top: 20px;
+    color: #032E42;
+    text-align: center;
+}

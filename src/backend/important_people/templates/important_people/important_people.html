@@ -3,10 +3,10 @@
 {% block title %}Important people{% endblock %}
 
 {% block additional_media3 %}
-        <link rel="stylesheet" type="text/css" href="{% static 'important_people/important people.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'important_people/important_people.css' %}" />
 {% endblock %}
 
-{% block title_main %}Контакты{% endblock %}
+{% block title_main %}Важные люди{% endblock %}
 {% block person_contact_list %}
 <!--
         {% for friend in friends %}
@@ -43,6 +43,7 @@
 {% block personal_data %}
     <h3>Email</h3>
         <p id="personal-data-email"></p>
+
     <h3>Кампус</h3>
         <p id="personal-data-campus"></p>
 
@@ -51,11 +52,8 @@
 
     <h3>Факультет</h3>
         <p id="personal-data-department"></p>
-
-    <h3>Группа</h3>
-        <p id="personal-data-group"></p>
 {% endblock %}
-{% block block_info_choose %}Выберите контакт, чтобы увидеть персональные данные{% endblock %}
+{% block block_info_choose %}Выберите пользователя, чтобы увидеть персональные данные{% endblock %}
 {% block script %}
 <script>
         // делает рандомные цвета в аватарках людям

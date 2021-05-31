@@ -248,7 +248,7 @@ def logout_view(request):
     return redirect("login")
 
 
-def account_view(request, *args, **kwargs):
+def other_account_view(request, *args, **kwargs):
     context = {}
 
     user_id = kwargs.get('user_id')
@@ -262,7 +262,7 @@ def account_view(request, *args, **kwargs):
     context['username'] = user.username
     context['email'] = user.email
 
-    return render(request, "account/account_view.html", context)
+    return render(request, "account/other_account_view.html", context)
 
 # !!!! поиск аккаунтов !!!!
 # from django.db.models import Q

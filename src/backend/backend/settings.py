@@ -43,8 +43,9 @@ INSTALLED_APPS = [
     'hse',
     'website',
     'account',
-    # 'apptest',
     'contact',
+    'important_people',
+    'search',
     'channels',
     'chat',
 ]
