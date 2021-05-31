@@ -46,3 +46,11 @@
         </div>
 </div>
 {% endblock %}
+
+{% block script %}
+<script>
+    var profile = document.getElementsByClassName("this-user-info");
+    var height = profile[0].offsetHeight;
+    profile[0].style.top = "calc(50vh - " + height + "px/2 - 20px)";
+</script>
+{% endblock %}
