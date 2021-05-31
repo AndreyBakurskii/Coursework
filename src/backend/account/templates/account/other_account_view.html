@@ -1,7 +1,12 @@
 {% extends "website/base.html" %}
 {% load static %}
-{% block title %}The current time{% endblock %}
+{% block title %}Other account view{% endblock %}
+
 {% block additional_media2 %}
+        <link rel="stylesheet" type="text/css" href="{% static 'website/base2.css' %}" />
+{% endblock %}
+
+{% block additional_media3 %}
         <link rel="stylesheet" type="text/css" href="{% static 'account/other_account_view.css' %}" />
     {% endblock %}
 
