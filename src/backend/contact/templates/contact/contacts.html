@@ -52,23 +52,26 @@
     </button>
 {% endblock %}
 {% block personal_data %}
-    <h3>Email</h3>
+    <h3 id="title-data-email">Email</h3>
         <p id="personal-data-email"></p>
-    <h3>Кампус</h3>
+    <h3 id="title-data-campus">Кампус</h3>
         <p id="personal-data-campus"></p>
 
-    <h3>Должность</h3>
+    <h3 id="title-data-staff">Должность</h3>
         <p id="personal-data-staff"></p>
 
-    <h3>Факультет</h3>
+    <h3 id="title-data-department">Факультет</h3>
         <p id="personal-data-department"></p>
 
-    <h3>Группа</h3>
+    <h3 id="title-data-group">Группа</h3>
         <p id="personal-data-group"></p>
 {% endblock %}
 {% block block_info_choose %}Выберите контакт, чтобы увидеть персональные данные{% endblock %}
 {% block script %}
 <script>
+
+		document.getElementById("title-data-department").style.display = "none";
+        document.getElementById("personal-data-department").style.dispaly = "none";
         // делает рандомные цвета в аватарках людям
         function ChooseColor() {
             var color = [

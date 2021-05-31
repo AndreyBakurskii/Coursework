@@ -57,5 +57,8 @@
     var profile = document.getElementsByClassName("this-user-info");
     var height = profile[0].offsetHeight;
     profile[0].style.top = "calc(50vh - " + height + "px/2 - 20px)";
+    if (document.getElementsByClassName("button").length == 1) {
+        document.getElementsByClassName("button-contact-list")[0].style.marginLeft = "125px";
+    }
 </script>
 {% endblock %}
