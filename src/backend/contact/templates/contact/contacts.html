@@ -120,23 +120,6 @@
             // изменяем информацию о профиле
             var person_id = button.id.slice(7);
             
-//                // изменяем информацию в первом блоке
-//            document.getElementById("this-user-name").getElementsByTagName("span")[0].getElementsByTagName("strong")[0].textContent = "Иванов Иван Иванович";
-//                    
-//            var avatar = document.getElementById("this-user-avatar");                
-//            avatar.style.background = button.getElementsByClassName("user-info-avatar")[0].style.background;
-//
-//            var letterName = "И".substr(0, 1) + "И".substr(0, 1); 
-//            avatar.innerHTML = letterName;
-//
-//                    // изменяем информацию во втором блоке
-//            document.getElementById("personal-data-email").textContent = "friend.email";
-//            document.getElementById("personal-data-campus").textContent = "friend.campus";
-//
-//            document.getElementById("personal-data-staff").textContent = "friend.staff";
-//            document.getElementById("personal-data-department").textContent = "friend.department";
-//            document.getElementById("personal-data-group").textContent = "friend.group";
-            
             {% for friend in friends %}
                 if ( {{friend.id}} == person_id ) {
 
@@ -165,7 +148,8 @@
             // показываем два блока
             var profile = document.getElementsByClassName("this-user-info");
             profile[0].style.display = "block";
-            profile[1].style.display = "block";
+            var height = profile[0].offsetHeight;
+            profile[0].style.top = "calc(50vh - " + height + "px/2 - 20px)";
               
         }
 
