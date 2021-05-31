@@ -6,7 +6,10 @@
         <link rel="stylesheet" type="text/css" href="{% static 'search/search.css' %}" />
 {% endblock %}
 
-{% block title_main %}Контакты{% endblock %}
+{% block title_main %}Поиск пользователей{% endblock %}
+
+{% block block_info_choose %}Выберите пользователя, чтобы увидеть персональные данные{% endblock %}
+
 {% block person_contact_list %}
 <!--
         {% for friend in friends %}
@@ -23,8 +26,6 @@
         {% endfor %}
 -->
 {% endblock %}
-
-
 {% block button_contact_list %}
     <!-- кнопка "Удалить из контактов" -->
                     <button  class="button" type="submit" id="b-start" title="Добавить в контакты">
@@ -32,7 +33,7 @@
                             <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                             <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
                         </svg>
-                    </button>               
+                    </button>
     <!-- кнопка "Начать диалог" -->
                     <button  class="button" type="submit" id="b-start" title="Начать диалог">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
@@ -55,7 +56,6 @@
     <h3>Группа</h3>
         <p id="personal-data-group"></p>
 {% endblock %}
-{% block block_info_choose %}Выберите контакт, чтобы увидеть персональные данные{% endblock %}
 {% block script %}
 <script>
         // делает рандомные цвета в аватарках людям

@@ -18,5 +18,5 @@ from .views import (important_people,
                     )
 
 urlpatterns = [
-    path('important_people', important_people, name='important_people'),
+    path('', important_people, name='important_people'),
 ]

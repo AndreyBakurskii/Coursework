@@ -41,6 +41,6 @@ urlpatterns = [
     path('logout', logout_view, name='logout'),
     path('login', login_view, name='login'),
 
-    path('my_acc', account_view, name='account_view'),
+    path('', account_view, name='account_view'),
     path('<user_id>', other_account_view, name='other_account_view')
 ]
