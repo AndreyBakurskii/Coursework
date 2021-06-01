@@ -99,7 +99,7 @@
 }
 
 .block_person:hover{
-    border-color:  #012E67;
+    border-color:  #012E67 !important;
 }
 
 form {
