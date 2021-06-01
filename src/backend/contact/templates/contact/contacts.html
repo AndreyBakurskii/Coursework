@@ -67,8 +67,55 @@
         <p id="personal-data-group"></p>
 {% endblock %}
 {% block block_info_choose %}Выберите контакт, чтобы увидеть персональные данные{% endblock %}
+{% block popup %}
+<div class="popup" id="popup">
+        <a href="#header" class="popup_area"></a>
+        <div class="popup_body">
+            <div class="popup_content">
+                
+                <a href="#header" class="popup_close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path  d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </a>
+                
+                <div class="popup_title">Новые контакты</div>
+                <div class="popup_persons">
+                    <div class="popup_person" id="person_1">
+                        <div class="user-info-avatar" id="avatar"></div>
+                        <div class="user-info-name" id="name"><span>Зверев Кирилл Юрьевич</span></div>
+                        <button class="button_contact_add">Добавить в контакты</button>
+                        <button class="button_contact_add" id="reject">Отклонить заявку</button>
+                    </div>
+                    <div class="popup_person" id="person_1">
+                        <div class="user-info-avatar" id="avatar"></div>
+                        <div class="user-info-name" id="name"><span>Зверев Кирилл Юрьевич</span></div>
+                        <button class="button_contact_add">Добавить в контакты</button>
+                        <button class="button_contact_add" id="reject">Отклонить заявку</button>
+                    </div>
+                    <div class="popup_person" id="person_1">
+                        <div class="user-info-avatar" id="avatar"></div>
+                        <div class="user-info-name" id="name"><span>Зверев Кирилл Юрьевич</span></div>
+                        <button class="button_contact_add">Добавить в контакты</button>
+                        <button class="button_contact_add" id="reject">Отклонить заявку</button>
+                    </div>
+                    <div class="popup_person" id="person_1">
+                        <div class="user-info-avatar" id="avatar"></div>
+                        <div class="user-info-name" id="name"><span>Зверев Кирилл Юрьевич</span></div>
+                        <button class="button_contact_add">Добавить в контакты</button>
+                        <button class="button_contact_add" id="reject">Отклонить заявку</button>
+                    </div>        
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 {% block script %}
+<script src="{% static 'contact/scripts/contactList.js' %}"></script>
 <script>
+
+		var but = document.getElementsByClassName("block_person");
+        but[but.length - 1].style.marginBottom = "20px";
         // делает рандомные цвета в аватарках людям
         function ChooseColor() {
             var color = [
@@ -105,7 +152,7 @@
             var prof_b = document.getElementsByClassName("block_person");
             for(var i = 0; i < prof_b.length; i++) {
                 prof_b[i].style.background = "#BDDFEF";
-
+				prof_b[i].style.borderColor = "#2B6684";
                 document.getElementsByClassName("user-info-name")[i].style.color = "#032E42";
                 document.getElementsByClassName("user-status")[i].style.color = "#2B6684";
             }
@@ -113,6 +160,7 @@
             
             // изменяем цвет кнопки на которую нажали
             button.style.backgroundColor = "#012E67";
+			button.style.borderColor = "#012E67";
             button.getElementsByClassName("user-info-name")[0].style.color = "#F3F7FB";
             button.getElementsByClassName("user-status")[0].style.color = "#F3F7FB";
 
