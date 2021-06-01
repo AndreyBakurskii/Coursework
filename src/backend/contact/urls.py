@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.urls import path, include
 from .views import (my_contacts,
+                    check_is_friend,
                     )
 
 urlpatterns = [
     path('my_contacts', my_contacts, name='my_contacts'),
+    path('check_is_friend', check_is_friend, name='check_is_friend'),
 ]

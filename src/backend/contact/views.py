@@ -44,3 +44,9 @@ def my_contacts(request: HttpRequest):
 
     context['friends'] = Account.objects.all()
     return render(request, 'contact/contacts.html', context)
+
+
+def check_is_friend(request):
+    context = {'answer': True}
+
+    return HttpResponse(json.dumps(context), content_type='application/json')
