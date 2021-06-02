@@ -40,13 +40,98 @@ def my_contacts(request: HttpRequest):
     context = {}
     user = request.user
 
-    # context['friends'] = Contact.get_friends(user)
+    if request.GET.get('q'):
+        context['friends'] = Contact.get_friends(user)
 
-    context['friends'] = Account.objects.all()
+
+    context['senders_requests'] = ContactRequest.get_senders(user)
+
+    # context['friends'] = Account.objects.all().order_by('last_name')
     return render(request, 'contact/contacts.html', context)
 
 
-def check_is_friend(request):
-    context = {'answer': True}
+def check_is_friend(request, *args, **kwargs):
+    context = {}
 
-    return HttpResponse(json.dumps(context), content_type='application/json')
+    if request.POST:
+        user_id = kwargs.get('user_id')
+        context['is_friend'] = False
+
+        try:
+            user = Account.objects.get(pk=user_id)
+        except Account.DoesNotExist:
+            return HttpResponse(json.dumps(context), content_type='application/json')
+
+        if Contact.get_contact(request.user, user):
+            context['is_friend'] = True
+
+        return HttpResponse(json.dumps(context), content_type='application/json')
+
+
+def delete_contact(request, *args, **kwargs):
+    context = {}
+
+    if request.POST:
+        context['success'] = False
+        user1 = request.user
+
+        user2_id = kwargs.get('user_id')
+        try:
+            user2 = Account.objects.get(pk=user2_id)
+        except Account.DoesNotExist:
+            return HttpResponse(json.dumps(context), content_type='application/json')
+
+        Contact.delete_contact(user1, user2)
+
+        context['success'] = True
+
+        return HttpResponse(json.dumps(context), content_type='application/json')
+
+
+def accept_request(request, *args, **kwargs):
+    context = {}
+
+    if request.POST:
+        context['success'] = False
+
+        sender_id = kwargs.get('user_id')
+        try:
+            sender = Account.objects.get(pk=sender_id)
+        except Account.DoesNotExist:
+            return HttpResponse(json.dumps(context), content_type='application/json')
+
+        receiver = request.user
+
+        contact_request = ContactRequest.get_request(sender, receiver)
+        if contact_request:
+            contact_request.accept()
+            context['success'] = True
+
+        return HttpResponse(json.dumps(context), content_type='application/json')
+
+
+def decline_request(request, *args, **kwargs):
+    context = {}
+
+    if request.POST:
+        print(type(request.POST))
+        context['success'] = False
+
+        sender_id = kwargs.get('user_id')
+        try:
+            sender = Account.objects.get(pk=sender_id)
+        except Account.DoesNotExist:
+            return HttpResponse(json.dumps(context), content_type='application/json')
+
+        receiver = request.user
+
+        contact_request = ContactRequest.get_request(sender, receiver)
+        if contact_request:
+            contact_request.decline()
+            context['success'] = True
+
+        return HttpResponse(json.dumps(context), content_type='application/json')
+
+
+def cancel_request(request, *args, **kwargs):
+    pass

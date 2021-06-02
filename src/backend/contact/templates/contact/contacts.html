@@ -4,13 +4,11 @@
 
 {% block additional_media3 %}
         <link rel="stylesheet" type="text/css" href="{% static 'contact/contacts.css' %}" />
-        <script src="{%static 'contact/scripts/contactList.js' %}"></script>
 {% endblock %}
 
 {% block title_main %}Контакты{% endblock %}
 {% block person_contact_list %}
         {% for friend in friends %}
-
             <button class="block_person" id="person_{{ friend.id }}" onclick="ProfileInfo(this)">
 
                 <div class="user-info-avatar" id="avatar" ></div>
@@ -39,19 +37,20 @@
 
 {% block button_contact_list %}
     <!-- кнопка "Удалить из контактов" -->
-    <button  class="button" type="submit" id="b-delete" title="Удалить из контактов" onclick="del()">
+    <button  class="button" id="b-delete" title="Удалить из контактов" onclick="deleteContact(this)">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
             <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
         </svg>
     </button>                
     <!-- кнопка "Начать диалог" -->
-    <button  class="button" type="submit" id="b-start" title="Начать диалог">
+    <button  class="button" id="b-start" title="Начать диалог">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
             <path d="M13.498.795l.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
         </svg>
     </button>
 {% endblock %}
+
 {% block personal_data %}
     <h3 id="title-data-email">Email</h3>
         <p id="personal-data-email"></p>
@@ -67,14 +66,16 @@
     <h3 id="title-data-group">Группа</h3>
         <p id="personal-data-group"></p>
 {% endblock %}
+
 {% block block_info_choose %}Выберите контакт, чтобы увидеть персональные данные{% endblock %}
+
 {% block popup %}
 <div class="popup" id="popup">
-        <a href="#header" class="popup_area"></a>
+        <a href="" class="popup_area"></a>
         <div class="popup_body">
             <div class="popup_content">
                 
-                <a href="#header" class="popup_close">
+                <a href="" class="popup_close">
                     <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                         <path  d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                     </svg>
@@ -82,136 +83,183 @@
                 
                 <div class="popup_title">Новые контакты</div>
                 <div class="popup_persons">
-                    <div class="popup_person" id="person_1">
-                        <div class="user-info-avatar" id="avatar"></div>
-                        <div class="user-info-name" id="name"><span>Зверев Кирилл Юрьевич</span></div>
-                        <button class="button_contact_add">Добавить в контакты</button>
-                        <button class="button_contact_add" id="reject">Отклонить заявку</button>
-                    </div>
-                    <div class="popup_person" id="person_1">
-                        <div class="user-info-avatar" id="avatar"></div>
-                        <div class="user-info-name" id="name"><span>Зверев Кирилл Юрьевич</span></div>
-                        <button class="button_contact_add">Добавить в контакты</button>
-                        <button class="button_contact_add" id="reject">Отклонить заявку</button>
-                    </div>
-                    <div class="popup_person" id="person_1">
-                        <div class="user-info-avatar" id="avatar"></div>
-                        <div class="user-info-name" id="name"><span>Зверев Кирилл Юрьевич</span></div>
-                        <button class="button_contact_add">Добавить в контакты</button>
-                        <button class="button_contact_add" id="reject">Отклонить заявку</button>
-                    </div>
-                    <div class="popup_person" id="person_1">
-                        <div class="user-info-avatar" id="avatar"></div>
-                        <div class="user-info-name" id="name"><span>Зверев Кирилл Юрьевич</span></div>
-                        <button class="button_contact_add">Добавить в контакты</button>
-                        <button class="button_contact_add" id="reject">Отклонить заявку</button>
-                    </div>        
+                    {% for sender in senders_requests %}
+                        <div class="popup_person" id="request_from_person_{{ sender.id }}">
+                            <div class="user-info-avatar" id="avatar"></div>
+                            <div class="user-info-name" id="name"><span>{{sender.last_name}} {{sender.first_name}} {{sender.middle_name}}</span></div>
+                            <button class="button_contact_add" id="button_contact_accept_person_{{ sender.id }}" onclick="acceptRequest({{ sender.id }})">Добавить в контакты</button>
+                            <button class="button_contact_add" id="button_contact_decline_person_{{ sender.id }}" onclick="declineRequest({{ sender.id }})">Отклонить заявку</button>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
-{% block script %}
 
+{% block script %}
 <script>
 
-		var but = document.getElementsByClassName("block_person");
-        but[but.length - 1].style.marginBottom = "20px";
-        // делает рандомные цвета в аватарках людям
-        function ChooseColor() {
-            var color = [
-                '#F29B34',
-                '#A19C69',
-                '#FF00AE',
-                '#3C3741',
-                '#D0FF00',
-                '#25373D',
-                '#EB9532',
-                '#3AE2CE',
-                '#60646D',
-                '#00FFA9',
-                '#FFDD00',
-                '#B34EE9'];
-            var rand = Math.floor(Math.random() * color.length);
-            return color[rand];
-        };
+	var but = document.getElementsByClassName("block_person");
+    but[but.length - 1].style.marginBottom = "20px";
+    // делает рандомные цвета в аватарках людям
+    function ChooseColor() {
+        var color = [
+            '#F29B34',
+            '#A19C69',
+            '#FF00AE',
+            '#3C3741',
+            '#D0FF00',
+            '#25373D',
+            '#EB9532',
+            '#3AE2CE',
+            '#60646D',
+            '#00FFA9',
+            '#FFDD00',
+            '#B34EE9'];
+        var rand = Math.floor(Math.random() * color.length);
+        return color[rand];
+    };
 
-        var avatars = document.getElementsByClassName("user-info-avatar");
-        var names = document.getElementsByClassName("user-info-name");
-        for (var i = 0; i < avatars.length; i++) {
-            
-            avatars[i].style.background = ChooseColor();
-            var name = names[i].textContent;
-            var arrName = name.split(' ', 2)
-            var letterName = arrName[0].substr(0, 1) + arrName[1].substr(0, 1);
-            avatars[i].innerHTML = letterName;
+    var avatars = document.getElementsByClassName("user-info-avatar");
+    var names = document.getElementsByClassName("user-info-name");
+    for (var i = 0; i < avatars.length; i++) {
+        
+        avatars[i].style.background = ChooseColor();
+        var name = names[i].textContent;
+        var arrName = name.split(' ', 2)
+        var letterName = arrName[0].substr(0, 1) + arrName[1].substr(0, 1);
+        avatars[i].innerHTML = letterName;
+    }
+    
+    
+    function ProfileInfo(button) {
+        // возвращаем все кнопки в дефоолтный цвет
+        var prof_b = document.getElementsByClassName("block_person");
+        for(var i = 0; i < prof_b.length; i++) {
+            prof_b[i].style.background = "#BDDFEF";
+			prof_b[i].style.borderColor = "#2B6684";
+            document.getElementsByClassName("user-info-name")[i].style.color = "#032E42";
+            document.getElementsByClassName("user-status")[i].style.color = "#2B6684";
         }
+
         
+        // изменяем цвет кнопки на которую нажали
+        button.style.backgroundColor = "#012E67";
+		button.style.borderColor = "#012E67";
+        button.getElementsByClassName("user-info-name")[0].style.color = "#F3F7FB";
+        button.getElementsByClassName("user-status")[0].style.color = "#F3F7FB";
+
+
+        // изменяем информацию о профиле
+        var person_id = button.id.slice(7);
         
-        function ProfileInfo(button) {
-            // возвращаем все кнопки в дефоолтный цвет
-            var prof_b = document.getElementsByClassName("block_person");
-            for(var i = 0; i < prof_b.length; i++) {
-                prof_b[i].style.background = "#BDDFEF";
-				prof_b[i].style.borderColor = "#2B6684";
-                document.getElementsByClassName("user-info-name")[i].style.color = "#032E42";
-                document.getElementsByClassName("user-status")[i].style.color = "#2B6684";
+        {% for friend in friends %}
+            if ( {{friend.id}} == person_id ) {
+
+                // изменяем информацию в первом блоке
+                document.getElementById("this-user-name").getElementsByTagName("span")[0].getElementsByTagName("strong")[0].textContent = "{{ friend.last_name }} {{ friend.first_name }} {{ friend.middle_name }}";
+                
+                var avatar = document.getElementById("this-user-avatar");
+                avatar.style.background = button.getElementsByClassName("user-info-avatar")[0].style.background;
+
+                var letterName = "{{friend.last_name}}".substr(0, 1) + "{{friend.first_name}}".substr(0, 1);
+                avatar.innerHTML = letterName;
+
+                // изменяем информацию во втором блоке
+                document.getElementById("personal-data-email").textContent = "{{friend.email}}";
+                document.getElementById("personal-data-campus").textContent = "{{friend.campus}}";
+                document.getElementById("personal-data-staff").textContent = "{{friend.staff}}";
+
+                {% if friend.department%}
+                    document.getElementById("personal-data-department").textContent = "{{friend.department}}";
+                {% else %}
+                    document.getElementById("title-data-department").style.display = "none";
+                    document.getElementById("personal-data-department").style.display = "none";
+                {% endif %}
+
+                {% if friend.group %}
+                    document.getElementById("personal-data-group").textContent = "{{friend.group}}";
+                {% else %}
+                    document.getElementById("title-data-group").style.display = "none";
+                    document.getElementById("personal-data-group").style.display = "none";
+                {% endif %}
             }
+        {% endfor %}
 
-            
-            // изменяем цвет кнопки на которую нажали
-            button.style.backgroundColor = "#012E67";
-			button.style.borderColor = "#012E67";
-            button.getElementsByClassName("user-info-name")[0].style.color = "#F3F7FB";
-            button.getElementsByClassName("user-status")[0].style.color = "#F3F7FB";
+        // передаем person_id в value кнопки удаления контакта
+        document.getElementById("b-delete").value = person_id;
 
+        // скрываем подпись о выборе контакта
+        var info = document.getElementsByClassName("block_info_choose");
+        info[0].style.display = "none";
 
-            // изменяем информацию о профиле
-            var person_id = button.id.slice(7);
-            
-            {% for friend in friends %}
-                if ( {{friend.id}} == person_id ) {
+        // показываем два блока
+        var profile = document.getElementsByClassName("this-user-info");
+        profile[0].style.display = "block";
+        var height = profile[0].offsetHeight;
+        profile[0].style.top = "calc(50vh - " + height + "px/2 - 20px)";
+    }
 
-                    // изменяем информацию в первом блоке
-                    document.getElementById("this-user-name").getElementsByTagName("span")[0].getElementsByTagName("strong")[0].textContent = "{{ friend.last_name }} {{ friend.first_name }} {{ friend.middle_name }}";
-                    
-                    var avatar = document.getElementById("this-user-avatar");
-                    avatar.style.background = button.getElementsByClassName("user-info-avatar")[0].style.background;
+    function acceptRequest(person_id) {
+        console.log("acceptRequest is working!");
 
-                    var letterName = "{{friend.last_name}}".substr(0, 1) + "{{friend.first_name}}".substr(0, 1);
-                    avatar.innerHTML = letterName;
+        document.getElementById("request_from_person_" + person_id).style.display = "none"
 
-                    // изменяем информацию во втором блоке
-                    document.getElementById("personal-data-email").textContent = "{{friend.email}}";
-                    document.getElementById("personal-data-campus").textContent = "{{friend.campus}}";
-                    document.getElementById("personal-data-staff").textContent = "{{friend.staff}}";
-
-                    {% if friend.department%}
-                        document.getElementById("personal-data-department").textContent = "{{friend.department}}";
-                    {% else %}
-                        document.getElementById("title-data-department").style.display = "none";
-                        document.getElementById("personal-data-department").style.display = "none";
-                    {% endif %}
-
-                    {% if friend.group %}
-                        document.getElementById("personal-data-group").textContent = "{{friend.group}}";
-                    {% else %}
-                        document.getElementById("title-data-group").style.display = "none";
-                        document.getElementById("personal-data-group").style.display = "none";
-                    {% endif %}
+        $.ajax({
+                method: "POST",
+                url: "/contact/accept_request_from_user/" + person_id,
+                dataType: "json",
+                async: false,
+                data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+                success: function(data) {
+                    console.log("User accepts the request from person_"+ person_id + ": " + data.success);
                 }
-            {% endfor %}
+            });
+    }
 
-            // скрываем подпись о выборе контакта
-            var info = document.getElementsByClassName("block_info_choose");
-            info[0].style.display = "none";
+    function declineRequest(person_id) {
+        console.log("declineRequest is working!");
 
-            // показываем два блока
-            var profile = document.getElementsByClassName("this-user-info");
-            profile[0].style.display = "block";
-            var height = profile[0].offsetHeight;
-            profile[0].style.top = "calc(50vh - " + height + "px/2 - 20px)";
+        document.getElementById("request_from_person_" + person_id).style.display = "none"
 
-        }
+        $.ajax({
+                method: "POST",
+                url: "/contact/decline_request_from_user/" + person_id,
+                dataType: "json",
+                async: false,
+                data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+                success: function(data) {
+                    console.log("User declines the request from person_"+ person_id + ": " + data.success);
+                }
+            });
+    }
+
+    function deleteContact(button_delete) {
+        person_id = button_delete.value;
+        console.log("deleteContact is working! person_id= " + person_id);
+
+        document.getElementById("person_" + person_id).style.display = "none";
+
+        // скрываем блоки с информацией о пользователе
+        var profile = document.getElementsByClassName("this-user-info");
+        profile[0].style.display = "none";
+
+        // показываем подпись о выборе контакта
+        var info = document.getElementsByClassName("block_info_choose");
+        info[0].style.display = "block";
+
+        $.ajax({
+                method: "POST",
+                url: "/contact/delete_contact_with_user/" + person_id,
+                dataType: "json",
+                async: false,
+                data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+                success: function(data) {
+                    console.log("User declines the request from person_"+ person_id + ": " + data.success);
+                }
+            });
+    }
+
 </script>
 {% endblock %}

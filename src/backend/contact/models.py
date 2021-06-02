@@ -56,8 +56,23 @@ class ContactRequest(models.Model):
 
         self.is_active = False
 
+        self.save()
+
     def decline(self):
         self.is_active = False
+
+        self.save()
+
+    @staticmethod
+    def get_request(sender, receiver):
+        contact_request = None
+
+        try:
+            contact_request = ContactRequest.objects.get(sender=sender, receiver=receiver, is_active=True)
+        except ContactRequest.DoesNotExist:
+            return None
+
+        return contact_request
 
     @staticmethod
     def create_request(sender, receiver):
@@ -72,8 +87,4 @@ class ContactRequest(models.Model):
         :return:
         """
 
-        return [request.sender for request in ContactRequest.objects.filter(receiver=user)]
-
-    @staticmethod
-    def get_request(sender, receiver):
-        return ContactRequest.objects.get(sender=sender, receiver=receiver)
+        return [request.sender for request in ContactRequest.objects.filter(receiver=user, is_active=True)]
