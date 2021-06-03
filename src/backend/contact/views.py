@@ -42,12 +42,62 @@ def my_contacts(request: HttpRequest):
 
     if request.GET.get('q'):
         context['friends'] = Contact.get_friends(user)
-
+    else:
+        context['friends'] = Account.objects.all().order_by('last_name')
 
     context['senders_requests'] = ContactRequest.get_senders(user)
 
     # context['friends'] = Account.objects.all().order_by('last_name')
     return render(request, 'contact/contacts.html', context)
+
+
+def define_relationship(request, from_func=False, *args, **kwargs):
+    """
+    Может быть 4 статуса отношений между двумя юзерами:
+        - друзья (FRIENDS)
+        - не друзья и нет запроса на дружбу (NO_RELATIONSHIP)
+        - не друзья и должен принять запрос на дружбу (RECEIVER_REQUEST)
+        - не друзья и отправил запрос на дружбу (SENDER_REQUEST)
+
+    Возвращается отношение отностительно владельца аккаунта к запрашиваемому пользователю
+    :param request:
+    :param args:
+    :param kwargs:
+    :param from_func:
+    :return:
+    """
+    # noinspection PyPep8Naming
+    FRIENDS, NO_RELATIONSHIP, RECEIVER_REQUEST, SENDER_REQUEST = range(4)
+    context = {}
+
+    if request.POST or from_func:
+        user1 = request.user
+
+        user2_id = kwargs.get('user_id')
+
+        print(kwargs)
+        user2 = None
+        try:
+            user2 = Account.objects.get(pk=user2_id)
+        except Account.DoesNotExist:
+            context['error'] = True
+            return HttpResponse(json.dumps(context), content_type='application/json')
+
+        context['relationship'] = None
+
+        if Contact.get_contact(user1, user2):
+            context['relationship'] = FRIENDS
+
+        elif ContactRequest.get_request(user1, user2):
+            context['relationship'] = SENDER_REQUEST
+
+        elif ContactRequest.get_request(user2, user1):
+            context['relationship'] = RECEIVER_REQUEST
+
+        else:
+            context['relationship'] = NO_RELATIONSHIP
+
+        return HttpResponse(json.dumps(context), content_type='application/json')
 
 
 def check_is_friend(request, *args, **kwargs):

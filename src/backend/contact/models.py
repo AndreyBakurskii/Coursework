@@ -25,14 +25,14 @@ class Contact(models.Model):
 
     @staticmethod
     def get_friends(user: settings.AUTH_USER_MODEL):
-        friend = []
+        friends = []
         for contact in Contact.objects.all():
             if contact.user1 == user:
-                friend.append(contact.user2)
+                friends.append(contact.user2)
             elif contact.user2 == user:
-                friend.append(contact.user1)
+                friends.append(contact.user1)
 
-        return friend
+        return friends
 
     @staticmethod
     def create_contact(user1: settings.AUTH_USER_MODEL, user2: settings.AUTH_USER_MODEL):

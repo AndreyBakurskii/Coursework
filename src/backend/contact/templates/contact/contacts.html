@@ -87,7 +87,7 @@
                         <div class="popup_person" id="request_from_person_{{ sender.id }}">
                             <div class="user-info-avatar" id="avatar"></div>
                             <div class="user-info-name" id="name"><span>{{sender.last_name}} {{sender.first_name}} {{sender.middle_name}}</span></div>
-                            <button class="button_contact_add" id="button_contact_accept_person_{{ sender.id }}" onclick="acceptRequest({{ sender.id }})">Добавить в контакты</button>
+                            <button class="button_contact_add" id="button_contact_accept_person_{{ sender.id }}" onclick="acceptRequest({{ sender.id }})">Принять заявку</button>
                             <button class="button_contact_add" id="button_contact_decline_person_{{ sender.id }}" onclick="declineRequest({{ sender.id }})">Отклонить заявку</button>
                         </div>
                     {% endfor %}
@@ -134,7 +134,7 @@
     
     
     function ProfileInfo(button) {
-        // возвращаем все кнопки в дефоолтный цвет
+        // возвращаем все кнопки в дефолтный цвет
         var prof_b = document.getElementsByClassName("block_person");
         for(var i = 0; i < prof_b.length; i++) {
             prof_b[i].style.background = "#BDDFEF";
@@ -204,7 +204,7 @@
     function acceptRequest(person_id) {
         console.log("acceptRequest is working!");
 
-        document.getElementById("request_from_person_" + person_id).style.display = "none"
+        document.getElementById("request_from_person_" + person_id).style.display = "none";
 
         $.ajax({
                 method: "POST",
@@ -221,7 +221,7 @@
     function declineRequest(person_id) {
         console.log("declineRequest is working!");
 
-        document.getElementById("request_from_person_" + person_id).style.display = "none"
+        document.getElementById("request_from_person_" + person_id).style.display = "none";
 
         $.ajax({
                 method: "POST",

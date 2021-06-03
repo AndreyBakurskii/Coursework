@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from django.contrib.auth import login, authenticate, logout
+
 from .forms import RegistrationForm, RegistrationFIOEmailForm, RegistrationEndForm, LoginForm
 from hse.models import Campus, Department, Group, Staff
 from account.models import Account
 from contact.models import Contact
+from contact.views import define_relationship
 
+import json
 
 def registration_fio(request):
     context = dict()
@@ -250,24 +253,28 @@ def logout_view(request):
 
 
 def account_view(request):
-    return render(request, 'account/account_view.html')
+    context = {'user': request.user}
+    return render(request, 'account/account_view.html', context)
 
 
 def other_account_view(request, *args, **kwargs):
     context = {}
-
     user_id = kwargs.get('user_id')
 
     try:
         user = Account.objects.get(pk=user_id)
+        context['other_user'] = user
     except Account.DoesNotExist:
-        return HttpResponse('Something went wrong')
+        context['error'] = True
+        return render(request, "account/other_account_view.html", context)
 
-    context['is_friend'] = False
-    if Contact.get_contact(request.user, user):
-        context['is_friend'] = True
+    relationship = json.loads(define_relationship(request, from_func=True, user_id=user_id).getvalue()).get('relationship')
+    print(relationship)
 
-    context['other_user'] = user
+    if relationship is not None:
+        context['relationship'] = relationship
+    else:
+        context['error'] = True
 
     return render(request, "account/other_account_view.html", context)
 

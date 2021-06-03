@@ -93,7 +93,21 @@
             });
     }
 
+    function defineRelationship(person_id) {
+        var statusRelationship = -1;
+            $.ajax({
+                method: "POST",
+                url: "/contact/define_relationship_with_user/" + person_id,
+                dataType: "json",
+                async: false,
+                data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+                success: function(data) {
+                    statusRelationship = data.relationship;
+                }
+            });
+    }
+
+
+
     // onclick="document.location='{% url 'chat' %}'"
 </script>
-
-
