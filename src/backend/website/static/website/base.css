@@ -69,22 +69,26 @@ li {
     color: #032E42;
 }
 
-#b-start {
+button.button_blue {
     margin-top: 10px;
     background: #012E67;
 }
-
-#b-start:hover {
+.button.button_blue:hover {
     background: #408FB4;
 }
-
-#b-delete {
+button.button_green {
+    margin-top: 10px;
+    background: #63A583;
+}
+.button.button_green:hover {
+    background: #82D8AB;
+}
+.button.button_red {
     margin-top: 10px;
     margin-left: 10px;
     background: #C32439;
 }
-
-#b-delete:hover {
+.button.button_red:hover {
     background: #E35760;
 }
 
