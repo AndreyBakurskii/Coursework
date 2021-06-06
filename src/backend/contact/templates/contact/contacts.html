@@ -37,14 +37,14 @@
 
 {% block button_contact_list %}
     <!-- кнопка "Удалить из контактов" -->
-    <button  class="button button_red" id="b" title="Удалить из контактов" onclick="deleteContact(this)">
+    <button  class="button button_red" id="button_delete_contact" title="Удалить из контактов" value="" onclick="deleteContact(this)">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
             <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
         </svg>
     </button>                
     <!-- кнопка "Начать диалог" -->
-    <button  class="button button_blue" id="b" title="Начать диалог">
+    <button  class="button button_blue" id="button_start_chatting" title="Начать диалог">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
             <path d="M13.498.795l.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
         </svg>
@@ -87,8 +87,8 @@
                         <div class="popup_person" id="request_from_person_{{ sender.id }}">
                             <div class="user-info-avatar" id="avatar"></div>
                             <div class="user-info-name" id="name"><span>{{sender.last_name}} {{sender.first_name}} {{sender.middle_name}}</span></div>
-                            <button class="button_contact_add" id="button_contact_accept_person_{{ sender.id }}" onclick="acceptRequest({{ sender.id }})">Принять заявку</button>
-                            <button class="button_contact_add" id="button_contact_decline_person_{{ sender.id }}" onclick="declineRequest({{ sender.id }})">Отклонить заявку</button>
+                            <button class="button_contact_add" id="button_accept_request_person_{{ sender.id }}" onclick="acceptRequest({{ sender.id }})">Принять заявку</button>
+                            <button class="button_contact_add" id="button_decline_request_person_{{ sender.id }}" onclick="declineRequest({{ sender.id }})">Отклонить заявку</button>
                         </div>
                     {% endfor %}
                 </div>
@@ -177,7 +177,7 @@
                     document.getElementById("title-data-department").style.display = "none";
                     document.getElementById("personal-data-department").style.display = "none";
                 {% endif %}
-
+                
                 {% if friend.group %}
                     document.getElementById("personal-data-group").textContent = "{{friend.group}}";
                 {% else %}
@@ -186,9 +186,9 @@
                 {% endif %}
             }
         {% endfor %}
-
+       
         // передаем person_id в value кнопки удаления контакта
-        document.getElementById("b-delete").value = person_id;
+        document.getElementById("button_delete_contact").value = person_id;
 
         // скрываем подпись о выборе контакта
         var info = document.getElementsByClassName("block_info_choose");
@@ -250,15 +250,15 @@
         info[0].style.display = "block";
 
         $.ajax({
-                method: "POST",
-                url: "/contact/delete_contact_with_user/" + person_id,
-                dataType: "json",
-                async: false,
-                data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
-                success: function(data) {
-                    console.log("User declines the request from person_"+ person_id + ": " + data.success);
-                }
-            });
+            method: "POST",
+            url: "/contact/delete_contact_with_user/" + person_id,
+            dataType: "json",
+            async: false,
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+            success: function(data) {
+                console.log("User declines the request from person_"+ person_id + ": " + data.success);
+            }
+        });
     }
 
 </script>

@@ -54,3 +54,7 @@ class Staff(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+    @staticmethod
+    def get_educational_staff():
+        return Staff.objects.filter(is_educational=True)

@@ -39,15 +39,15 @@
         document.getElementById("request_from_person_" + person_id).style.display = "none"
 
         $.ajax({
-                method: "POST",
-                url: "/contact/accept_request_from_user/" + person_id,
-                dataType: "json",
-                async: false,
-                data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
-                success: function(data) {
-                    console.log("User accepts the request from person_"+ person_id + ": " + data.success);
-                }
-            });
+            method: "POST",
+            url: "/contact/accept_request_from_user/" + person_id,
+            dataType: "json",
+            async: false,
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+            success: function(data) {
+                console.log("User accepts the request from person_"+ person_id + ": " + data.success);
+            }
+        });
     }
 
     function declineRequest(person_id) {
@@ -56,15 +56,15 @@
         document.getElementById("request_from_person_" + person_id).style.display = "none"
 
         $.ajax({
-                method: "POST",
-                url: "/contact/decline_request_from_user/" + person_id,
-                dataType: "json",
-                async: false,
-                data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
-                success: function(data) {
-                    console.log("User declines the request from person_"+ person_id + ": " + data.success);
-                }
-            });
+            method: "POST",
+            url: "/contact/decline_request_from_user/" + person_id,
+            dataType: "json",
+            async: false,
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+            success: function(data) {
+                console.log("User declines the request from person_"+ person_id + ": " + data.success);
+            }
+        });
     }
 
     function deleteContact(button_delete) {
@@ -82,29 +82,42 @@
         info[0].style.display = "block";
 
         $.ajax({
-                method: "POST",
-                url: "/contact/delete_request_from_user/" + person_id,
-                dataType: "json",
-                async: false,
-                data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
-                success: function(data) {
-                    console.log("User declines the request from person_"+ person_id + ": " + data.success);
-                }
-            });
+            method: "POST",
+            url: "/contact/delete_request_from_user/" + person_id,
+            dataType: "json",
+            async: false,
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+            success: function(data) {
+                console.log("User declines the request from person_"+ person_id + ": " + data.success);
+            }
+        });
     }
 
     function defineRelationship(person_id) {
         var statusRelationship = -1;
-            $.ajax({
-                method: "POST",
-                url: "/contact/define_relationship_with_user/" + person_id,
-                dataType: "json",
-                async: false,
-                data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
-                success: function(data) {
-                    statusRelationship = data.relationship;
-                }
-            });
+        $.ajax({
+            method: "POST",
+            url: "/contact/define_relationship_with_user/" + person_id,
+            dataType: "json",
+            async: false,
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+            success: function(data) {
+                statusRelationship = data.relationship;
+            }
+        });
+    }
+
+    function createContact(person_id) {
+        $.ajax({
+            method: "POST",
+            url: "/contact/create_contact_with_user/" + person_id,
+            dataType: "json",
+            async: false,
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+            success: function(data) {
+                console.log(data.success);
+            }
+        });
     }
 
 

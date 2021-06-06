@@ -5,45 +5,18 @@ from django.http import HttpRequest, HttpResponse
 
 from .models import Contact, ContactRequest
 from account.models import Account
-# Create your views here.
-
-
-# def my_requests(request: HttpRequest):
-#     context = {}
-#     user = request.user
-#
-#     if request.POST:
-#         sender_id = request.POST['sender_id']
-#         sender = Account.objects.get(pk=sender_id)
-#
-#         # context['answer'] = 'Лови ответ от сервака!'
-#         print(sender_id)
-#         request_contact = ContactRequest.get_request(sender, user)
-#         print(request_contact)
-#
-#         if request.POST['decision'] == 'accept':
-#             request_contact.accept()
-#
-#         elif request.POST['decision'] == 'decline':
-#             request_contact.decline()
-#
-#         return HttpResponse(status=200)
-#         # return HttpResponse(json.dumps(context), content_type='application/json')
-#
-#     else:
-#         context['senders'] = ContactRequest.get_senders(user)
-#
-#         return render(request, 'contact/my_requests.html', context)
 
 
 def my_contacts(request: HttpRequest):
     context = {}
     user = request.user
 
-    if request.GET.get('q'):
-        context['friends'] = Contact.get_friends(user)
-    else:
-        context['friends'] = Account.objects.all().order_by('last_name')
+    # if request.GET.get('q'):
+    #     context['friends'] = Contact.get_friends(user)
+    # else:
+    #     context['friends'] = Account.objects.all().order_by('last_name')
+
+    context['friends'] = sorted(Contact.get_friends(user), key=lambda user: user.last_name)
 
     context['senders_requests'] = ContactRequest.get_senders(user)
 
@@ -74,8 +47,6 @@ def define_relationship(request, from_func=False, *args, **kwargs):
         user1 = request.user
 
         user2_id = kwargs.get('user_id')
-
-        print(kwargs)
         user2 = None
         try:
             user2 = Account.objects.get(pk=user2_id)
@@ -96,6 +67,27 @@ def define_relationship(request, from_func=False, *args, **kwargs):
 
         else:
             context['relationship'] = NO_RELATIONSHIP
+
+        return HttpResponse(json.dumps(context), content_type='application/json')
+
+
+def create_contact(request, *args, **kwargs):
+    context = {}
+
+    if request.POST:
+        context['success'] = False
+        user1 = request.user
+
+        user2_id = kwargs.get('user_id')
+        try:
+            user2 = Account.objects.get(pk=user2_id)
+        except Account.DoesNotExist:
+            context['error'] = True
+            return HttpResponse(json.dumps(context), content_type='application/json')
+
+        if ContactRequest.create_request(user1, user2):
+            context['success'] = True
+            return HttpResponse(json.dumps(context), content_type='application/json')
 
         return HttpResponse(json.dumps(context), content_type='application/json')
 
@@ -164,7 +156,6 @@ def decline_request(request, *args, **kwargs):
     context = {}
 
     if request.POST:
-        print(type(request.POST))
         context['success'] = False
 
         sender_id = kwargs.get('user_id')
@@ -184,4 +175,22 @@ def decline_request(request, *args, **kwargs):
 
 
 def cancel_request(request, *args, **kwargs):
-    pass
+    context = {}
+
+    if request.POST:
+        context['success'] = False
+
+        user1 = request.user
+
+        user2_id = kwargs.get('user_id')
+        try:
+            user2 = Account.objects.get(pk=user2_id)
+        except Account.DoesNotExist:
+            return HttpResponse(json.dumps(context), content_type='application/json')
+
+        contact_request = ContactRequest.get_request(user1, user2)
+        if contact_request:
+            contact_request.decline()
+            context['success'] = True
+
+        return HttpResponse(json.dumps(context), content_type='application/json')

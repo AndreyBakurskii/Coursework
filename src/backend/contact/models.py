@@ -76,8 +76,13 @@ class ContactRequest(models.Model):
 
     @staticmethod
     def create_request(sender, receiver):
-        contact_request = ContactRequest(sender=sender, receiver=receiver)
-        contact_request.save()
+        try:
+            contact_request = ContactRequest(sender=sender, receiver=receiver)
+            contact_request.save()
+        except Exception as e:
+            return None
+
+        return contact_request
 
     @staticmethod
     def get_senders(user):

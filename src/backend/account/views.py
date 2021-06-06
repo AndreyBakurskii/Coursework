@@ -10,6 +10,7 @@ from contact.views import define_relationship
 
 import json
 
+
 def registration_fio(request):
     context = dict()
 

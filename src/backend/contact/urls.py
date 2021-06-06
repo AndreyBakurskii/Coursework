@@ -20,7 +20,8 @@ from .views import (my_contacts,
                     decline_request,
                     delete_contact,
                     cancel_request,
-                    define_relationship
+                    define_relationship,
+                    create_contact
                     )
 
 urlpatterns = [
@@ -31,4 +32,5 @@ urlpatterns = [
     path('cancel_request_to_user/<user_id>', cancel_request),
     path('delete_contact_with_user/<user_id>', delete_contact),
     path('define_relationship_with_user/<user_id>', define_relationship),
+    path('create_contact_with_user/<user_id>', create_contact),
 ]
