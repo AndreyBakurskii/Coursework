@@ -32,6 +32,7 @@ class Contact(models.Model):
             elif contact.user2 == user:
                 friends.append(contact.user1)
 
+        friends = sorted(friends, key=lambda user: user.last_name)
         return friends
 
     @staticmethod

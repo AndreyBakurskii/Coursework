@@ -131,7 +131,15 @@
         var letterName = arrName[0].substr(0, 1) + arrName[1].substr(0, 1);
         avatars[i].innerHTML = letterName;
     }
-    
+
+    function searchOnPage() {
+        var search_query = document.getElementById("input_search_text").value
+        console.log("searchOnPage is working! pattern for search: \"" + search_query + "\"");
+        
+        window.location.replace("{% url 'my_contacts' %}?q=" + search_query);
+
+        document.getElementById("input_search_text").value = "";
+    }
     
     function ProfileInfo(button) {
         // возвращаем все кнопки в дефолтный цвет
@@ -177,7 +185,7 @@
                     document.getElementById("title-data-department").style.display = "none";
                     document.getElementById("personal-data-department").style.display = "none";
                 {% endif %}
-                
+
                 {% if friend.group %}
                     document.getElementById("personal-data-group").textContent = "{{friend.group}}";
                 {% else %}

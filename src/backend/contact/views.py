@@ -11,16 +11,20 @@ def my_contacts(request: HttpRequest):
     context = {}
     user = request.user
 
-    # if request.GET.get('q'):
-    #     context['friends'] = Contact.get_friends(user)
-    # else:
-    #     context['friends'] = Account.objects.all().order_by('last_name')
-
     context['friends'] = sorted(Contact.get_friends(user), key=lambda user: user.last_name)
+
+    search_query = request.GET.get("q")
+    # проверка на None
+    if search_query:
+        # проверка на непустой запрос
+        search_query = search_query.strip()
+        if len(search_query) > 0:
+            context['friends'] = [user for user in context['friends']
+                                  if f'{user.last_name} {user.first_name} {user.middle_name} {user.email}' \
+                                     f' {user.username}'.find(search_query) != -1]
 
     context['senders_requests'] = ContactRequest.get_senders(user)
 
-    # context['friends'] = Account.objects.all().order_by('last_name')
     return render(request, 'contact/contacts.html', context)
 
 
