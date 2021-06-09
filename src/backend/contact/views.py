@@ -10,7 +10,6 @@ from account.models import Account
 def my_contacts(request: HttpRequest):
     context = {}
     user = request.user
-
     context['friends'] = sorted(Contact.get_friends(user), key=lambda user: user.last_name)
 
     search_query = request.GET.get("q")

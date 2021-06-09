@@ -21,6 +21,7 @@
             </button>
 {% endblock %}
 
+<<<<<<< Updated upstream
 {% block popup %}
 				<div class="popup" id="popup">
 				<a href="" class="popup_area"></a>
@@ -83,6 +84,7 @@
 			</div>
 						
 {% endblock %}
+
 {% block person_contact_list %}
 <!--
         {% for friend in friends %}
@@ -162,14 +164,18 @@
         <p id="personal-data-group"></p>
 {% endblock %}
 
+
+>>>>>>> Stashed changes
 {% block script %}
 <script>
+function buttonFilterSearch() {
     var index1 = document.getElementsByTagName("select")[0].options.selectedIndex;
     var value1 = document.getElementsByTagName("select")[0].options[index].text;
     var index2 = document.getElementsByTagName("select")[1].options.selectedIndex;
     var value2 = document.getElementsByTagName("select")[1].options[index].text;
     var index3 = document.getElementsByTagName("select")[2].options.selectedIndex;
     var value3 = document.getElementsByTagName("select")[2].options[index].text;
+<<<<<<< Updated upstream
 </script>
 <script>
         // делает рандомные цвета в аватарках людям
@@ -223,6 +229,61 @@
             // изменяем информацию о профиле
             var person_id = button.id.slice(7);
             
+=======
+}
+
+// делает рандомные цвета в аватарках людям
+function ChooseColor() {
+var color = [
+    '#F29B34',
+    '#A19C69',
+    '#FF00AE',
+    '#3C3741',
+    '#D0FF00',
+    '#25373D',
+    '#EB9532',
+    '#3AE2CE',
+    '#60646D',
+    '#00FFA9',
+    '#FFDD00',
+    '#B34EE9'];
+var rand = Math.floor(Math.random() * color.length);
+return color[rand];
+};
+
+var avatars = document.getElementsByClassName("user-info-avatar");
+var names = document.getElementsByClassName("user-info-name");
+for (var i = 0; i < avatars.length; i++) {
+
+avatars[i].style.background = ChooseColor();
+var name = names[i].textContent;
+var arrName = name.split(' ', 2)
+var letterName = arrName[0].substr(0, 1) + arrName[1].substr(0, 1);
+avatars[i].innerHTML = letterName;
+}
+
+
+function ProfileInfo(button) {
+// возвращаем все кнопки в дефоолтный цвет
+var prof_b = document.getElementsByClassName("block_person");
+for(var i = 0; i < prof_b.length; i++) {
+    prof_b[i].style.background = "#BDDFEF";
+
+    document.getElementsByClassName("user-info-name")[i].style.color = "#032E42";
+    document.getElementsByClassName("user-status")[i].style.color = "#2B6684";
+}
+
+
+// изменяем цвет кнопки на которую нажали
+button.style.backgroundColor = "#012E67";
+button.getElementsByClassName("user-info-name")[0].style.color = "#F3F7FB";
+button.getElementsByClassName("user-status")[0].style.color = "#F3F7FB";
+
+
+// изменяем информацию о профиле
+var person_id = button.id.slice(7);
+
+>>>>>>> Stashed changes
 //            {% for friend in friends %}
 //                if ( {{friend.id}} == person_id ) {
 //
@@ -244,17 +305,17 @@
 //                }
 //            {% endfor %}
 
-            // скрываем подпись о выборе контакта
-            var info = document.getElementsByClassName("block_info_choose");
-            info[0].style.display = "none";
+// скрываем подпись о выборе контакта
+var info = document.getElementsByClassName("block_info_choose");
+info[0].style.display = "none";
 
-            // показываем два блока
-            var profile = document.getElementsByClassName("this-user-info");
-            profile[0].style.display = "block";
-            var height = profile[0].offsetHeight;
-            profile[0].style.top = "calc(50vh - " + height + "px/2 - 20px)";
-              
-        }
+// показываем два блока
+var profile = document.getElementsByClassName("this-user-info");
+profile[0].style.display = "block";
+var height = profile[0].offsetHeight;
+profile[0].style.top = "calc(50vh - " + height + "px/2 - 20px)";
 
-    </script>
+}
+
+</script>
 {% endblock %}
