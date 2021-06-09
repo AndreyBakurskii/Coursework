@@ -149,6 +149,16 @@
 {% endblock %}
 
 {% block script %}
+{% block script %}
+<script>
+    var index1 = document.getElementsByTagName("select")[0].options.selectedIndex;
+    var value1 = document.getElementsByTagName("select")[0].options[index].text;
+    var index2 = document.getElementsByTagName("select")[1].options.selectedIndex;
+    var value2 = document.getElementsByTagName("select")[1].options[index].text;
+    var index3 = document.getElementsByTagName("select")[2].options.selectedIndex;
+    var value3 = document.getElementsByTagName("select")[2].options[index].text;
+</script>
+{% endblock %}
 <script>
         // делает рандомные цвета в аватарках людям
         function ChooseColor() {
