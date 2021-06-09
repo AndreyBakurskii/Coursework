@@ -10,6 +10,65 @@
 
 {% block block_info_choose %}Выберите пользователя, чтобы увидеть персональные данные{% endblock %}
 
+
+
+{% block button_create_new_chat %}
+            <button class="button" onclick="location.href ='#popup'" title="Параметры для поиска">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
+                <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+                </svg>
+            </button>
+{% endblock %}
+
+{% block popup %}
+                <div class="popup_title">Параметры для поиска</div>
+                <div class="popup_persons">
+<!--                    <form id="regForm" >-->
+                        <div class="middle">
+                            <h2>Кампус</h2>
+                            <div class="form-select">               
+                                <div class="form-input-select">
+                                    <select required>
+                                        <option value="" hidden>Кампус</option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <h2>Должность</h2>
+                            <div class="form-select">               
+                                <div class="form-input-select">
+                                    <select required>
+                                        <option value="" hidden>Должность</option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <h2>Группа</h2>
+                            <div class="form-select">               
+                                <div class="form-input-select">
+                                    <select required>
+                                        <option value="" hidden>Группа</option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="button_filter">Найти</button>
+                            
+                        </div>
+<!--                    </form>-->
+                </div>
+{% endblock %}
 {% block person_contact_list %}
 <!--
         {% for friend in friends %}
