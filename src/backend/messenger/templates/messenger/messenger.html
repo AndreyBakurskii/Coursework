@@ -1,0 +1,278 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block title %}Messenger{% endblock %}
+
+{% block additional_media3 %}
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="{% static 'jquery.nicescroll.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'messenger.css' %}" />
+       
+<!--        <script scr="{% static 'contactList.js' %}"></script>-->
+{% endblock %}
+{% block title_main %}Мессенджер{% endblock %}
+{% block block_info_choose %}Выберите контакт, чтобы начать общение{% endblock %}
+{% block person_contact_list %}
+                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
+
+                    <div class="user-info-avatar" id="avatar" ></div>
+                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
+
+                    <div class="user-status">
+                        <p><strong>Должность: </strong>студент</p>
+
+                    </div>
+                </button>
+                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
+
+                    <div class="user-info-avatar" id="avatar" ></div>
+                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
+
+                    <div class="user-status">
+                        <p><strong>Должность: </strong>студент</p>
+
+                    </div>
+                </button>
+                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
+
+                    <div class="user-info-avatar" id="avatar" ></div>
+                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
+
+                    <div class="user-status">
+                        <p><strong>Должность: </strong>студент</p>
+
+                    </div>
+                </button>
+                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
+
+                    <div class="user-info-avatar" id="avatar" ></div>
+                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
+
+                    <div class="user-status">
+                        <p><strong>Должность: </strong>студент</p>
+
+                    </div>
+                </button>
+                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
+
+                    <div class="user-info-avatar" id="avatar" ></div>
+                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
+
+                    <div class="user-status">
+                        <p><strong>Должность: </strong>студент</p>
+
+                    </div>
+                </button>
+                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
+
+                    <div class="user-info-avatar" id="avatar" ></div>
+                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
+
+                    <div class="user-status">
+                        <p><strong>Должность: </strong>студент</p>
+
+                    </div>
+                </button>
+                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
+
+                    <div class="user-info-avatar" id="avatar" ></div>
+                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
+
+                    <div class="user-status">
+                        <p><strong>Должность: </strong>студент</p>
+
+                    </div>
+                </button>
+{% for friend in friends %}
+
+                <button class="block_person" id="person_{{ friend.id }}" onclick="ProfileInfo(this)">
+
+                    <div class="user-info-avatar" id="avatar" ></div>
+                    <div class="user-info-name" id="name"><span>{{friend.last_name}} {{friend.first_name}} {{friend.middle_name}}</span></div>
+
+                    <div class="user-status">
+                        <p><strong>Должность: </strong>{{friend.staff}}</p>
+
+                    </div>
+                </button>
+            {% endfor %}
+{% endblock %}
+
+{% block button_create_new_chat %}
+<!--
+            <button class="button" onclick="location.href ='#popup'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+                </svg>
+            </button>
+-->
+
+            <button class="button" type="submit" id="newChat">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+            </button>
+{% endblock %}
+{% block right %}
+        <div class="info_user_chat">
+            <div class="user-info-avatar" id="avatar" ></div>
+            <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
+            <div class="user-status">
+                        <p><strong>Онлайн</strong></p>
+
+            </div>
+        <div class="messages">
+            <div class="message_container">
+                <div class="message" id="I">Мама звала Аню, Симу и Яшу кушать. На столе был завтрак: масло, сыр, мёд, хлеб и чай. Были яблоки и груши. Мама принесла ещё арбуз. Аня ела хлеб и масло. Сима ела хлеб с сыром. Яша ел хлеб с мёдом. А потом дети стали есть фрукты</div>
+            </div>
+            <div class="message_container">
+                <div class="message" id="you">Мама звала Аню, Симу и Яшу кушать. На столе был завтрак: масло, сыр, мёд, хлеб и чай. Были яблоки и груши. Мама принесла ещё арбуз. Аня ела хлеб и масло. Сима ела хлеб с сыром. Яша ел хлеб с мёдом. А потом дети стали есть фрукты</div>
+            </div>
+            <div class="message_container">
+                <div class="message" id="you">Мама звала Аню, Симу и Яшу кушать. На столе был завтрак: масло, сыр, мёд, хлеб и чай. Были яблоки и груши. Мама принесла ещё арбуз. Аня ела хлеб и масло. Сима ела хлеб с сыром. Яша ел хлеб с мёдом. А потом дети стали есть фрукты</div>
+            </div>
+            <div class="message_container">
+                <div class="message" id="you">Мама звала Аню, Симу и Яшу кушать. На столе был завтрак: масло, сыр, мёд, хлеб и чай. Были яблоки и груши. Мама принесла ещё арбуз. Аня ела хлеб и масло. Сима ела хлеб с сыром. Яша ел хлеб с мёдом. А потом дети стали есть фрукты</div>
+            </div>
+            <div class="message_container">
+                <div class="message" id="I">Мама звала Аню, Симу и Яшу кушать. На столе был завтрак: масло, сыр, мёд, хлеб и чай. Были яблоки и груши. Мама принесла ещё арбуз. Аня ела хлеб и масло. Сима ела хлеб с сыром. Яша ел хлеб с мёдом. А потом дети стали есть фрукты</div>
+            </div>
+            <div class="message_container">
+                <div class="message" id="you">hi)</div>
+            </div>
+        </div>
+        <div class="enter_message">
+            <button class="button emoji">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-emoji-laughing" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M12.331 9.5a1 1 0 0 1 0 1A4.998 4.998 0 0 1 8 13a4.998 4.998 0 0 1-4.33-2.5A1 1 0 0 1 4.535 9h6.93a1 1 0 0 1 .866.5zM7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5z"/>
+                </svg>
+            </button>
+            <input class="enter_" type="text" placeholder="Напишите сообщение...">
+            <button class="button enter_message_">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                </svg>
+            </button>
+        </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<!--<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>-->
+<script>
+    $(document).ready(
+        function () {
+            $(".block_persons").niceScroll({
+                cursorcolor: "#012E67",
+                cursorborder: "0 solid #012E67"
+            });
+        }
+       
+    )
+    $(document).ready(
+        function () {
+            $(".messages").niceScroll({
+                cursorcolor: "#012E67",
+                cursorborder: "0 solid #012E67"
+            });
+        }
+       
+    )
+</script>
+<script>
+       
+        var but = document.getElementsByClassName("block_person");
+        but[but.length - 1].style.marginBottom = "20px";
+    
+    
+        // делает рандомные цвета в аватарках людям
+        function ChooseColor() {
+            var color = [
+                '#F29B34',
+                '#A19C69',
+                '#FF00AE',
+                '#3C3741',
+                '#D0FF00',
+                '#25373D',
+                '#EB9532',
+                '#3AE2CE',
+                '#60646D',
+                '#00FFA9',
+                '#FFDD00',
+                '#B34EE9'];
+            var rand = Math.floor(Math.random() * color.length);
+            return color[rand];
+        };
+
+        var avatars = document.getElementsByClassName("user-info-avatar");
+        var names = document.getElementsByClassName("user-info-name");
+        for (var i = 0; i < avatars.length; i++) {
+            
+            avatars[i].style.background = ChooseColor();
+            var name = names[i].textContent;
+            var arrName = name.split(' ', 2)
+            var letterName = arrName[0].substr(0, 1) + arrName[1].substr(0, 1);
+            avatars[i].innerHTML = letterName;
+        }
+        
+        
+        function ProfileInfo(button) {
+            // возвращаем все кнопки в дефоолтный цвет
+            var prof_b = document.getElementsByClassName("block_person");
+            for(var i = 0; i < prof_b.length; i++) {
+                prof_b[i].style.background = "#BDDFEF";
+                prof_b[i].style.borderColor = "#2B6684";
+                document.getElementsByClassName("user-info-name")[i].style.color = "#032E42";
+                document.getElementsByClassName("user-status")[i].style.color = "#2B6684";
+//                prof_b[i].style.borderColor = "#2B6684";
+            }
+
+            
+            // изменяем цвет кнопки на которую нажали
+            button.style.backgroundColor = "#012E67";
+             button.style.borderColor = "#012E67";
+
+            button.getElementsByClassName("user-info-name")[0].style.color = "#F3F7FB";
+            button.getElementsByClassName("user-status")[0].style.color = "#F3F7FB";
+           
+
+            // изменяем информацию о профиле
+            var person_id = button.id.slice(7);
+            
+
+            // скрываем подпись о выборе контакта
+            var info = document.getElementsByClassName("block_info_choose");
+            info[0].style.display = "none";
+
+            // показываем три блока
+            document.getElementsByClassName("enter_message")[0].style.display = "block";
+            document.getElementsByClassName("info_user_chat")[0].style.display = "block";
+            document.getElementsByClassName("messages")[0].style.display = "block";
+            
+//            {% for friend in friends %}
+//                if ( {{friend.id}} == person_id ) {
+//
+//                    // изменяем информацию в первом блоке
+//                    document.getElementById("this-user-name").getElementsByTagName("span")[0].getElementsByTagName("strong")[0].textContent = "{{ friend.last_name }} {{ friend.first_name }} {{ friend.middle_name }}";
+//                    
+//                    var avatar = document.getElementById("this-user-avatar");
+//                    avatar.style.background = button.getElementsByClassName("user-info-avatar")[0].style.background;
+//
+//                    var letterName = "{{friend.last_name}}".substr(0, 1) + "{{friend.first_name}}".substr(0, 1);
+//                    avatar.innerHTML = letterName;
+//
+//                    // изменяем информацию во втором блоке
+//                    document.getElementById("personal-data-email").textContent = "{{friend.email}}";
+//                    document.getElementById("personal-data-campus").textContent = "{{friend.campus}}";
+//                    document.getElementById("personal-data-staff").textContent = "{{friend.staff}}";
+//                    document.getElementById("personal-data-department").textContent = "{{friend.department}}";
+//                    document.getElementById("personal-data-group").textContent = "{{friend.group}}";
+//                }
+//            {% endfor %}
+
+            
+              
+        }
+
+    </script>
+{% endblock %}
