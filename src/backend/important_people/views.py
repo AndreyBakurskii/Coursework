@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 from account.models import Account
-from contact.models import Contact
 from hse.models import Staff
 
 
+@login_required(login_url='login')
 def important_people(request):
     context = dict()
 

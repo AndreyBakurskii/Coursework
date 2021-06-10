@@ -2,11 +2,13 @@ import json
 
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
+from django.contrib.auth.decorators import login_required
 
 from .models import Contact, ContactRequest
 from account.models import Account
 
 
+@login_required(login_url='login')
 def my_contacts(request: HttpRequest):
     context = {}
     user = request.user
@@ -27,7 +29,8 @@ def my_contacts(request: HttpRequest):
     return render(request, 'contact/contacts.html', context)
 
 
-def define_relationship(request, from_func=False, *args, **kwargs):
+@login_required(login_url='login')
+def define_relationship(request: HttpRequest, from_func=False, *args, **kwargs):
     """
     Может быть 4 статуса отношений между двумя юзерами:
         - друзья (FRIENDS)
@@ -54,8 +57,7 @@ def define_relationship(request, from_func=False, *args, **kwargs):
         try:
             user2 = Account.objects.get(pk=user2_id)
         except Account.DoesNotExist:
-            context['error'] = True
-            return HttpResponse(json.dumps(context), content_type='application/json')
+            return HttpResponse(status=404)
 
         context['relationship'] = None
 
@@ -74,126 +76,106 @@ def define_relationship(request, from_func=False, *args, **kwargs):
         return HttpResponse(json.dumps(context), content_type='application/json')
 
 
-def create_contact(request, *args, **kwargs):
+@login_required(login_url='login')
+def create_contact(request: HttpRequest, *args, **kwargs):
     context = {}
 
     if request.POST:
-        context['success'] = False
         user1 = request.user
 
         user2_id = kwargs.get('user_id')
         try:
             user2 = Account.objects.get(pk=user2_id)
         except Account.DoesNotExist:
-            context['error'] = True
-            return HttpResponse(json.dumps(context), content_type='application/json')
+            return HttpResponse(status=404)
 
-        if ContactRequest.create_request(user1, user2):
-            context['success'] = True
-            return HttpResponse(json.dumps(context), content_type='application/json')
+        if ContactRequest.create_request(user1, user2) is None:
+            return HttpResponse(status=404)
 
         return HttpResponse(json.dumps(context), content_type='application/json')
 
 
-def check_is_friend(request, *args, **kwargs):
+@login_required(login_url='login')
+def delete_contact(request: HttpRequest, *args, **kwargs):
     context = {}
 
     if request.POST:
-        user_id = kwargs.get('user_id')
-        context['is_friend'] = False
-
-        try:
-            user = Account.objects.get(pk=user_id)
-        except Account.DoesNotExist:
-            return HttpResponse(json.dumps(context), content_type='application/json')
-
-        if Contact.get_contact(request.user, user):
-            context['is_friend'] = True
-
-        return HttpResponse(json.dumps(context), content_type='application/json')
-
-
-def delete_contact(request, *args, **kwargs):
-    context = {}
-
-    if request.POST:
-        context['success'] = False
         user1 = request.user
 
         user2_id = kwargs.get('user_id')
         try:
             user2 = Account.objects.get(pk=user2_id)
         except Account.DoesNotExist:
-            return HttpResponse(json.dumps(context), content_type='application/json')
+            return HttpResponse(status=404)
 
         Contact.delete_contact(user1, user2)
 
-        context['success'] = True
-
         return HttpResponse(json.dumps(context), content_type='application/json')
 
 
-def accept_request(request, *args, **kwargs):
+@login_required(login_url='login')
+def accept_request(request: HttpRequest, *args, **kwargs):
     context = {}
 
     if request.POST:
-        context['success'] = False
 
         sender_id = kwargs.get('user_id')
         try:
             sender = Account.objects.get(pk=sender_id)
         except Account.DoesNotExist:
-            return HttpResponse(json.dumps(context), content_type='application/json')
+            return HttpResponse(status=404)
 
         receiver = request.user
 
         contact_request = ContactRequest.get_request(sender, receiver)
         if contact_request:
             contact_request.accept()
-            context['success'] = True
+        else:
+            return HttpResponse(status=404)
 
         return HttpResponse(json.dumps(context), content_type='application/json')
 
 
-def decline_request(request, *args, **kwargs):
+@login_required(login_url='login')
+def decline_request(request: HttpRequest, *args, **kwargs):
     context = {}
 
     if request.POST:
-        context['success'] = False
 
         sender_id = kwargs.get('user_id')
         try:
             sender = Account.objects.get(pk=sender_id)
         except Account.DoesNotExist:
-            return HttpResponse(json.dumps(context), content_type='application/json')
+            return HttpResponse(status=404)
 
         receiver = request.user
 
         contact_request = ContactRequest.get_request(sender, receiver)
         if contact_request:
             contact_request.decline()
-            context['success'] = True
+        else:
+            return HttpResponse(status=404)
 
         return HttpResponse(json.dumps(context), content_type='application/json')
 
 
-def cancel_request(request, *args, **kwargs):
+@login_required(login_url='login')
+def cancel_request(request: HttpRequest, *args, **kwargs):
     context = {}
 
     if request.POST:
-        context['success'] = False
-
         user1 = request.user
 
         user2_id = kwargs.get('user_id')
         try:
             user2 = Account.objects.get(pk=user2_id)
         except Account.DoesNotExist:
-            return HttpResponse(json.dumps(context), content_type='application/json')
+            return HttpResponse(status=404)
 
         contact_request = ContactRequest.get_request(user1, user2)
         if contact_request:
             contact_request.decline()
-            context['success'] = True
+        else:
+            return HttpResponse(status=404)
 
         return HttpResponse(json.dumps(context), content_type='application/json')

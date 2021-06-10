@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.urls import path, include
 from .views import (my_contacts,
-                    check_is_friend,
                     accept_request,
                     decline_request,
                     delete_contact,
@@ -26,7 +25,6 @@ from .views import (my_contacts,
 
 urlpatterns = [
     path('my_contacts', my_contacts, name='my_contacts'),
-    path('check_is_friend/<user_id>', check_is_friend),
     path('accept_request_from_user/<user_id>', accept_request),
     path('decline_request_from_user/<user_id>', decline_request),
     path('cancel_request_to_user/<user_id>', cancel_request),

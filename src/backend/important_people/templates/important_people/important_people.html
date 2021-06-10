@@ -107,277 +107,274 @@
 </script>
 <script>
     // делает рандомные цвета в аватарках людям
-    function ChooseColor() {
-        var color = [
-            '#F29B34',
-            '#A19C69',
-            '#FF00AE',
-            '#3C3741',
-            '#D0FF00',
-            '#25373D',
-            '#EB9532',
-            '#3AE2CE',
-            '#60646D',
-            '#00FFA9',
-            '#FFDD00',
-            '#B34EE9'];
-        var rand = Math.floor(Math.random() * color.length);
-        return color[rand];
-    };
+function ChooseColor() {
+    var color = [
+        '#F29B34',
+        '#A19C69',
+        '#FF00AE',
+        '#3C3741',
+        '#D0FF00',
+        '#25373D',
+        '#EB9532',
+        '#3AE2CE',
+        '#60646D',
+        '#00FFA9',
+        '#FFDD00',
+        '#B34EE9'];
+    var rand = Math.floor(Math.random() * color.length);
+    return color[rand];
+};
 
-    var avatars = document.getElementsByClassName("user-info-avatar");
-    var names = document.getElementsByClassName("user-info-name");
-    for (var i = 0; i < avatars.length; i++) {
+var avatars = document.getElementsByClassName("user-info-avatar");
+var names = document.getElementsByClassName("user-info-name");
+for (var i = 0; i < avatars.length; i++) {
 
-        avatars[i].style.background = ChooseColor();
-        var name = names[i].textContent;
-        var arrName = name.split(' ', 2)
-        var letterName = arrName[0].substr(0, 1) + arrName[1].substr(0, 1);
-        avatars[i].innerHTML = letterName;
-    };
+    avatars[i].style.background = ChooseColor();
+    var name = names[i].textContent;
+    var arrName = name.split(' ', 2)
+    var letterName = arrName[0].substr(0, 1) + arrName[1].substr(0, 1);
+    avatars[i].innerHTML = letterName;
+};
 
-    function searchOnPage() {
-        var search_query = document.getElementById("input_search_text").value
-        console.log("searchOnPage is working! pattern for search: \"" + search_query + "\"");
-        
-        window.location.replace("{% url 'important_people' %}?q=" + search_query);
+function searchOnPage() {
+    var search_query = document.getElementById("input_search_text").value
+    console.log("searchOnPage is working! pattern for search: \"" + search_query + "\"");
+    
+    window.location.replace("{% url 'important_people' %}?q=" + search_query);
 
-        document.getElementById("input_search_text").value = "";
-    }
+    document.getElementById("input_search_text").value = "";
+}
 
-    function hideButtons() {
-        document.getElementById("button_delete_contact").style.display = "none";
-        document.getElementById("button_start_chatting").style.display = "none";
-        document.getElementById("button_create_contact").style.display = "none";
-        document.getElementById("button_decline_request").style.display = "none";
-        document.getElementById("button_accept_request").style.display = "none";
-        document.getElementById("button_cancel_request").style.display = "none";
-    };
+function hideButtons() {
+    document.getElementById("button_delete_contact").style.display = "none";
+    document.getElementById("button_start_chatting").style.display = "none";
+    document.getElementById("button_create_contact").style.display = "none";
+    document.getElementById("button_decline_request").style.display = "none";
+    document.getElementById("button_accept_request").style.display = "none";
+    document.getElementById("button_cancel_request").style.display = "none";
+};
 
-    function ProfileInfo(button) {
-        // возвращаем все кнопки в дефолтный цвет
-        var prof_b = document.getElementsByClassName("block_person");
-        for(var i = 0; i < prof_b.length; i++) {
-            prof_b[i].style.background = "#BDDFEF";
-            prof_b[i].style.borderColor = "#2B6684";
-            document.getElementsByClassName("user-info-name")[i].style.color = "#032E42";
-            document.getElementsByClassName("user-status")[i].style.color = "#2B6684";
-        }
-
-        
-        // изменяем цвет кнопки на которую нажали
-        button.style.backgroundColor = "#012E67";
-        button.style.borderColor = "#012E67";
-        button.getElementsByClassName("user-info-name")[0].style.color = "#F3F7FB";
-        button.getElementsByClassName("user-status")[0].style.color = "#F3F7FB";
-
-
-        // изменяем информацию о профиле
-        var person_id = button.id.slice(7);
-        
-        {% for person in important_people %}
-            if ( {{person.id}} == person_id ) {
-
-                // изменяем информацию в первом блоке
-                document.getElementById("this-user-name").getElementsByTagName("span")[0].getElementsByTagName("strong")[0].textContent = "{{ person.last_name }} {{ person.first_name }} {{ person.middle_name }}";
-                
-                var avatar = document.getElementById("this-user-avatar");
-                avatar.style.background = button.getElementsByClassName("user-info-avatar")[0].style.background;
-
-                var letterName = "{{person.last_name}}".substr(0, 1) + "{{person.first_name}}".substr(0, 1);
-                avatar.innerHTML = letterName;
-
-                // изменяем информацию во втором блоке
-                document.getElementById("personal-data-email").textContent = "{{person.email}}";
-                document.getElementById("personal-data-campus").textContent = "{{person.campus}}";
-                document.getElementById("personal-data-staff").textContent = "{{person.staff}}";
-
-                {% if person.department%}
-                    document.getElementById("personal-data-department").textContent = "{{person.department}}";
-                {% else %}
-                    document.getElementById("title-data-department").style.display = "none";
-                    document.getElementById("personal-data-department").style.display = "none";
-                {% endif %}
-
-                {% if person.group %}
-                    document.getElementById("personal-data-group").textContent = "{{person.group}}";
-                {% else %}
-                    document.getElementById("title-data-group").style.display = "none";
-                    document.getElementById("personal-data-group").style.display = "none";
-                {% endif %}
-            }
-        {% endfor %}
-
-        // передаем person_id в value кнопки удаления контакта
-        // document.getElementById("b-delete").value = person_id;
-
-        hideButtons();
-        
-        // определяем статус отношений между владельцем пользователя и выбранным пользователем
-        var statusRelationship = -1;
-        $.ajax({
-            method: "POST",
-            url: "/contact/define_relationship_with_user/" + person_id,
-            dataType: "json",
-            async: false,
-            data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
-            success: function(data) {
-                statusRelationship = data.relationship;
-
-                if (statusRelationship == 0) {
-                    document.getElementById("button_delete_contact").value = person_id;
-                    document.getElementById("button_start_chatting").value = person_id;
-
-                    document.getElementById("button_delete_contact").style.display = "block";
-                    document.getElementById("button_start_chatting").style.display = "block";
-
-                    document.getElementsByClassName("button-contact-list")[0].style.marginLeft = "160px";
-                };
-
-                if (statusRelationship == 1) {
-                    document.getElementById("button_create_contact").value = person_id;
-
-                    document.getElementById("button_create_contact").style.display = "block";
-
-                    document.getElementsByClassName("button-contact-list")[0].style.marginLeft = "125px";
-                };
-
-                if (statusRelationship == 2) {
-                    document.getElementById("button_decline_request").value = person_id;
-                    document.getElementById("button_accept_request").value = person_id;
-
-                    document.getElementById("button_decline_request").style.display = "block";
-                    document.getElementById("button_accept_request").style.display = "block";
-
-                    document.getElementsByClassName("button-contact-list")[0].style.marginLeft = "160px";
-                };
-
-                if (statusRelationship == 3) {
-                    document.getElementById("button_cancel_request").value = person_id;
-
-                    document.getElementById("button_cancel_request").style.display = "block";
-
-                    document.getElementsByClassName("button-contact-list")[0].style.marginLeft = "125px";
-                };
-            }
-        });
-
-        // скрываем подпись о выборе контакта
-        var info = document.getElementsByClassName("block_info_choose");
-        info[0].style.display = "none";
-
-        // показываем два блока
-        var profile = document.getElementsByClassName("this-user-info");
-        profile[0].style.display = "block";
-        var height = profile[0].offsetHeight;
-        profile[0].style.top = "calc(50vh - " + height + "px/2 - 20px)";
+function ProfileInfo(button) {
+    // возвращаем все кнопки в дефолтный цвет
+    var prof_b = document.getElementsByClassName("block_person");
+    for(var i = 0; i < prof_b.length; i++) {
+        prof_b[i].style.background = "#BDDFEF";
+        prof_b[i].style.borderColor = "#2B6684";
+        document.getElementsByClassName("user-info-name")[i].style.color = "#032E42";
+        document.getElementsByClassName("user-status")[i].style.color = "#2B6684";
     }
 
     
-
-    function deleteContact(person_id) {
-        hideButtons();
-
-        console.log("deleteContact is working! person_id= " + person_id);
-
-        $.ajax({
-            method: "POST",
-            url: "/contact/delete_contact_with_user/" + person_id,
-            dataType: "json",
-            async: false,
-            data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
-            success: function(data) {
-                console.log("User declines the request from person_"+ person_id + ": " + data.success);
-            }
-        });
-
-        document.getElementById("button_create_contact").style.display = "block";
-        document.getElementById("button_create_contact").value = person_id;
-
-    };
-
-    function createContact(person_id) {
-        hideButtons();
-
-        console.log("createContact is working! person_id= " + person_id);
-
-        $.ajax({
-            method: "POST",
-            url: "/contact/create_contact_with_user/" + person_id,
-            dataType: "json",
-            async: false,
-            data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
-            success: function(data) {
-                console.log("Server create a contact with person_"+ person_id + ": " + data.success);
-            }
-        });
-
-        document.getElementById("button_cancel_request").style.display = "block";
-        document.getElementById("button_cancel_request").value = person_id;
-    };
-
-    function declineRequest(person_id) {
-        hideButtons();
-
-        console.log("declineRequest is working! person_id= " + person_id);
-
-        $.ajax({
-            method: "POST",
-            url: "/contact/decline_request_from_user/" + person_id,
-            dataType: "json",
-            async: false,
-            data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
-            success: function(data) {
-                console.log("User declines the request from person_"+ person_id + ": " + data.success);
-            }
-        });
-
-        document.getElementById("button_create_contact").style.display = "block";
-        document.getElementById("button_create_contact").value = person_id;
-    };
-
-    function acceptRequest(person_id) {
-        hideButtons();
-
-        console.log("acceptRequest is working! person_id= " + person_id);
-
-        $.ajax({
-            method: "POST",
-            url: "/contact/accept_request_from_user/" + person_id,
-            dataType: "json",
-            async: false,
-            data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
-            success: function(data) {
-                console.log("User accepts the request from person_"+ person_id + ": " + data.success);
-            }
-        });
-
-        document.getElementById("button_delete_contact").style.display = "block";
-        document.getElementById("button_delete_contact").value = person_id;
-
-        document.getElementById("button_start_chatting").style.display = "block";
-    };
-
-    function cancelRequest(person_id) {
-        hideButtons();
-
-        console.log("cancelRequest is working! person_id= " + person_id);
-
-        $.ajax({
-            method: "POST",
-            url: "/contact/cancel_request_to_user/" + person_id,
-            dataType: "json",
-            async: false,
-            data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
-            success: function(data) {
-                console.log("User cancels the request to person_"+ person_id + ": " + data.success);
-            }
-        });
-
-        document.getElementById("button_create_contact").style.display = "block";
-        document.getElementById("button_create_contact").value = person_id;
-    };
+    // изменяем цвет кнопки на которую нажали
+    button.style.backgroundColor = "#012E67";
+    button.style.borderColor = "#012E67";
+    button.getElementsByClassName("user-info-name")[0].style.color = "#F3F7FB";
+    button.getElementsByClassName("user-status")[0].style.color = "#F3F7FB";
 
 
-    </script>
+    // изменяем информацию о профиле
+    var person_id = button.id.slice(7);
+    
+    {% for person in important_people %}
+        if ( {{person.id}} == person_id ) {
+
+            // изменяем информацию в первом блоке
+            document.getElementById("this-user-name").getElementsByTagName("span")[0].getElementsByTagName("strong")[0].textContent = "{{ person.last_name }} {{ person.first_name }} {{ person.middle_name }}";
+            
+            var avatar = document.getElementById("this-user-avatar");
+            avatar.style.background = button.getElementsByClassName("user-info-avatar")[0].style.background;
+
+            var letterName = "{{person.last_name}}".substr(0, 1) + "{{person.first_name}}".substr(0, 1);
+            avatar.innerHTML = letterName;
+
+            // изменяем информацию во втором блоке
+            document.getElementById("personal-data-email").textContent = "{{person.email}}";
+            document.getElementById("personal-data-campus").textContent = "{{person.campus}}";
+            document.getElementById("personal-data-staff").textContent = "{{person.staff}}";
+
+            {% if person.department%}
+                document.getElementById("personal-data-department").textContent = "{{person.department}}";
+            {% else %}
+                document.getElementById("title-data-department").style.display = "none";
+                document.getElementById("personal-data-department").style.display = "none";
+            {% endif %}
+
+            {% if person.group %}
+                document.getElementById("personal-data-group").textContent = "{{person.group}}";
+            {% else %}
+                document.getElementById("title-data-group").style.display = "none";
+                document.getElementById("personal-data-group").style.display = "none";
+            {% endif %}
+        }
+    {% endfor %}
+
+    hideButtons();
+    
+    // определяем статус отношений между владельцем пользователя и выбранным пользователем
+    var statusRelationship = -1;
+    $.ajax({
+        method: "POST",
+        url: "/contact/define_relationship_with_user/" + person_id,
+        dataType: "json",
+        async: false,
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+        success: function(data) {
+            statusRelationship = data.relationship;
+
+            if (statusRelationship == 0) {
+                document.getElementById("button_delete_contact").value = person_id;
+                document.getElementById("button_start_chatting").value = person_id;
+
+                document.getElementById("button_delete_contact").style.display = "block";
+                document.getElementById("button_start_chatting").style.display = "block";
+
+                document.getElementsByClassName("button-contact-list")[0].style.marginLeft = "160px";
+            };
+
+            if (statusRelationship == 1) {
+                document.getElementById("button_create_contact").value = person_id;
+
+                document.getElementById("button_create_contact").style.display = "block";
+
+                document.getElementsByClassName("button-contact-list")[0].style.marginLeft = "125px";
+            };
+
+            if (statusRelationship == 2) {
+                document.getElementById("button_decline_request").value = person_id;
+                document.getElementById("button_accept_request").value = person_id;
+
+                document.getElementById("button_decline_request").style.display = "block";
+                document.getElementById("button_accept_request").style.display = "block";
+
+                document.getElementsByClassName("button-contact-list")[0].style.marginLeft = "160px";
+            };
+
+            if (statusRelationship == 3) {
+                document.getElementById("button_cancel_request").value = person_id;
+
+                document.getElementById("button_cancel_request").style.display = "block";
+
+                document.getElementsByClassName("button-contact-list")[0].style.marginLeft = "125px";
+            };
+        }
+    });
+
+    // скрываем подпись о выборе контакта
+    var info = document.getElementsByClassName("block_info_choose");
+    info[0].style.display = "none";
+
+    // показываем два блока
+    var profile = document.getElementsByClassName("this-user-info");
+    profile[0].style.display = "block";
+    var height = profile[0].offsetHeight;
+    profile[0].style.top = "calc(50vh - " + height + "px/2 - 20px)";
+}
+
+
+
+function deleteContact(person_id) {
+    hideButtons();
+
+    console.log("deleteContact is working! person_id= " + person_id);
+
+    $.ajax({
+        method: "POST",
+        url: "/contact/delete_contact_with_user/" + person_id,
+        dataType: "json",
+        async: false,
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+        success: function(data) {
+            console.log("User declines the request from person_"+ person_id + ": " + data.success);
+        }
+    });
+
+    document.getElementById("button_create_contact").style.display = "block";
+    document.getElementById("button_create_contact").value = person_id;
+
+};
+
+function createContact(person_id) {
+    hideButtons();
+
+    console.log("createContact is working! person_id= " + person_id);
+
+    $.ajax({
+        method: "POST",
+        url: "/contact/create_contact_with_user/" + person_id,
+        dataType: "json",
+        async: false,
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+        success: function(data) {
+            console.log("Server create a contact with person_"+ person_id + ": " + data.success);
+        }
+    });
+
+    document.getElementById("button_cancel_request").style.display = "block";
+    document.getElementById("button_cancel_request").value = person_id;
+};
+
+function declineRequest(person_id) {
+    hideButtons();
+
+    console.log("declineRequest is working! person_id= " + person_id);
+
+    $.ajax({
+        method: "POST",
+        url: "/contact/decline_request_from_user/" + person_id,
+        dataType: "json",
+        async: false,
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+        success: function(data) {
+            console.log("User declines the request from person_"+ person_id + ": " + data.success);
+        }
+    });
+
+    document.getElementById("button_create_contact").style.display = "block";
+    document.getElementById("button_create_contact").value = person_id;
+};
+
+function acceptRequest(person_id) {
+    hideButtons();
+
+    console.log("acceptRequest is working! person_id= " + person_id);
+
+    $.ajax({
+        method: "POST",
+        url: "/contact/accept_request_from_user/" + person_id,
+        dataType: "json",
+        async: false,
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+        success: function(data) {
+            console.log("User accepts the request from person_"+ person_id + ": " + data.success);
+        }
+    });
+
+    document.getElementById("button_delete_contact").style.display = "block";
+    document.getElementById("button_delete_contact").value = person_id;
+
+    document.getElementById("button_start_chatting").style.display = "block";
+};
+
+function cancelRequest(person_id) {
+    hideButtons();
+
+    console.log("cancelRequest is working! person_id= " + person_id);
+
+    $.ajax({
+        method: "POST",
+        url: "/contact/cancel_request_to_user/" + person_id,
+        dataType: "json",
+        async: false,
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+        success: function(data) {
+            console.log("User cancels the request to person_"+ person_id + ": " + data.success);
+        }
+    });
+
+    document.getElementById("button_create_contact").style.display = "block";
+    document.getElementById("button_create_contact").value = person_id;
+};
+
+
+</script>
 {% endblock %}

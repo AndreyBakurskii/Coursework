@@ -1,13 +1,11 @@
-{% extends "base2.html" %}
+{% extends "website/base2.html" %}
 {% load static %}
 {% block title %}Messenger{% endblock %}
 
 {% block additional_media3 %}
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-        <script src="{% static 'jquery.nicescroll.js' %}"></script>
-        <link rel="stylesheet" type="text/css" href="{% static 'messenger.css' %}" />
-       
-<!--        <script scr="{% static 'contactList.js' %}"></script>-->
+        <script src="{% static 'chat/jquery.nicescroll.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'chat/messenger.css' %}" />
 {% endblock %}
 {% block title_main %}Мессенджер{% endblock %}
 {% block block_info_choose %}Выберите контакт, чтобы начать общение{% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 
 from .forms import RegistrationForm, RegistrationFIOEmailForm, RegistrationEndForm, LoginForm
 from hse.models import Campus, Department, Group, Staff
@@ -11,7 +12,7 @@ from contact.views import define_relationship
 import json
 
 
-def registration_fio(request):
+def registration_fio(request: HttpRequest):
     context = dict()
 
     if request.POST:
@@ -30,7 +31,7 @@ def registration_fio(request):
     return render(request, 'account/reg_fio_email.html', context)
 
 
-def registration_campus(request):
+def registration_campus(request: HttpRequest):
     context = dict()
 
     if request.POST:
@@ -44,10 +45,9 @@ def registration_campus(request):
     return render(request, 'account/reg_campus.html', context)
 
 
-def registration_staff(request):
+def registration_staff(request: HttpRequest):
     context = dict()
     if request.POST:
-        print(request.session['campus'])
 
         if request.POST['action'] == 'next':
 
@@ -66,7 +66,7 @@ def registration_staff(request):
     return render(request, 'account/reg_staff.html', context)
 
 
-def registration_department(request):
+def registration_department(request: HttpRequest):
     context = dict()
     context['errors'] = []
 
@@ -94,7 +94,7 @@ def registration_department(request):
     return render(request, 'account/reg_department.html', context)
 
 
-def registration_ed_staff(request):
+def registration_ed_staff(request: HttpRequest):
     context = dict()
 
     if request.POST:
@@ -114,7 +114,7 @@ def registration_ed_staff(request):
     return render(request, 'account/reg_ed_staff.html', context)
 
 
-def registration_choose_staff(request):
+def registration_choose_staff(request: HttpRequest):
     context = dict()
     context['errors'] = []
 
@@ -139,7 +139,7 @@ def registration_choose_staff(request):
     return render(request, 'account/reg_choose_staff.html', context)
 
 
-def registration_group(request):
+def registration_group(request: HttpRequest):
     context = dict()
     context['errors'] = []
 
@@ -163,7 +163,7 @@ def registration_group(request):
     return render(request, 'account/reg_group.html', context)
 
 
-def registration_end(request):
+def registration_end(request: HttpRequest):
     context = dict()
 
     context['errors'] = []
@@ -218,7 +218,7 @@ def registration_end(request):
     return render(request, 'account/reg_end.html', context)
 
 
-def login_view(request):
+def login_view(request: HttpRequest):
     context = {}
 
     user = request.user
@@ -243,22 +243,24 @@ def login_view(request):
         form = LoginForm()
 
     context['login_form'] = form
-    print(form.errors)
 
     return render(request, "account/login.html", context)
 
 
-def logout_view(request):
+@login_required(login_url='login')
+def logout_view(request: HttpRequest):
     logout(request)
     return redirect("login")
 
 
-def account_view(request):
+@login_required(login_url='login')
+def account_view(request: HttpRequest):
     context = {'user': request.user}
     return render(request, 'account/account_view.html', context)
 
 
-def other_account_view(request, *args, **kwargs):
+@login_required(login_url='login')
+def other_account_view(request: HttpRequest, *args, **kwargs):
     context = {}
     user_id = kwargs.get('user_id')
 
@@ -266,46 +268,11 @@ def other_account_view(request, *args, **kwargs):
         user = Account.objects.get(pk=user_id)
         context['other_user'] = user
     except Account.DoesNotExist:
-        context['error'] = True
-        return render(request, "account/other_account_view.html", context)
+        return HttpResponse(status=404)
 
     relationship = json.loads(define_relationship(request, from_func=True, user_id=user_id).getvalue()).get('relationship')
-    print(relationship)
 
     if relationship is not None:
         context['relationship'] = relationship
-    else:
-        context['error'] = True
 
     return render(request, "account/other_account_view.html", context)
-
-# !!!! поиск аккаунтов !!!!
-# from django.db.models import Q
-#
-#
-# def account_search_view(request):
-#     context = {}
-#     if request.method == "GET":
-#         search_query = request.GET.get("q")
-#         if len(search_query) > 0:
-#
-#             search_results = Account.objects.filter(
-#                 Q(username__icontains=search_query) | Q(email__icontains=search_query)
-#             )
-#             context['search_results'] = search_results
-#
-#             #### связь с контактами ####
-#             # user = request.user
-#             # accounts = []  # [(account1, True), (account2, False), ...]
-#             # if user.is_authenticated:
-#             #     # get the authenticated users friend list
-#             #     auth_user_friend_list = FriendList.objects.get(user=user)
-#             #     for account in search_results:
-#             #         accounts.append((account, auth_user_friend_list.is_mutual_friend(account)))
-#             #     context['accounts'] = accounts
-#             # else:
-#             #     for account in search_results:
-#             #         accounts.append((account, False))
-#             #     context['accounts'] = accounts
-#
-#     return render(request, "account/search.html", context)

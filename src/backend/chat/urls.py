@@ -1,9 +1,12 @@
 from django.urls import path
 
-from . import views
+from .views import (
+                    messenger,
+                    room,
+                    test
+                    )
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('<str:room_name>/', views.room, name='room'),
-    path('test/', views.test, name='test'),
+    path('', messenger, name='messenger'),
+    path('<str:room_name>/', room, name='room'),
 ]
