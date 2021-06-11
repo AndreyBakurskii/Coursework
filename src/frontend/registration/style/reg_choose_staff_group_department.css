@@ -1,0 +1,262 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#grey {
+    left:0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color:  rgba(0, 0, 0, 0.3);
+    position: fixed;
+}
+body {
+    font-family: sans-serif;
+    background: #E6E8EB;
+    background: url(images/ZOOM_HSE_04.jpg) 0 0/100% 100% fixed;
+    background-repeat: no-repeat;
+}
+
+.registration {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.reg {
+    float:right;
+    background: #ffffff; 
+    width: 540px;
+    position:relative
+}
+#regForm {
+    background-color: #ffffff;
+    font-family: Raleway;
+    padding: 40px;
+}
+
+h1 {
+    text-align: center;  
+}
+
+.tab {
+    display: block;
+}
+
+button {
+    appearance: none;
+    border: 0;
+    border-radius: 5px;
+    background: #2C3E50;
+    color: #fff;
+    padding: 12px 14px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-family: inherit;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;  
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+.step.active {
+    opacity: 1;
+}
+
+.step.finish {
+    background-color: #0332DC;
+}
+
+
+.title {
+    width: 100%;
+    float: left;
+    line-height: 46px;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #0332DC;
+    text-align: center;  
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.title:before {
+    content: "";
+    width: 5px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: -40px;
+    background: #0332DC;
+}
+h2 {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    margin-left: 30px;
+    color: #2C3E50;
+    font-size: 20px;
+    font-weight: normal;
+    text-align: left;
+}
+.form-input-select {
+    display: block;
+    padding: 0;
+    position: relative;
+    color: #0332DC;
+    display: block;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 20px;
+    margin-top: 9px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+.form-input-select::after {
+    content: "";
+    display: block;
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+    border: 1px solid transparent;
+    width: 0;
+    height: 0;
+    right: 16px;
+    border-width: 8px 6.5px 0 6.5px;
+    border-top-color: #D6D6D6;
+    bottom: 20px;
+}
+.form-input-select select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: none;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    border: 1px solid transparent;
+    font-size: 20px;
+    outline: none;
+}
+.form-input-select select:focus {
+    background-color: transparent;
+    outline: none;
+}
+.form-input-select option {
+    font-weight: normal;
+}
+
+.form-input-select:hover select {
+    box-shadow: 0 2px 3px rgba(0, 91, 166, 0.1) inset;
+    border-color: #0332DC;
+}
+.form-input-select:hover select:focus {
+    outline-color: transparent;
+}
+.form-input-select:hover::after {
+    border-top-color: #0332DC;
+}
+.form-input-select:click::after {
+    border-top-color: #0332DC;
+    transform: rotate(-180deg);
+}
+.form-input-select:checked::after {
+    border-top-color: #0332DC;
+    transform: rotate(-90deg);
+}
+.form-input-select select {
+    border: 3px solid #E6E6E6;
+    border-radius: 0;
+    font-weight: 400;
+    color: inherit;
+    padding: 11px 15px;
+    line-height: normal;
+    transition: border-color 0.2s ease, outline 0.2s ease;
+}
+.form-input-select select:focus {
+    box-shadow: 0 3px 4px rgba(0, 91, 166, 0.3) inset;
+    outline: 3px solid #0332DC;
+    outline-offset: -3px;
+}
+.form-input-select select[disabled], .form-input-select select:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+.form-input-select select:not(:focus):invalid {
+    color: #C7C7C7;
+}
+.form-input-select select[disabled], .form-input-select select:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+.form-input-select select:not(:focus):invalid {
+    color: #C7C7C7;
+}
+
+.form-select {
+    margin: 0 auto;
+    width: 300px;
+    margin-top: 30px;
+    margin-bottom: 20px
+}
+
+
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .form-input-select select::-ms-expand {
+    display: none;
+  }
+  .form-input-select select:focus::-ms-value {
+    background: transparent;
+    color: #000;
+  }
+}
+@-moz-document url-prefix() {
+  .form-input-select {
+    overflow: hidden;
+  }
+  .form-input-select select {
+    width: 120%;
+    width: calc(100% + 3em);
+  }
+  @supports (-moz-appearance: none) {
+    .form-input-select select {
+      width: 100%;
+    }
+  }
+  .form-input-select select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+  }
+}
+@supports (-moz-appearance: none) {
+  .form-input-select {
+    width: 100%;
+  }
+}
+
+@-moz-document url-prefix() {
+ .form-input-select {
+    border-right: 3px solid #E6E6E6;
+  }
+  .form-input-select:hover {
+    border-right: 3px solid #0332DC;
+  }
+}

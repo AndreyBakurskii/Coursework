@@ -1,0 +1,63 @@
+{% extends "website/base.html" %}
+{% load static %}
+{% block title %}Account view{% endblock %}
+
+{% block additional_media2 %}
+        <link rel="stylesheet" type="text/css" href="{% static 'website/base2.css' %}" />
+{% endblock %}
+
+{% block additional_media3 %}
+        <link rel="stylesheet" type="text/css" href="{% static 'account/account_view.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="block_messages">
+<div class="this-user-info">
+    <div class="personal-data" id="contact-avatar">
+        <div class="this-user-info-avatar" id="this-avatar" ></div>
+        <div class="this-user-info-name" id="this-name"><span><strong>{{user.last_name}} {{user.first_name}} {{user.middle_name}}</strong></span></div>
+        <div class="button-contact-list">
+
+            <button  class="button" id="b-end" title="Выйти" onclick="document.location='{% url 'logout' %}'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
+                    <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+
+                </svg> Выйти
+            </button>
+        </div>
+    </div>
+            <div class="personal-data">
+                <h3>Email</h3>
+                    <p>{{user.email}}</p>
+
+                <h3>Кампус</h3>
+                    <p>{{user.campus}}</p>
+
+                <h3>Должность</h3>
+                    <p>{{user.staff}}</p>
+
+                {% if user.department%}
+                    <h3>Факультет</h3>
+                        <p>{{user.department}}</p>
+                {% endif %}
+
+                {% if user.group%}
+                    <h3>Группа</h3>
+                        <p>{{user.group}}</p>
+                {% endif %}
+<!--            </div>-->
+            </div>
+        
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+
+    var profile = document.getElementsByClassName("this-user-info");
+    var height = profile[0].offsetHeight;
+    profile[0].style.top = "calc(50vh - " + height + "px/2 - 20px)";
+</script>
+{% endblock %}

@@ -1,0 +1,133 @@
+#grey {
+    left:0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color:  rgba(0, 0, 0, 0.3);
+    position: fixed;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #E6E8EB;
+    background: url(images/ZOOM_HSE_04.jpg) 0 0/100% 100% fixed;
+    background-repeat: no-repeat;
+}
+
+.authoriz_f {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.authorization_form {
+    float:right;
+    background: #ffffff; 
+    padding: 10px; 
+    width: 430px;
+    height: 415px;
+    border-radius: 0 10px 10px 0;
+    opacity: 0.8;
+    position:relative
+} 
+
+.authorization_form input {
+ display: block;
+ width: 100%;
+}
+.info-form {
+    float:left;
+    background: #0332DC; 
+    padding: 10px; 
+    font-size: 20px;
+    color: #ffffff;
+    width: 430px;
+    height: 415px;
+    border-radius: 10px 0 0 10px;
+    opacity: 0.7;
+}
+.tab-form {
+    height: 260px;   
+    border-radius: 0 10px 0 0;
+    background: #fff;
+    padding: 30px 20px 20px;
+    margin: -10px -10px -10px -10px;
+}
+.tab-form-down {
+    height: 115px;  
+    background: #ABAEA9;
+    color: #DDDDDD;
+    text-align: center;
+    font-size: 18px;
+    margin: 0 -10px -10px -10px;
+    border-radius: 0 0 10px 0;
+    padding: 1px 20px 10px;
+    
+    padding: 20px 15px 15px;
+    padding: 1px 20px 20px;
+   
+}
+
+.input:focus{
+    background-color: #fff;
+    border-color: #0332DC;
+    color: #6D6D6C; 
+}
+.input {
+    vertical-align: 0;
+    font-size: 16px;
+    border: 2px solid #e9eaea;
+    padding: 12px 14px;
+    box-sizing: border-box;
+    margin-bottom: 1px;
+    color: black;
+    outline: none;
+    border-radius: 3px 3px 3px 3px;
+}
+
+
+button {
+    appearance: none;
+    border: 0;
+    border-radius: 5px;
+    background: #0332DC;
+    color: #fff;
+    padding: 12px 14px;
+    font-size: 18px;
+    text-transform: uppercase;
+    min-width: 100px;
+    width: 410px;
+    font-family: inherit;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+button[id="b2"] {
+    background: #3458DC;
+}
+button[id="b3"] {
+    border: 4px solid transparent;
+    border-color: #41FF3E;
+    margin-top: 10px;
+    color: #41FF3E;
+    text-transform: none;
+    background-color: #90928E;
+}
+button:hover {
+  background: #36d2ff;
+}
+button[id="b2"]:hover {
+    background: #69DEFF;
+}
+button[id="b3"]:hover {
+    color: #fff;
+    background: #41FF3E;
+}
+
+.info-form p, h3, hr{
+    margin-top: 55px;
+    text-align: center;
+    vertical-align: middle;
+}

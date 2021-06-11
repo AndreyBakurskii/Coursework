@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = "account.Account"
+
+# AUTHENTICATION_BACKENDS = ['account.backends.EmailBackend']
 
 # Application definition
 
@@ -37,6 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'hse',
+    'website',
+    'account',
+    'contact',
+    'important_people',
+    'search',
+    'channels',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +79,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
+
+ASGI_APPLICATION = 'backend.asgi.application'
 
 CHANNEL_LAYERS = {
     'default': {

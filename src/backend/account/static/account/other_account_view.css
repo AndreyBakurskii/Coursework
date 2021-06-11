@@ -1,0 +1,10 @@
+.this-user-info {
+    display: block;
+}
+.block_messages {
+    width: calc(100vw - 80px);
+    left: 80px;
+}
+#b-start {
+    margin-right: 10px;
+}

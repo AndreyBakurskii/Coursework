@@ -1,3 +1,7 @@
 venv
 .idea
-src/backend/backend/__pycache__
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+**/__pycache__**
+./logins.txt

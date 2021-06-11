@@ -1,0 +1,20 @@
+.this-user-info {
+    display: block;
+}
+.block_messages {
+    width: calc(100vw - 80px);
+    left: 80px;
+}
+#b-end {
+    margin-right: 160px;
+    width: 100px;
+    font-size: 16px;
+    margin-top: 10px;
+    background: #012E67;
+}
+#b-end:hover {
+    background: #408FB4;
+}
+.button-contact-list {
+    margin-left: 310px;
+}
