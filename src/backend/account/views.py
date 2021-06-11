@@ -189,6 +189,7 @@ def registration_end(request: HttpRequest):
 
                 # получаем все данные из session
                 if request.session['student']:
+                    new_user.staff = Staff.objects.get(name='Студент')
                     new_user.department = Department.objects.get(name=request.session['department'])
                     new_user.group = Group.objects.get(name=request.session['group'])
 
