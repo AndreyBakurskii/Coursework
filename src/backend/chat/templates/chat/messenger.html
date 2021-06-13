@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="{% static 'chat/messenger.css' %}" />
 {% endblock %}
 {% block title_main %}Мессенджер{% endblock %}
-{% block block_info_choose %}Выберите контакт, чтобы начать общение{% endblock %}
+{% block block_info_choose %}Выберите чат, чтобы начать общение{% endblock %}
 {% block person_contact_list %}
                 <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
 
@@ -146,7 +146,7 @@
                 </svg>
             </button>
             <input class="enter_" type="text" placeholder="Напишите сообщение...">
-            <button class="button enter_message_">
+            <button class="button enter_message_" onclick="MessageBlock('hello, guys!!', 'I')">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                 </svg>
@@ -175,26 +175,27 @@
     messagesContainer.scrollTop(prevScrollH).on('scroll', function(e){
         var $that = $(this);
         if($that.scrollTop() <= 0){
-            $.ajax({
-                url: '/echo/html/',
-                type: 'POST',
-                dataType: 'html',
-                beforeSend: function(){
-                    load.show();
-                },
-                complete: function(){
-                    load.hide();
-                },
-                message: {
-                    html: mes,
-                    delay: 1
-                },
-                success: function(message){
-                    $that.prepend(message);
-                    $that.scrollTop($that.prop('scrollHeight') - prevScrollH);
-                    prevScrollH = $that.prop('scrollHeight');                
-                }
-            });
+            // $.ajax({
+            //     url: '/echo/html/',
+            //     type: 'POST',
+            //     dataType: 'html',
+            //     beforeSend: function(){
+            //         load.show();
+            //     },
+            //     complete: function(){
+            //         load.hide();
+            //     },
+            //     message: {
+            //         html: mes,
+            //         delay: 1
+            //     },
+            //     success: function(message){
+            //         $that.prepend(message);
+            //         $that.scrollTop($that.prop('scrollHeight') - prevScrollH);
+            //         prevScrollH = $that.prop('scrollHeight');                
+            //     }
+            // });
+            console.log("scroll top");
         }
     });
 </script>
@@ -209,118 +210,141 @@
 //              createChatMessageElement(message, time, position)
 //
 //        }
-		function MessageBlock(message, time, position){
-            var newContainer = document.createElement("div");
-            newContainer.classList.add("message_container");
-            var newMessage = document.createElement("div");
-            newMessage.classList.add("message");
-            newMessage.id = position;
-            newMessage.textContent = message;
-            newContainer.appendChild(newMessage);
-            document.getElementsByClassName("messages")[0].appendChild(newContainer);
-			var messageBody = document.querySelector('.messages');
-            messageBody.scrollTop = messageBody.scrollHeight;
+function MessageBlock(message, position){ // , time
+    var newContainer = document.createElement("div");
+    newContainer.classList.add("message_container");
+    var newMessage = document.createElement("div");
+    newMessage.classList.add("message");
+    newMessage.id = position;
+    newMessage.textContent = message;
+    newContainer.appendChild(newMessage);
+    document.getElementsByClassName("messages")[0].appendChild(newContainer);
+	var messageBody = document.querySelector('.messages');
+    messageBody.scrollTop = messageBody.scrollHeight;
 
-        }
-	
-        var but = document.getElementsByClassName("block_person");
-        but[but.length - 1].style.marginBottom = "20px";
-    
-    
-        // делает рандомные цвета в аватарках людям
-        function ChooseColor() {
-            var color = [
-                '#F29B34',
-                '#A19C69',
-                '#FF00AE',
-                '#3C3741',
-                '#D0FF00',
-                '#25373D',
-                '#EB9532',
-                '#3AE2CE',
-                '#60646D',
-                '#00FFA9',
-                '#FFDD00',
-                '#B34EE9'];
-            var rand = Math.floor(Math.random() * color.length);
-            return color[rand];
-        };
+}
 
-        var avatars = document.getElementsByClassName("user-info-avatar");
-        var names = document.getElementsByClassName("user-info-name");
-        for (var i = 0; i < avatars.length; i++) {
-            
-            avatars[i].style.background = ChooseColor();
-            var name = names[i].textContent;
-            var arrName = name.split(' ', 2)
-            var letterName = arrName[0].substr(0, 1) + arrName[1].substr(0, 1);
-            avatars[i].innerHTML = letterName;
-        }
+var chatSocket = null;
+var roomId = null;
+
+function closeWebSocket(){
+    if(chatSocket != null){
+        chatSocket.close()
+        chatSocket = null
+
+        // clearChatLog()
+        // setPageNumber("1")
+        // disableChatLogScrollListener()
+    }
+}
+
+function SetupSocket(room_id){
+    console.log("SetupSocket: " + room_id);
+
+    closeWebSocket();
+
+    roomId = room_id;
+
+    var wsPath = 'ws://' + window.location.host + '/ws/chat/' + room_id + '/';
+    chatSocket = new WebSocket(wsPath);
+
+    chatSocket.addEventListener("open", function(e) {
+        console.log("srabotal slushatel na open");
+    });
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+
+    chatSocket.onmessage = function(e) {
+        console.log(e);
+        const data = JSON.parse(e.data);
+
+        console.log(data.message);
         
-        
-        function ProfileInfo(button) {
-            // возвращаем все кнопки в дефоолтный цвет
-            var prof_b = document.getElementsByClassName("block_person");
-            for(var i = 0; i < prof_b.length; i++) {
-                prof_b[i].style.background = "#BDDFEF";
-                prof_b[i].style.borderColor = "#2B6684";
-                document.getElementsByClassName("user-info-name")[i].style.color = "#032E42";
-                document.getElementsByClassName("user-status")[i].style.color = "#2B6684";
+        document.querySelector('#chat-log').value += (data.message + '\n');
+    };
+}
+
+var but = document.getElementsByClassName("block_person");
+but[but.length - 1].style.marginBottom = "20px";
+
+
+// делает рандомные цвета в аватарках людям
+function ChooseColor() {
+    var color = [
+        '#F29B34',
+        '#A19C69',
+        '#FF00AE',
+        '#3C3741',
+        '#D0FF00',
+        '#25373D',
+        '#EB9532',
+        '#3AE2CE',
+        '#60646D',
+        '#00FFA9',
+        '#FFDD00',
+        '#B34EE9'];
+    var rand = Math.floor(Math.random() * color.length);
+    return color[rand];
+};
+
+var avatars = document.getElementsByClassName("user-info-avatar");
+var names = document.getElementsByClassName("user-info-name");
+for (var i = 0; i < avatars.length; i++) {
+    
+    avatars[i].style.background = ChooseColor();
+    var name = names[i].textContent;
+    var arrName = name.split(' ', 2)
+    var letterName = arrName[0].substr(0, 1) + arrName[1].substr(0, 1);
+    avatars[i].innerHTML = letterName;
+}
+
+
+function ProfileInfo(button) {
+    // возвращаем все кнопки в дефоолтный цвет
+    var prof_b = document.getElementsByClassName("block_person");
+    for(var i = 0; i < prof_b.length; i++) {
+        prof_b[i].style.background = "#BDDFEF";
+        prof_b[i].style.borderColor = "#2B6684";
+        document.getElementsByClassName("user-info-name")[i].style.color = "#032E42";
+        document.getElementsByClassName("user-status")[i].style.color = "#2B6684";
 //                prof_b[i].style.borderColor = "#2B6684";
-            }
 
-            
-            // изменяем цвет кнопки на которую нажали
-            button.style.backgroundColor = "#012E67";
-             button.style.borderColor = "#012E67";
+    }
 
-            button.getElementsByClassName("user-info-name")[0].style.color = "#F3F7FB";
-            button.getElementsByClassName("user-status")[0].style.color = "#F3F7FB";
-           
+    
+    // изменяем цвет кнопки на которую нажали
+    button.style.backgroundColor = "#012E67";
+     button.style.borderColor = "#012E67";
 
-            // изменяем информацию о профиле
-            var person_id = button.id.slice(7);
-            
+    button.getElementsByClassName("user-info-name")[0].style.color = "#F3F7FB";
+    button.getElementsByClassName("user-status")[0].style.color = "#F3F7FB";
+   
 
-            // скрываем подпись о выборе контакта
-            var info = document.getElementsByClassName("block_info_choose");
-            info[0].style.display = "none";
+    // изменяем информацию о профиле
+    var person_id = button.id.slice(7);
 
-            // показываем три блока
-            document.getElementsByClassName("enter_message")[0].style.display = "block";
-            document.getElementsByClassName("info_user_chat")[0].style.display = "block";
-            document.getElementsByClassName("messages")[0].style.display = "block";
-			var messageBody = document.querySelector('.messages');
-            messageBody.scrollTop = messageBody.scrollHeight;
-            
-//            {% for friend in friends %}
-//                if ( {{friend.id}} == person_id ) {
-//
-//                    // изменяем информацию в первом блоке
-//                    document.getElementById("this-user-name").getElementsByTagName("span")[0].getElementsByTagName("strong")[0].textContent = "{{ friend.last_name }} {{ friend.first_name }} {{ friend.middle_name }}";
-//                    
-//                    var avatar = document.getElementById("this-user-avatar");
-//                    avatar.style.background = button.getElementsByClassName("user-info-avatar")[0].style.background;
-//
-//                    var letterName = "{{friend.last_name}}".substr(0, 1) + "{{friend.first_name}}".substr(0, 1);
-//                    avatar.innerHTML = letterName;
-//
-//                    // изменяем информацию во втором блоке
-//                    document.getElementById("personal-data-email").textContent = "{{friend.email}}";
-//                    document.getElementById("personal-data-campus").textContent = "{{friend.campus}}";
-//                    document.getElementById("personal-data-staff").textContent = "{{friend.staff}}";
-//                    document.getElementById("personal-data-department").textContent = "{{friend.department}}";
-//                    document.getElementById("personal-data-group").textContent = "{{friend.group}}";
-//                }
-//            {% endfor %}
+    // скрываем подпись о выборе контакта
+    var info = document.getElementsByClassName("block_info_choose");
+    info[0].style.display = "none";
 
-            
-              
-        }
-		function DeleteMessage() {
-                document.getElementsByClassName("message")[0].remove();
-        }
-        DeleteMessage();
+    SetupSocket(12);
 
-    </script>
+    // показываем три блока
+    document.getElementsByClassName("enter_message")[0].style.display = "block";
+    document.getElementsByClassName("info_user_chat")[0].style.display = "block";
+    document.getElementsByClassName("messages")[0].style.display = "block";
+	var messageBody = document.querySelector('.messages');
+    messageBody.scrollTop = messageBody.scrollHeight;
+
+
+}
+
+function DeleteMessage() {
+    document.getElementsByClassName("message")[0].remove();
+}
+
+</script>
 {% endblock %}
