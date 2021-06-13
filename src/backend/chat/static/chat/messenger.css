@@ -137,3 +137,19 @@
     background: #9CACBF;
     color: #012E67;
 }
+.messages::-webkit-scrollbar {
+    width: 6px;
+    background: url(main3.png)  0 0/100% auto fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top 0 left 280px;
+    overflow-y: auto;
+}
+
+.messages::-webkit-scrollbar-thumb {
+    height: 10px;
+    background-color: #012E67;
+    border-radius: 10px;
+    background-image: none;
+   
+}
