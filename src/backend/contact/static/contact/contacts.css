@@ -4,12 +4,12 @@
 .search button {
     top: 70px;
 }
-/*
-A:link { text-decoration: none;
+
+.user-info-name a:link { text-decoration: none;
          color: #012E67; } 
-A:visited { text-decoration: none;
+.user-info-name a:visited { text-decoration: none;
             color: #012E67; } 
-A:active { text-decoration: none;
+.user-info-name a:active { text-decoration: none;
            color: #012E67; }
-A:hover { text-decoration: none; 
-          color: #012E67;}*/
+.user-info-name a:hover { text-decoration: none; 
+          color: #012E67;}

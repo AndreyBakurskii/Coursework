@@ -179,6 +179,27 @@
 </script>
 <script>
        
+//		function AddMessage(data, maintainPosition, isNewMessage){
+//              message = data['message']
+//              time = 
+//              position = 
+//
+//              
+//              createChatMessageElement(message, time, position)
+//
+//        }
+		function MessageBlock(message, time, position){
+            var newContainer = document.createElement("div");
+            newContainer.classList.add("message_container");
+            var newMessage = document.createElement("div");
+            newMessage.classList.add("message");
+            newMessage.id = position;
+            newMessage.textContent = message;
+            newContainer.appendChild(newMessage);
+            document.getElementsByClassName("messages")[0].appendChild(newContainer);
+
+        }
+	
         var but = document.getElementsByClassName("block_person");
         but[but.length - 1].style.marginBottom = "20px";
     
