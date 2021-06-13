@@ -167,6 +167,36 @@
         }
        
     )
+	var load = $('#load'),
+    messagesContainer = $('.messages'),
+    prevScrollH = messagesContainer.prop('scrollHeight');
+
+
+    messagesContainer.scrollTop(prevScrollH).on('scroll', function(e){
+        var $that = $(this);
+        if($that.scrollTop() <= 0){
+            $.ajax({
+                url: '/echo/html/',
+                type: 'POST',
+                dataType: 'html',
+                beforeSend: function(){
+                    load.show();
+                },
+                complete: function(){
+                    load.hide();
+                },
+                message: {
+                    html: mes,
+                    delay: 1
+                },
+                success: function(message){
+                    $that.prepend(message);
+                    $that.scrollTop($that.prop('scrollHeight') - prevScrollH);
+                    prevScrollH = $that.prop('scrollHeight');                
+                }
+            });
+        }
+    });
 </script>
 <script>
        
