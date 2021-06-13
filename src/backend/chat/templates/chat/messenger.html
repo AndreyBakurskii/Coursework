@@ -188,6 +188,8 @@
             newMessage.textContent = message;
             newContainer.appendChild(newMessage);
             document.getElementsByClassName("messages")[0].appendChild(newContainer);
+			var messageBody = document.querySelector('.messages');
+            messageBody.scrollTop = messageBody.scrollHeight;
 
         }
 	
@@ -258,6 +260,8 @@
             document.getElementsByClassName("enter_message")[0].style.display = "block";
             document.getElementsByClassName("info_user_chat")[0].style.display = "block";
             document.getElementsByClassName("messages")[0].style.display = "block";
+			var messageBody = document.querySelector('.messages');
+            messageBody.scrollTop = messageBody.scrollHeight;
             
 //            {% for friend in friends %}
 //                if ( {{friend.id}} == person_id ) {
