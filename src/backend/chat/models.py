@@ -7,7 +7,7 @@ class ChatRoom(models.Model):
     user1 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chat_user1')
     user2 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chat_user2')
 
-    online_users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='online_users')
+    # online_users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, null=True, related_name='online_users')
 
     # def connect_user(self, user):
     #     is_online = False
@@ -31,8 +31,11 @@ class ChatRoom(models.Model):
 
 
 class RoomChatMessageManager(models.Manager):
-    def from_room(self, room):
+    def from_room(self, room, from_message_id=None):
         query_set = RoomChatMessage.objects.filter(room=room).order_by("-timestamp")
+
+        if from_message_id is not None:
+            query_set = query_set.filter(id__lt=from_message_id)
         return query_set
 
 

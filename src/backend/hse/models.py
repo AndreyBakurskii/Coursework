@@ -35,8 +35,6 @@ class Department(models.Model):
 
 class Group(models.Model):
     name = models.CharField(verbose_name="name_group", max_length=50, null=False, blank=False)
-    start_year = models.DateField(verbose_name="start_year", default=datetime(year=2019, month=8, day=30))
-    graduate_year = models.DateField(verbose_name="finish_year", default=datetime(year=2023, month=7, day=30))
     department = models.ForeignKey(Department, on_delete=models.CASCADE, verbose_name="department")
 
     class Meta:

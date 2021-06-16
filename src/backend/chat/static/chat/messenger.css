@@ -139,7 +139,7 @@
 }
 .messages::-webkit-scrollbar {
     width: 6px;
-    background: url(Coursework\src\backend\website\static\website\main3.png)  0 0/100% auto fixed;
+    background: url(./main3.png)  0 0/100% auto fixed;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top 0 left 280px;

@@ -10,134 +10,24 @@
 {% block title_main %}Мессенджер{% endblock %}
 {% block block_info_choose %}Выберите чат, чтобы начать общение{% endblock %}
 {% block person_contact_list %}
-                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
 
-                    <div class="user-info-avatar" id="avatar" ></div>
-                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
+{% for room_user in room_id_and_user %}
+    <button class="block_person" id="room_{{room_user.room_id}}" onclick="OnSelectedRoom(this)">
+        <div class="user-info-avatar" id="avatar" ></div>
+        <div class="user-info-name" id="name"><span>{{room_user.user.last_name}} {{room_user.user.first_name}} {{room_user.user.middle_name}}</span></div>
+    </button>
+{% endfor %}
 
-                    <div class="user-status">
-                        <p><strong>Должность: </strong>студент</p>
-
-                    </div>
-                </button>
-                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
-
-                    <div class="user-info-avatar" id="avatar" ></div>
-                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
-
-                    <div class="user-status">
-                        <p><strong>Должность: </strong>студент</p>
-
-                    </div>
-                </button>
-                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
-
-                    <div class="user-info-avatar" id="avatar" ></div>
-                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
-
-                    <div class="user-status">
-                        <p><strong>Должность: </strong>студент</p>
-
-                    </div>
-                </button>
-                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
-
-                    <div class="user-info-avatar" id="avatar" ></div>
-                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
-
-                    <div class="user-status">
-                        <p><strong>Должность: </strong>студент</p>
-
-                    </div>
-                </button>
-                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
-
-                    <div class="user-info-avatar" id="avatar" ></div>
-                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
-
-                    <div class="user-status">
-                        <p><strong>Должность: </strong>студент</p>
-
-                    </div>
-                </button>
-                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
-
-                    <div class="user-info-avatar" id="avatar" ></div>
-                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
-
-                    <div class="user-status">
-                        <p><strong>Должность: </strong>студент</p>
-
-                    </div>
-                </button>
-                <button class="block_person" id="person_2" onclick="ProfileInfo(this)">
-
-                    <div class="user-info-avatar" id="avatar" ></div>
-                    <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
-
-                    <div class="user-status">
-                        <p><strong>Должность: </strong>студент</p>
-
-                    </div>
-                </button>
-{% for friend in friends %}
-
-                <button class="block_person" id="person_{{ friend.id }}" onclick="ProfileInfo(this)">
-
-                    <div class="user-info-avatar" id="avatar" ></div>
-                    <div class="user-info-name" id="name"><span>{{friend.last_name}} {{friend.first_name}} {{friend.middle_name}}</span></div>
-
-                    <div class="user-status">
-                        <p><strong>Должность: </strong>{{friend.staff}}</p>
-
-                    </div>
-                </button>
-            {% endfor %}
 {% endblock %}
 
-{% block button_create_new_chat %}
-<!--
-            <button class="button" onclick="location.href ='#popup'">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
-                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
-                </svg>
-            </button>
--->
-
-            <button class="button" type="submit" id="newChat">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                </svg>
-            </button>
-{% endblock %}
 {% block right %}
         <div class="info_user_chat">
             <div class="user-info-avatar" id="avatar" ></div>
-            <div class="user-info-name" id="name"><span>Иванов Иван Иванович</span></div>
-            <div class="user-status">
-                        <p><strong>Онлайн</strong></p>
-
-            </div>
-        <div class="messages">
-            <div class="message_container">
-                <div class="message" id="I">Мама звала Аню, Симу и Яшу кушать. На столе был завтрак: масло, сыр, мёд, хлеб и чай. Были яблоки и груши. Мама принесла ещё арбуз. Аня ела хлеб и масло. Сима ела хлеб с сыром. Яша ел хлеб с мёдом. А потом дети стали есть фрукты</div>
-            </div>
-            <div class="message_container">
-                <div class="message" id="you">Мама звала Аню, Симу и Яшу кушать. На столе был завтрак: масло, сыр, мёд, хлеб и чай. Были яблоки и груши. Мама принесла ещё арбуз. Аня ела хлеб и масло. Сима ела хлеб с сыром. Яша ел хлеб с мёдом. А потом дети стали есть фрукты</div>
-            </div>
-            <div class="message_container">
-                <div class="message" id="you">Мама звала Аню, Симу и Яшу кушать. На столе был завтрак: масло, сыр, мёд, хлеб и чай. Были яблоки и груши. Мама принесла ещё арбуз. Аня ела хлеб и масло. Сима ела хлеб с сыром. Яша ел хлеб с мёдом. А потом дети стали есть фрукты</div>
-            </div>
-            <div class="message_container">
-                <div class="message" id="you">Мама звала Аню, Симу и Яшу кушать. На столе был завтрак: масло, сыр, мёд, хлеб и чай. Были яблоки и груши. Мама принесла ещё арбуз. Аня ела хлеб и масло. Сима ела хлеб с сыром. Яша ел хлеб с мёдом. А потом дети стали есть фрукты</div>
-            </div>
-            <div class="message_container">
-                <div class="message" id="I">Мама звала Аню, Симу и Яшу кушать. На столе был завтрак: масло, сыр, мёд, хлеб и чай. Были яблоки и груши. Мама принесла ещё арбуз. Аня ела хлеб и масло. Сима ела хлеб с сыром. Яша ел хлеб с мёдом. А потом дети стали есть фрукты</div>
-            </div>
-            <div class="message_container">
-                <div class="message" id="you">hi)</div>
-            </div>
+            <div class="user-info-name" id="name"><span></span></div>
+        
+        <div class="messages" id="mesages-log">
         </div>
+        
         <div class="enter_message">
             <button class="button emoji">
                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-emoji-laughing" viewBox="0 0 16 16">
@@ -145,8 +35,8 @@
                     <path d="M12.331 9.5a1 1 0 0 1 0 1A4.998 4.998 0 0 1 8 13a4.998 4.998 0 0 1-4.33-2.5A1 1 0 0 1 4.535 9h6.93a1 1 0 0 1 .866.5zM7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5z"/>
                 </svg>
             </button>
-            <input class="enter_" type="text" placeholder="Напишите сообщение...">
-            <button class="button enter_message_" onclick="MessageBlock('hello, guys!!', 'I')">
+            <input class="enter_" type="text" id= "input_message" placeholder="Напишите сообщение...">
+            <button class="button enter_message_" id="enter_message_button" onclick="sendMessage()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                 </svg>
@@ -210,19 +100,6 @@
 //              createChatMessageElement(message, time, position)
 //
 //        }
-function MessageBlock(message, position){ // , time
-    var newContainer = document.createElement("div");
-    newContainer.classList.add("message_container");
-    var newMessage = document.createElement("div");
-    newMessage.classList.add("message");
-    newMessage.id = position;
-    newMessage.textContent = message;
-    newContainer.appendChild(newMessage);
-    document.getElementsByClassName("messages")[0].appendChild(newContainer);
-	var messageBody = document.querySelector('.messages');
-    messageBody.scrollTop = messageBody.scrollHeight;
-
-}
 
 var chatSocket = null;
 var roomId = null;
@@ -232,40 +109,136 @@ function closeWebSocket(){
         chatSocket.close()
         chatSocket = null
 
-        // clearChatLog()
+        DeleteMessage();
         // setPageNumber("1")
         // disableChatLogScrollListener()
     }
 }
 
 function SetupSocket(room_id){
-    console.log("SetupSocket: " + room_id);
-
+    // закрываем старый сокет
     closeWebSocket();
+
+    console.log("SetupSocket: " + room_id);
 
     roomId = room_id;
 
     var wsPath = 'ws://' + window.location.host + '/ws/chat/' + room_id + '/';
     chatSocket = new WebSocket(wsPath);
 
+
+    // обработчик входящих команд от сервера
+    chatSocket.onmessage = function(e) {
+        console.log(e);
+        const data = JSON.parse(e.data);
+
+        if (data.join){
+            getOldMessages();
+        }
+
+        if (data.message) {
+            if (data.sender_id == {{request.user.id}}) {
+                addMessageBlock(data.message, data.message_id, "I");
+            } else {
+                addMessageBlock(data.message, data.message_id, "you");
+            }
+        }
+
+        if (data.get_old_messages) {
+            handleGetOldMessages(data.messages);
+        }
+    };
+
     chatSocket.addEventListener("open", function(e) {
-        console.log("srabotal slushatel na open");
+        console.log("ChatSocket OPEN")
+        chatSocket.send(JSON.stringify({
+            "command": "join",
+            "room": roomId
+        }));
     });
 
     chatSocket.onclose = function(e) {
         console.error('Chat socket closed unexpectedly');
     };
 
+    if (chatSocket.readyState == WebSocket.OPEN) {
+        console.log("ChatSocket OPEN")
+    } else if (chatSocket.readyState == WebSocket.CONNECTING){
+        console.log("ChatSocket connecting..")
+    }
+};
 
-    chatSocket.onmessage = function(e) {
-        console.log(e);
-        const data = JSON.parse(e.data);
+// отправляем сообщение на сервер
+function sendMessage(){
+    var messageInputDom = document.getElementById("input_message");
+    var message = messageInputDom.value;
 
-        console.log(data.message);
-        
-        document.querySelector('#chat-log').value += (data.message + '\n');
-    };
+    chatSocket.send(JSON.stringify({
+       "command": "send",
+       "message": message,
+    }));
+
+    messageInputDom.value = "";
+};
+
+
+// запрашиваем старые сообщения с сервера
+function getOldMessages(from_message_id=null) {
+    if (from_message_id){
+        chatSocket.send(JSON.stringify({
+            "command": "get_old_messages",
+            "from_message_id": from_message_id,
+        }));
+    } else {
+        chatSocket.send(JSON.stringify({
+            "command": "get_old_messages"
+        }));
+    }
+};
+
+
+// обрабатываем старые сообщения, пришедшие с сервера
+function handleGetOldMessages(messages){
+    if(messages != null && messages != "undefined" && messages != "None"){
+        messages.forEach(function(message){
+            console.log(message)
+            console.log(message.message, message.sender_id)
+
+            MessageBlock(message.message, message.sender_id);
+        })
+    }
+    else{
+        console.log("сообщений больше нет");
+    }
 }
+
+
+function addMessageBlock(message, message_id, sender_id){ // , time
+    var position = ""
+
+    if (sender_id == {{request.user.id}}) {
+        position = "I";
+    } else {
+        position = "you";
+    }
+
+    var newContainer = document.createElement("div");
+    newContainer.classList.add("message_container");
+    var newMessage = document.createElement("div");
+    newMessage.classList.add("message");
+    newMessage.id = position;
+    newMessage.textContent = message;
+    newContainer.appendChild(newMessage);
+    document.getElementsByClassName("messages")[0].appendChild(newContainer);
+    var messageBody = document.querySelector('.messages');
+    messageBody.scrollTop = messageBody.scrollHeight;
+}
+
+
+function DeleteMessage() {
+    document.getElementById("mesages-log").innerHTML = "";
+}
+
 
 var but = document.getElementsByClassName("block_person");
 but[but.length - 1].style.marginBottom = "20px";
@@ -302,35 +275,33 @@ for (var i = 0; i < avatars.length; i++) {
 }
 
 
-function ProfileInfo(button) {
+function OnSelectedRoom(button) {
     // возвращаем все кнопки в дефоолтный цвет
     var prof_b = document.getElementsByClassName("block_person");
     for(var i = 0; i < prof_b.length; i++) {
         prof_b[i].style.background = "#BDDFEF";
         prof_b[i].style.borderColor = "#2B6684";
         document.getElementsByClassName("user-info-name")[i].style.color = "#032E42";
-        document.getElementsByClassName("user-status")[i].style.color = "#2B6684";
-//                prof_b[i].style.borderColor = "#2B6684";
-
+        // document.getElementsByClassName("user-status")[i].style.color = "#2B6684";
+        // prof_b[i].style.borderColor = "#2B6684";
     }
-
     
     // изменяем цвет кнопки на которую нажали
     button.style.backgroundColor = "#012E67";
-     button.style.borderColor = "#012E67";
+    button.style.borderColor = "#012E67";
 
     button.getElementsByClassName("user-info-name")[0].style.color = "#F3F7FB";
-    button.getElementsByClassName("user-status")[0].style.color = "#F3F7FB";
+    // button.getElementsByClassName("user-status")[0].style.color = "#F3F7FB";
    
 
     // изменяем информацию о профиле
-    var person_id = button.id.slice(7);
+    var room_id = button.id.slice(5);
 
-    // скрываем подпись о выборе контакта
+    // скрываем подпись о выборе диалога
     var info = document.getElementsByClassName("block_info_choose");
     info[0].style.display = "none";
 
-    SetupSocket(12);
+    SetupSocket(room_id);
 
     // показываем три блока
     document.getElementsByClassName("enter_message")[0].style.display = "block";
@@ -339,12 +310,18 @@ function ProfileInfo(button) {
 	var messageBody = document.querySelector('.messages');
     messageBody.scrollTop = messageBody.scrollHeight;
 
-
-}
-
-function DeleteMessage() {
-    document.getElementsByClassName("message")[0].remove();
-}
+    // document.getElementById('enter_message_button').focus();
+    // document.getElementById('enter_message_button').onkeyup = function(e) {
+    //     // if (e.keyCode === 13 && e.shiftKey) {  // enter + return
+    //     //     // Handled automatically by textarea
+    //     // }
+    //     // else if(e.keyCode === 13 && !e.shiftKey){ // enter + !return
+    //     //     document.getElementById('enter_message_button').click();
+    //     // }
+    //     if (e.keyCode == 13){
+    //         sendMessage();
+    // }
+};
 
 </script>
 {% endblock %}
