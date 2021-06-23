@@ -136,12 +136,8 @@ function SetupSocket(room_id){
             getOldMessages();
         }
 
-        if (data.message) {
-            if (data.sender_id == {{request.user.id}}) {
-                addMessageBlock(data.message, data.message_id, "I");
-            } else {
-                addMessageBlock(data.message, data.message_id, "you");
-            }
+        if (data.send) {
+            addMessageBlock(data.message, data.message_id, data.sender_id);
         }
 
         if (data.get_old_messages) {
@@ -176,6 +172,7 @@ function sendMessage(){
     chatSocket.send(JSON.stringify({
        "command": "send",
        "message": message,
+       "room_id": roomId,
     }));
 
     messageInputDom.value = "";
@@ -188,10 +185,12 @@ function getOldMessages(from_message_id=null) {
         chatSocket.send(JSON.stringify({
             "command": "get_old_messages",
             "from_message_id": from_message_id,
+            "room_id": roomId
         }));
     } else {
         chatSocket.send(JSON.stringify({
-            "command": "get_old_messages"
+            "command": "get_old_messages",
+            "room_id": roomId
         }));
     }
 };
@@ -202,9 +201,8 @@ function handleGetOldMessages(messages){
     if(messages != null && messages != "undefined" && messages != "None"){
         messages.forEach(function(message){
             console.log(message)
-            console.log(message.message, message.sender_id)
 
-            MessageBlock(message.message, message.sender_id);
+            addMessageBlock(message.message, message.message_id, message.sender_id);
         })
     }
     else{
@@ -216,7 +214,7 @@ function handleGetOldMessages(messages){
 function addMessageBlock(message, message_id, sender_id){ // , time
     var position = ""
 
-    if (sender_id == {{request.user.id}}) {
+    if (sender_id == "{{request.user.id}}") {
         position = "I";
     } else {
         position = "you";
@@ -294,7 +292,7 @@ function OnSelectedRoom(button) {
     // button.getElementsByClassName("user-status")[0].style.color = "#F3F7FB";
    
 
-    // изменяем информацию о профиле
+    // берем room_id
     var room_id = button.id.slice(5);
 
     // скрываем подпись о выборе диалога

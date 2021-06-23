@@ -1,13 +1,6 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 from account.models import Account
-
-from hse.models import *
-
-
-class RegistrationForm(UserCreationForm):
-    pass
 
 
 class RegistrationFIOEmailForm(forms.ModelForm):
@@ -66,8 +59,8 @@ class LoginForm(forms.ModelForm):
                 raise forms.ValidationError("Email должен оканчиваться на hse.ru")
 
             password = self.cleaned_data['password']
-            # print(email, password)
+
             # параметру username передаем email, при аутентификации проверяется поле user_model.USERNAME_FIELD, а оно
-            # соответсвует полю user_model.email
+            # соответствует полю user_model.email
             if not authenticate(username=email, password=password):
                 raise forms.ValidationError("Неверная почта или пароль!")

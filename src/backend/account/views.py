@@ -3,10 +3,10 @@ from django.http import HttpRequest, HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
-from .forms import RegistrationForm, RegistrationFIOEmailForm, RegistrationEndForm, LoginForm
+from .forms import RegistrationFIOEmailForm, RegistrationEndForm, LoginForm
 from hse.models import Campus, Department, Group, Staff
 from account.models import Account
-from contact.models import Contact
+
 from contact.views import define_relationship
 
 import json

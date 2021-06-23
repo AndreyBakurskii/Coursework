@@ -8,6 +8,7 @@ from datetime import datetime
 # 135288 - Нижний Новгород
 # 135083 - Санкт-Петербург
 # 135213 - Пермь
+
 class Campus(models.Model):
     id_campus = models.CharField(primary_key=True, verbose_name="id_campus", max_length=10, blank=False, unique=True)
     city = models.CharField(primary_key=False, verbose_name="city_campus", max_length=50, blank=False, unique=True)

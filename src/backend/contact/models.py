@@ -8,18 +8,13 @@ class Contact(models.Model):
 
     @staticmethod
     def get_contact(user1: settings.AUTH_USER_MODEL, user2: settings.AUTH_USER_MODEL):
-        contact = None
-
         try:
             contact = Contact.objects.get(user1=user1, user2=user2)
         except Contact.DoesNotExist:
-            pass
-
-        if not contact:
             try:
                 contact = Contact.objects.get(user1=user2, user2=user1)
             except Contact.DoesNotExist:
-                pass
+                return None
 
         return contact
 
@@ -37,8 +32,8 @@ class Contact(models.Model):
 
     @staticmethod
     def create_contact(user1: settings.AUTH_USER_MODEL, user2: settings.AUTH_USER_MODEL):
-        contact1 = Contact(user1=user1, user2=user2)
-        contact1.save()
+        contact = Contact(user1=user1, user2=user2)
+        contact.save()
 
     @staticmethod
     def delete_contact(owner: settings.AUTH_USER_MODEL, del_friend: settings.AUTH_USER_MODEL):
@@ -65,9 +60,7 @@ class ContactRequest(models.Model):
         self.save()
 
     @staticmethod
-    def get_request(sender, receiver):
-        contact_request = None
-
+    def get_request(sender: settings.AUTH_USER_MODEL, receiver: settings.AUTH_USER_MODEL):
         try:
             contact_request = ContactRequest.objects.get(sender=sender, receiver=receiver, is_active=True)
         except ContactRequest.DoesNotExist:
@@ -76,7 +69,7 @@ class ContactRequest(models.Model):
         return contact_request
 
     @staticmethod
-    def create_request(sender, receiver):
+    def create_request(sender: settings.AUTH_USER_MODEL, receiver: settings.AUTH_USER_MODEL):
         try:
             contact_request = ContactRequest(sender=sender, receiver=receiver)
             contact_request.save()
@@ -86,7 +79,7 @@ class ContactRequest(models.Model):
         return contact_request
 
     @staticmethod
-    def get_senders(user):
+    def get_senders(user: settings.AUTH_USER_MODEL):
         """
         Возвращает список поль-лей которые отправили запрос для user
         :param user:

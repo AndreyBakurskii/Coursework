@@ -15,8 +15,9 @@ def my_contacts(request: HttpRequest):
     user = request.user
     friends = sorted(Contact.get_friends(user), key=lambda user: user.last_name)
 
-    search_query = request.GET.get("q")
-    friends = user_search(friends, search_query, is_list=True)
+    search_query = request.GET.get("q", default=None)
+    if search_query is not None:
+        friends = user_search(friends, search_query, is_list=True)
 
     context['friends'] = friends
     context['senders_requests'] = ContactRequest.get_senders(user)
