@@ -15,6 +15,10 @@
     <button class="block_person" id="room_{{room_user.room_id}}" onclick="OnSelectedRoom(this)">
         <div class="user-info-avatar" id="avatar" ></div>
         <div class="user-info-name" id="name"><span>{{room_user.user.last_name}} {{room_user.user.first_name}} {{room_user.user.middle_name}}</span></div>
+        <div class="chat-time" id="time"><span>01.01.21</span></div>
+        <div class="user-chat" id="chat">
+            <p>Наступил июль. Стоит сильная жара. Ребята идут в лес. Вот кусты малины. На кустах крупные душистые ягоды. Ольга любит малину. Вот и полная корзина ягод. Брат Никита несет корзину. Жара спала. Надвинулась темная туча. Ребята быстро бегут к дому.</p>
+        </div>
     </button>
 {% endfor %}
 
@@ -210,7 +214,13 @@ function handleGetOldMessages(messages){
     }
 }
 
-
+var input = document.getElementsByClassName("enter_")[0];
+input.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementsByClassName("button enter_message_")[0].click();
+    }
+});
 function addMessageBlock(message, message_id, sender_id){ // , time
     var position = ""
 
@@ -274,13 +284,14 @@ for (var i = 0; i < avatars.length; i++) {
 
 
 function OnSelectedRoom(button) {
-    // возвращаем все кнопки в дефоолтный цвет
+    // возвращаем все кнопки в дефолтный цвет
     var prof_b = document.getElementsByClassName("block_person");
     for(var i = 0; i < prof_b.length; i++) {
         prof_b[i].style.background = "#BDDFEF";
         prof_b[i].style.borderColor = "#2B6684";
         document.getElementsByClassName("user-info-name")[i].style.color = "#032E42";
-        // document.getElementsByClassName("user-status")[i].style.color = "#2B6684";
+        document.getElementsByClassName("user-chat")[i].style.color = "#2B6684";
+        document.getElementsByClassName("chat-time")[i].style.color = "#2B6684";
         // prof_b[i].style.borderColor = "#2B6684";
     }
     
@@ -289,7 +300,8 @@ function OnSelectedRoom(button) {
     button.style.borderColor = "#012E67";
 
     button.getElementsByClassName("user-info-name")[0].style.color = "#F3F7FB";
-    // button.getElementsByClassName("user-status")[0].style.color = "#F3F7FB";
+    button.getElementsByClassName("user-chat")[0].style.color = "#F3F7FB";
+    button.getElementsByClassName("chat-time")[0].style.color = "#F3F7FB";
    
 
     // берем room_id

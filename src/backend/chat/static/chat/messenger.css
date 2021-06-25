@@ -153,3 +153,28 @@
     background-image: none;
    
 }
+#load {
+    display: none;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    background: url(Fidget-spinner.gif) 50% 50% no-repeat rgba(1,46,103,.7);
+}
+
+.user-chat {
+    float: left;
+    margin-top: -30px;
+    margin-left: 85px;
+    font-size: 14px;
+    color: #2B6684;
+    
+}
+.user-chat p {
+    padding-right: 15px;
+    /* Убираем внешний отступ */
+    -webkit-line-clamp: 1; /* Число отображаемых строк */
+    display: -webkit-box; /* Включаем флексбоксы */
+    -webkit-box-orient: vertical; /* Вертикальная ориентация */
+    overflow: hidden; /* Обрезаем всё за пределами блока */
+}

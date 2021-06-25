@@ -346,6 +346,7 @@ form {
 .chat-time {
     float: right;
     margin-right: 20px;
-    margin-top: 20px;
+    margin-top: 22px;
+    font-size: 15px;
     color: #2B6684;
 }
