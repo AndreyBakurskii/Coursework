@@ -12,13 +12,13 @@
 {% block block_info_choose %}Выберите чат, чтобы начать общение{% endblock %}
 {% block person_contact_list %}
 
-{% for room_user in room_id_and_user %}
-    <button class="block_person" id="room_{{room_user.room_id}}" onclick="OnSelectedRoom(this)">
+{% for room in rooms_info %}
+    <button class="block_person" id="room_{{room.room_id}}" onclick="OnSelectedRoom(this)">
         <div class="user-info-avatar" id="avatar" ></div>
-        <div class="user-info-name" id="name"><span>{{room_user.user.last_name}} {{room_user.user.first_name}} {{room_user.user.middle_name}}</span></div>
-        <div class="chat-time" id="time"><span>01.01.21</span></div>
+        <div class="user-info-name" id="name"><span>{{room.user.last_name}} {{room.user.first_name}}</span></div>
+        <div class="chat-time" id="time"><span>{{room.message_time}}</span></div>
         <div class="user-chat" id="chat">
-            <p>Наступил июль. Стоит сильная жара. Ребята идут в лес. Вот кусты малины. На кустах крупные душистые ягоды. Ольга любит малину. Вот и полная корзина ягод. Брат Никита несет корзину. Жара спала. Надвинулась темная туча. Ребята быстро бегут к дому.</p>
+            <p>{{room.message}}</p>
         </div>
     </button>
 {% endfor %}
@@ -26,91 +26,81 @@
 {% endblock %}
 
 {% block right %}
-        <div class="info_user_chat">
-            <div class="user-info-avatar" id="avatar" ></div>
-            <div class="user-info-name" id="name"><span></span></div>
-        
-        <div class="messages" id="mesages-log">
-        </div>
-        <div id="load">
-            <i class="fa fa-spinner fa-spin"></i>Loading
-        </div>
-        <div class="enter_message">
-            <button class="button emoji">
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-emoji-laughing" viewBox="0 0 16 16">
-                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                    <path d="M12.331 9.5a1 1 0 0 1 0 1A4.998 4.998 0 0 1 8 13a4.998 4.998 0 0 1-4.33-2.5A1 1 0 0 1 4.535 9h6.93a1 1 0 0 1 .866.5zM7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5z"/>
-                </svg>
-            </button>
-            <input class="enter_" type="text" id= "input_message" placeholder="Напишите сообщение...">
-            <button class="button enter_message_" id="enter_message_button" onclick="sendMessage()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                </svg>
-            </button>
-        </div>
+<div class="info_user_chat">
+    <div class="user-info-avatar" id="avatar" ></div>
+    <div class="user-info-name" id="name"><span></span></div>
+
+    <div class="messages" id="mesages-log"></div>
+    <div id="load">
+        <i class="fa fa-spinner fa-spin"></i>Loading
+    </div>
+    <div class="enter_message">
+        <button class="button emoji">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-emoji-laughing" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M12.331 9.5a1 1 0 0 1 0 1A4.998 4.998 0 0 1 8 13a4.998 4.998 0 0 1-4.33-2.5A1 1 0 0 1 4.535 9h6.93a1 1 0 0 1 .866.5zM7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5z"/>
+            </svg>
+        </button>
+        <input class="enter_" type="text" id= "input_message" placeholder="Напишите сообщение...">
+        <button class="button enter_message_" id="enter_message_button" onclick="sendMessage()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+            </svg>
+        </button>
+    </div>
 </div>
 {% endblock %}
 
 {% block script %}
 <!--<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>-->
 <script>
-    $(document).ready(
-        function () {
-            $(".block_persons").niceScroll({
-                cursorcolor: "#012E67",
-                cursorborder: "0 solid #012E67"
-            });
-        }
-       
-    )
-    var mess = '<div class="message_container"> <div class="message I">Мама звала Аню, Симу и Яшу кушать. На столе был завтрак: масло, сыр, мёд, хлеб и чай. Были яблоки и груши. Мама принесла ещё арбуз. Аня ела хлеб и масло. Сима ела хлеб с сыром. Яша ел хлеб с мёдом. А потом дети стали есть фрукты</div></div>';
-    String.prototype.repeat = function(num){
-        return new Array( num + 1 ).join( this );
+$(document).ready(
+    function () {
+        $(".block_persons").niceScroll({
+            cursorcolor: "#012E67",
+            cursorborder: "0 solid #012E67"
+        });
     }
-    var load = $('#load'),
-    messagesContainer = $('.messages').append(mess.repeat(3)),
-    prevScrollH = messagesContainer.prop('scrollHeight');
+   
+)
+var mess = '<div class="message_container"> <div class="message I">Мама звала Аню, Симу и Яшу кушать. На столе был завтрак: масло, сыр, мёд, хлеб и чай. Были яблоки и груши. Мама принесла ещё арбуз. Аня ела хлеб и масло. Сима ела хлеб с сыром. Яша ел хлеб с мёдом. А потом дети стали есть фрукты</div></div>';
+String.prototype.repeat = function(num){
+    return new Array( num + 1 ).join( this );
+}
+var load = $('#load'),
+messagesContainer = $('.messages').append(mess.repeat(3)),
+prevScrollH = messagesContainer.prop('scrollHeight');
 
 
-    messagesContainer.scrollTop(prevScrollH).on('scroll', function(e){
-        var $that = $(this);
-        
-        if($that.scrollTop() <= 0){
-            $.ajax({
-                url: '??????',
-                type: 'POST',
-                dataType: 'html',
-                beforeSend: function(){
-                    load.show();
-                },
-                complete: function(){
-                    load.hide();
-                },
-                data: {
-                    html: mess.repeat(3),
-                    delay: 1
-                },
-                success: function(data){
-                    $that.append(data);
-                    $that.scrollTop($that.prop('scrollHeight') - prevScrollH);
-                    prevScrollH = $that.prop('scrollHeight');                
-                }
-            });
-        }
-    });
+messagesContainer.scrollTop(prevScrollH).on('scroll', function(e){
+    var $that = $(this);
+    
+    if($that.scrollTop() <= 0){
+        $.ajax({
+            url: '??????',
+            type: 'POST',
+            dataType: 'html',
+            beforeSend: function(){
+                load.show();
+            },
+            complete: function(){
+                load.hide();
+            },
+            data: {
+                html: mess.repeat(3),
+                delay: 1
+            },
+            success: function(data){
+                $that.append(data);
+                $that.scrollTop($that.prop('scrollHeight') - prevScrollH);
+                prevScrollH = $that.prop('scrollHeight');                
+            }
+        });
+    }
+});
 </script>
+
 <script>
-       
-//		function AddMessage(data, maintainPosition, isNewMessage){
-//              message = data['message']
-//              time = 
-//              position = 
-//
-//              
-//              createChatMessageElement(message, time, position)
-//
-//        }
 
 var chatSocket = null;
 var roomId = null;
@@ -228,6 +218,7 @@ input.addEventListener("keyup", function(event) {
         document.getElementsByClassName("button enter_message_")[0].click();
     }
 });
+
 function addMessageBlock(message, message_id, sender_id){ // , time
     var position = ""
 
@@ -314,6 +305,16 @@ function OnSelectedRoom(button) {
     // берем room_id
     var room_id = button.id.slice(5);
 
+    // {% for room in rooms_info %}
+    //     document.getElementById("user-info-name").getElementsByTagName("span")[0].textContent = "{{ room.user.last_name }} {{ room.user.first_name }} {{ room.user.middle_name }}";
+
+    //     var avatar = document.getElementById("user-info-avatar");
+    //     avatar.style.background = button.getElementsByClassName("user-info-avatar")[0].style.background;
+
+    //     var letterName = "{{ room.user.last_name }}".substr(0, 1) + "{{ room.user.first_name }}".substr(0, 1);
+    //     avatar.innerHTML = letterName;
+    // {% endfor %}
+
     // скрываем подпись о выборе диалога
     var info = document.getElementsByClassName("block_info_choose");
     info[0].style.display = "none";
@@ -326,18 +327,6 @@ function OnSelectedRoom(button) {
     document.getElementsByClassName("messages")[0].style.display = "block";
 	var messageBody = document.querySelector('.messages');
     messageBody.scrollTop = messageBody.scrollHeight;
-
-    // document.getElementById('enter_message_button').focus();
-    // document.getElementById('enter_message_button').onkeyup = function(e) {
-    //     // if (e.keyCode === 13 && e.shiftKey) {  // enter + return
-    //     //     // Handled automatically by textarea
-    //     // }
-    //     // else if(e.keyCode === 13 && !e.shiftKey){ // enter + !return
-    //     //     document.getElementById('enter_message_button').click();
-    //     // }
-    //     if (e.keyCode == 13){
-    //         sendMessage();
-    // }
 };
 
 </script>

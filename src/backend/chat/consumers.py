@@ -83,7 +83,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             room = await get_room_or_error(room_id, user)
 
             # с какого сообщения начинать брать сообщения из БД
-            from_message_id = content.get('from_massage_id', None)
+            from_message_id = content.get('from_message_id', None)
 
             payload = await get_old_messages(room, from_message_id=from_message_id)
             if payload is not None:

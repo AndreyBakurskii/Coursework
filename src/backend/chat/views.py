@@ -3,6 +3,9 @@ from django.contrib.auth.decorators import login_required
 from itertools import chain
 
 from .models import ChatRoom, RoomChatMessage
+from .utils import calculate_date
+
+from django.utils import timezone
 
 
 @login_required(login_url='login')
@@ -15,13 +18,21 @@ def messenger(request):
 
     rooms = list(chain(rooms1, rooms2))
 
-    room_id_and_user = []
+    rooms_info = []
     for room in rooms:
-        if room.user1 == user:
-            room_id_and_user.append({'room_id': room.id, 'user': room.user2})
-        else:
-            room_id_and_user.append({'room_id': room.id, 'user': room.user1})
+        room_info = {}
+        if room.user1 == user or room.user2 == user:
+            room_info['room_id'] = room.id
+            room_info['user'] = room.user2 if room.user1 == user else room.user1
 
-    context['room_id_and_user'] = room_id_and_user
+            message = RoomChatMessage.objects.last_message_from_room(room)
+            room_info['message'] = message.content
+            room_info['message_time'] = calculate_date(message.timestamp)
+
+            rooms_info.append(room_info)
+
+    context['rooms_info'] = rooms_info
+
+    # timezone.localtime(timezone.now())
 
     return render(request, 'chat/messenger.html', context)
