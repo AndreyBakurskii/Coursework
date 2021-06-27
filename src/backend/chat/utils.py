@@ -1,6 +1,8 @@
 from django.core.serializers.python import Serializer
 from django.contrib.humanize.templatetags.humanize import naturalday
-from datetime import datetime
+from django.utils.timezone import pytz
+from backend.settings import TIME_ZONE
+
 
 class LazyRoomChatMessageEncoder(Serializer):
     def get_dump_object(self, obj):
@@ -14,12 +16,13 @@ class LazyRoomChatMessageEncoder(Serializer):
 def calculate_date(timestamp):
     date = ""
 
+    timestamp = timestamp.astimezone(pytz.timezone(TIME_ZONE))
+
     if naturalday(timestamp) == 'today':
-        date = f"{datetime.strftime(timestamp, '%H:%M')}"
+        date = f"{timestamp.hour}:{timestamp.minute}"
     elif naturalday(timestamp) == 'yesterday':
         date = f"Вчера"
     else:
-        date = f"{datetime.strftime(timestamp, '%d.%m')}"
+        date = f"{timestamp.day}.{timestamp.month}"
 
-    print(date)
     return date

@@ -34,7 +34,6 @@ class RoomChatMessageManager(models.Manager):
     def from_room(self, room, from_message_id=None):
         query_set = RoomChatMessage.objects.filter(room=room).order_by("-timestamp")
 
-        print(from_message_id)
         if from_message_id is not None:
             query_set = query_set.filter(id__lt=from_message_id)
         return query_set
