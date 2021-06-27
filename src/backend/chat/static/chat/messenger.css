@@ -168,14 +168,6 @@
     background-image: none;
    
 }
-#load {
-    display: none;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    bottom: 0;
-    background: url(Fidget-spinner.gif) 50% 50% no-repeat rgba(1,46,103,.7);
-}
 
 .user-chat {
     float: left;
