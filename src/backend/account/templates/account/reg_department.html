@@ -55,8 +55,19 @@
 <script>
      document.getElementById("title").style.marginBottom = "30px";
 </script>
+<script>
+    var fin = document.getElementsByClassName("step");
+    var count = 3;
+    for(var i = 0; i < count; i++){
+        fin[i].style.background = "#2B6684";
+        fin[i].style.opacity = "1";
+    }
+   
+    fin[count].style.opacity = "1";
+</script>
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
     <script src="index.js"></script>
+
 </body>
 </html>
