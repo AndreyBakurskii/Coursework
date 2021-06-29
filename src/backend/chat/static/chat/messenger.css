@@ -195,3 +195,22 @@
     -webkit-box-orient: vertical; /* Вертикальная ориентация */
     overflow: hidden; /* Обрезаем всё за пределами блока */
 }
+.user-info-avatar {
+    margin-right: 10px;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+.user-info-name {
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 10px;
+    width: 230px;
+    font-size: 17px;
+}
+
+.chat-time {
+    float: right;
+    margin-right: 20px;
+    margin-top: 22px;
+    font-size: 15px;
+}
