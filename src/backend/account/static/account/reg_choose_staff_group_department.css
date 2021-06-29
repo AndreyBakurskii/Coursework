@@ -28,12 +28,12 @@ body {
 
 .reg {
     float:right;
-    background: #ffffff; 
+    background: #F3F7FB;
     width: 540px;
     position:relative
 }
 #regForm {
-    background-color: #ffffff;
+    background-color: #F3F7FB;
     font-family: Raleway;
     padding: 40px;
 }
@@ -50,7 +50,7 @@ button {
     appearance: none;
     border: 0;
     border-radius: 5px;
-    background: #2C3E50;
+    background: #2B6684;
     color: #fff;
     padding: 12px 14px;
     font-size: 18px;
@@ -62,26 +62,27 @@ button {
 }
 
 button:hover {
-    opacity: 0.8;
+    background: #0076B2;
 }
 
 .step {
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbbbbb;
-    border: none;  
-    border-radius: 50%;
-    display: inline-block;
-    opacity: 0.5;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #9CACBF;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
 }
 
 .step.active {
-    opacity: 1;
+  opacity: 1;
 }
 
+/* Mark the steps that are finished and valid: */
 .step.finish {
-    background-color: #0332DC;
+  background-color: #0332DC;
 }
 
 
@@ -105,13 +106,13 @@ button:hover {
     position: absolute;
     top: 0;
     left: -40px;
-    background: #0332DC;
+    background: #012E67;
 }
 h2 {
     margin-top: 20px;
     margin-bottom: 15px;
     margin-left: 30px;
-    color: #2C3E50;
+    color: #2B6684;
     font-size: 20px;
     font-weight: normal;
     text-align: left;
@@ -120,7 +121,7 @@ h2 {
     display: block;
     padding: 0;
     position: relative;
-    color: #0332DC;
+    color: #012E67;
     display: block;
     border-radius: 0;
     box-shadow: none;
@@ -140,7 +141,7 @@ h2 {
     height: 0;
     right: 16px;
     border-width: 8px 6.5px 0 6.5px;
-    border-top-color: #D6D6D6;
+    border-top-color: #9CACBF;
     bottom: 20px;
 }
 .form-input-select select {
@@ -165,13 +166,13 @@ h2 {
 
 .form-input-select:hover select {
     box-shadow: 0 2px 3px rgba(0, 91, 166, 0.1) inset;
-    border-color: #0332DC;
+    border-color: #012E67;
 }
 .form-input-select:hover select:focus {
     outline-color: transparent;
 }
 .form-input-select:hover::after {
-    border-top-color: #0332DC;
+    border-top-color:#012E67;
 }
 .form-input-select:click::after {
     border-top-color: #0332DC;
@@ -182,7 +183,7 @@ h2 {
     transform: rotate(-90deg);
 }
 .form-input-select select {
-    border: 3px solid #E6E6E6;
+    border: 3px solid #9CACBF;
     border-radius: 0;
     font-weight: 400;
     color: inherit;
@@ -192,7 +193,7 @@ h2 {
 }
 .form-input-select select:focus {
     box-shadow: 0 3px 4px rgba(0, 91, 166, 0.3) inset;
-    outline: 3px solid #0332DC;
+    outline: 3px solid #012E67;
     outline-offset: -3px;
 }
 .form-input-select select[disabled], .form-input-select select:disabled {
@@ -200,14 +201,14 @@ h2 {
     cursor: not-allowed;
 }
 .form-input-select select:not(:focus):invalid {
-    color: #C7C7C7;
+    color:#9CACBF;
 }
 .form-input-select select[disabled], .form-input-select select:disabled {
     opacity: 0.4;
     cursor: not-allowed;
 }
 .form-input-select select:not(:focus):invalid {
-    color: #C7C7C7;
+    color: #9CACBF;
 }
 
 .form-select {
@@ -254,10 +255,10 @@ h2 {
 
 @-moz-document url-prefix() {
  .form-input-select {
-    border-right: 3px solid #E6E6E6;
+    border-right: 3px solid #9CACBF;
   }
   .form-input-select:hover {
-    border-right: 3px solid #0332DC;
+    border-right: 3px solid #012E67;
   }
 }
 
