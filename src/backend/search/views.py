@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
-from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 
 from hse.models import Campus, Department, Staff
 from account.models import Account
+from .utils import user_search
 
 
 @login_required(login_url='login')
@@ -42,19 +42,14 @@ def search(request: HttpRequest):
 
         users = users.filter(staff=staff)
 
-    if search_query:
-        # проверка на непустой запрос
-        search_query = search_query.strip()
-        if len(search_query) > 0:
-            users = users.filter(Q(username__icontains=search_query) | Q(email__icontains=search_query) |
-                                 Q(last_name__icontains=search_query) | Q(first_name__icontains=search_query) |
-                                 Q(middle_name__icontains=search_query)
-                                 )
+    users = user_search(users, search_query, is_query_set=True)
 
-    context['users'] = users.order_by('last_name')
+    context['users'] = users
 
     context['campuses'] = Campus.objects.all()
     context['departments'] = Department.objects.all()
     context['staffs'] = Staff.objects.all()
 
     return render(request, 'search/search.html', context)
+
+

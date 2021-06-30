@@ -25,10 +25,18 @@ from .views import (my_contacts,
 
 urlpatterns = [
     path('my_contacts', my_contacts, name='my_contacts'),
+
+    # ajax запросы:
+    # принять запрос в контакты
     path('accept_request_from_user/<user_id>', accept_request),
+    # отклонить запрос в контакты
     path('decline_request_from_user/<user_id>', decline_request),
+    # отменить запрос в контакты
     path('cancel_request_to_user/<user_id>', cancel_request),
+    # удалить из контактов
     path('delete_contact_with_user/<user_id>', delete_contact),
+    # определить отношение между пользователями
     path('define_relationship_with_user/<user_id>', define_relationship),
+    # добавить в контакты
     path('create_contact_with_user/<user_id>', create_contact),
 ]

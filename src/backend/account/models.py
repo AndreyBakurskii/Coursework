@@ -4,7 +4,6 @@ from django.contrib.auth.models import (
     BaseUserManager,
 )
 
-
 from hse.models import (
     Campus,
     Department,
@@ -80,6 +79,9 @@ class Account(AbstractBaseUser):
     REQUIRED_FIELDS = ['username']
 
     objects = AccountManager()
+
+    class Meta:
+        ordering = ['last_name']
 
     # For checking permissions. to keep it simple all admin have ALL permissons
     def has_perm(self, perm, obj=None):

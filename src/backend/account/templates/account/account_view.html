@@ -59,5 +59,13 @@
     var profile = document.getElementsByClassName("this-user-info");
     var height = profile[0].offsetHeight;
     profile[0].style.top = "calc(50vh - " + height + "px/2 - 20px)";
+    
+    var elementThisAvatar = document.getElementById("this-avatar");
+
+    var arrName = "{{user.last_name}} {{user.first_name}}".split(" ", 2);
+    var letterName = arrName[0].substr(0, 1) + arrName[1].substr(0, 1);
+
+    elementThisAvatar.innerHTML = letterName;
+    elementThisAvatar.style.backgroundColor = "#FF00AE";
 </script>
 {% endblock %}

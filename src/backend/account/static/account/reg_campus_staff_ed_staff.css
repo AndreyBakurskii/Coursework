@@ -27,12 +27,12 @@ body {
 
 .reg {
     float:right;
-    background: #ffffff; 
+    background: #F3F7FB;
     width: 540px;
     position:relative
 }
 #regForm {
-    background-color: #ffffff;
+    background-color: #F3F7FB;
     font-family: Raleway;
     padding: 40px;
 }
@@ -49,7 +49,7 @@ button {
     appearance: none;
     border: 0;
     border-radius: 5px;
-    background: #2C3E50;
+    background: #2B6684;
     color: #fff;
     padding: 12px 14px;
     font-size: 18px;
@@ -61,27 +61,31 @@ button {
 }
 
 button:hover {
-    opacity: 0.8;
+  background: #0076B2;
 }
 
+/* Make circles that indicate the steps of the form: */
 .step {
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbbbbb;
-    border: none;  
-    border-radius: 50%;
-    display: inline-block;
-    opacity: 0.5;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #9CACBF;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
 }
 
 .step.active {
-    opacity: 1;
+  opacity: 1;
 }
 
+/* Mark the steps that are finished and valid: */
 .step.finish {
-    background-color: #0332DC;
+  background-color: #0332DC;
 }
+
+
 .title {
     width: 100%;
     float: left;
@@ -89,7 +93,7 @@ button:hover {
     font-size: 34px;
     font-weight: 700;
     letter-spacing: 2px;
-    color: #0332DC;
+    color: #012E67;
     text-align: center;  
     position: relative;
     margin-bottom: 30px;
@@ -101,7 +105,7 @@ button:hover {
     position: absolute;
     top: 0;
     left: -40px;
-    background: #0332DC;
+    background: #012E67;
 }
 .middle {  
     width: 400px;
@@ -111,7 +115,7 @@ h2 {
     margin-top: 20px;
     margin-bottom: 15px;
     margin-left: 30px;
-    color: #2C3E50;
+    color: #2B6684;
     font-size: 20px;
     font-weight: normal;
     text-align: left;
@@ -157,12 +161,12 @@ h2 {
     left: 0;
     height: 24px;
     width: 24px;
-    background: #fff;
-    border: 2px solid #ccc;
+    background: #F3F7FB;
+    border: 2px solid #2B6684;
 }
  
 .control--radio {  
-    color: #0332DC;
+    color: #012E67;
     font-size: 22px;
     transition: 0.3s;
     -webkit-transition: 0.3s;
@@ -182,10 +186,10 @@ h2 {
 }
 .control:hover input:not([disabled]) ~ .control__indicator,
 .control input:focus ~ .control__indicator {
-    border-color: #2C3E50;
+    border-color: #032E42;
 }
 .control input:checked ~ .control__indicator {
-    background: #bbbbbb;
+    background: #9CACBF;
 }
 .control__indicator:after {
     content: '';
@@ -200,7 +204,7 @@ h2 {
     top: 0px;
     width: 15px;
     height: 22px;
-    border: solid #2C3E50;
+    border: solid #032E42;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
@@ -210,7 +214,7 @@ h2 {
     height: 14px;
     width: 14px;
     border-radius: 100%;
-    background: #2C3E50;
+    background: #032E42;
 }
 
 ul {

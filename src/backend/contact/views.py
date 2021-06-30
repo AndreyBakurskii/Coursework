@@ -6,24 +6,20 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Contact, ContactRequest
 from account.models import Account
+from search.utils import user_search
 
 
 @login_required(login_url='login')
 def my_contacts(request: HttpRequest):
     context = {}
     user = request.user
-    context['friends'] = sorted(Contact.get_friends(user), key=lambda user: user.last_name)
+    friends = sorted(Contact.get_friends(user), key=lambda user: user.last_name)
 
-    search_query = request.GET.get("q")
-    # проверка на None
-    if search_query:
-        # проверка на непустой запрос
-        search_query = search_query.strip()
-        if len(search_query) > 0:
-            context['friends'] = [user for user in context['friends']
-                                  if f'{user.last_name} {user.first_name} {user.middle_name} {user.email}' \
-                                     f' {user.username}'.find(search_query) != -1]
+    search_query = request.GET.get("q", default=None)
+    if search_query is not None:
+        friends = user_search(friends, search_query, is_list=True)
 
+    context['friends'] = friends
     context['senders_requests'] = ContactRequest.get_senders(user)
 
     return render(request, 'contact/contacts.html', context)
@@ -46,20 +42,25 @@ def define_relationship(request: HttpRequest, from_func=False, *args, **kwargs):
     :return:
     """
     # noinspection PyPep8Naming
-    FRIENDS, NO_RELATIONSHIP, RECEIVER_REQUEST, SENDER_REQUEST = range(4)
+    FRIENDS, NO_RELATIONSHIP, RECEIVER_REQUEST, SENDER_REQUEST, SELF = range(5)
     context = {}
 
     if request.POST or from_func:
         user1 = request.user
 
         user2_id = kwargs.get('user_id')
+
+        context['relationship'] = None
+
+        if user1.id == int(user2_id):
+            context['relationship'] = SELF
+            return HttpResponse(json.dumps(context), content_type='application/json')
+
         user2 = None
         try:
             user2 = Account.objects.get(pk=user2_id)
         except Account.DoesNotExist:
             return HttpResponse(status=404)
-
-        context['relationship'] = None
 
         if Contact.get_contact(user1, user2):
             context['relationship'] = FRIENDS

@@ -1,12 +1,7 @@
 from django.urls import path
 
-from .views import (
-                    messenger,
-                    room,
-                    test
-                    )
+from .views import messenger
 
 urlpatterns = [
     path('', messenger, name='messenger'),
-    path('<str:room_name>/', room, name='room'),
 ]

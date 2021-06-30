@@ -311,7 +311,6 @@ form {
 #reject:hover {
     color: #408FB4;
 }
-
 .user-info-avatar {
     float: left;
     width: 50px;
@@ -324,7 +323,6 @@ form {
     margin-left: 20px;
     margin-top: 20px;
 }
-
 .user-info-name {
     float: left;
     margin-top: 20px;
@@ -334,13 +332,13 @@ form {
     font-size: 17px;
     font-weight: bold;
 }
-
 .user-status {
     float: left;
     margin-top: 5px;
     margin-left: 10px;
     color: #2B6684;
     font-size: 15px;
+    
 }
 
 .chat-time {

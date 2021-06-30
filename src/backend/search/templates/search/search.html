@@ -321,7 +321,7 @@ function ProfileInfo(button) {
         data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
         success: function(data) {
             statusRelationship = data.relationship;
-
+            console.log(statusRelationship);
             if (statusRelationship == 0) {
                 document.getElementById("button_delete_contact").value = person_id;
                 document.getElementById("button_start_chatting").value = person_id;

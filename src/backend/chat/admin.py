@@ -9,3 +9,10 @@ class ChatRoomAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ChatRoom, ChatRoomAdmin)
+
+
+class RoomChatMessageAdmin(admin.ModelAdmin):
+    list_display = ['id', 'room', 'user', 'timestamp']
+
+
+admin.site.register(RoomChatMessage, RoomChatMessageAdmin)
