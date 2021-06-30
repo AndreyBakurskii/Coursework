@@ -5,8 +5,6 @@ from itertools import chain
 from .models import ChatRoom, RoomChatMessage
 from .utils import calculate_date
 
-from django.utils import timezone
-
 
 @login_required(login_url='login')
 def messenger(request):
@@ -26,13 +24,12 @@ def messenger(request):
             room_info['user'] = room.user2 if room.user1 == user else room.user1
 
             message = RoomChatMessage.objects.last_message_from_room(room)
-            room_info['message'] = message.content
-            room_info['message_time'] = calculate_date(message.timestamp)
+            if message is not None:
+                room_info['message'] = message.content
+                room_info['message_time'] = calculate_date(message.timestamp)
 
             rooms_info.append(room_info)
 
     context['rooms_info'] = rooms_info
-
-    # timezone.localtime(timezone.now())
 
     return render(request, 'chat/messenger.html', context)

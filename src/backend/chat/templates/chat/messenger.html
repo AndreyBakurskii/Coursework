@@ -310,14 +310,16 @@ function OnSelectedRoom(button) {
     var room_id = button.id.slice(5);
 
     {% for room in rooms_info %}
-        document.getElementById("user-chat-name").getElementsByTagName("span")[0].innerHTML = "<a href=\"{% url 'account_view' %}{{room.user.id}}\">{{ room.user.last_name }} {{ room.user.first_name }} {{room.user.middle_name }}";
 
-        var avatar = document.getElementById("user-avatar-chat");
-        avatar.style.background = button.getElementsByClassName("user-info-avatar")[0].style.background;
+        if ( {{room.room_id}} == room_id ) {
+            document.getElementById("user-chat-name").getElementsByTagName("span")[0].innerHTML = "<a href=\"{% url 'account_view' %}{{room.user.id}}\">{{ room.user.last_name }} {{ room.user.first_name }} {{room.user.middle_name }}";
 
-        var letterName = "{{ room.user.last_name }}".substr(0, 1) + "{{ room.user.first_name }}".substr(0, 1);
-        avatar.innerHTML = letterName;
+            var avatar = document.getElementById("user-avatar-chat");
+            avatar.style.background = button.getElementsByClassName("user-info-avatar")[0].style.background;
 
+            var letterName = "{{ room.user.last_name }}".substr(0, 1) + "{{ room.user.first_name }}".substr(0, 1);
+            avatar.innerHTML = letterName;
+        }
     {% endfor %}
 
     // скрываем подпись о выборе диалога
